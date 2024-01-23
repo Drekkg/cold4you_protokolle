@@ -1,0 +1,389 @@
+input, textarea {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  padding-left: 0.2em;
+ 
+}
+
+ 
+.text_area {
+  vertical-align: top;
+  padding: 1em;
+  
+}
+.label_margin {
+  margin-top: 6em;
+
+}
+
+.table {
+  font-size: 1.7em;
+  margin-left: 2em;
+  
+}
+.endBlock {
+ 
+  width: 80%;
+}
+.flexContainer {
+  
+  border-radius: 3em;
+  margin-left: 6em;
+  margin-bottom: 3em;
+  margin-top: 1em;
+  margin-right: 5em;
+  display: flex;
+  background-color: rgb(244, 245, 255);
+  width: 110rem;
+  flex-direction: column;
+}
+.flexContainer2 {
+  border-radius: 3em;
+  margin-left: 6em;
+  margin-bottom: 3em;
+  margin-top: 3em;
+  display: flex;
+  background-color: rgb(9, 16, 95);
+  width: 90em;
+  flex-direction: column;
+}
+.flexInner {
+  font-size: 1.3em;
+  border-radius: 3em;
+  margin-left: 5em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(244, 245, 255);
+  width: 84em;
+  padding-bottom: 2em;
+}
+.divSize1 {
+  border-radius: 1em;
+  width: 33em;
+  background-color: rgb(217, 219, 238);
+  margin: 4em 1em 0em 3em;
+  padding: 1em;
+}
+
+.divSize {
+  border-radius: 1em;
+  width: 33em;
+  background-color: rgb(217, 219, 238);
+  margin: 2em 1em 1em 3em;
+  padding: 1em;
+}
+.divSize3 {
+  border-radius: 1em;
+  width: 33em;
+  background-color: rgb(217, 219, 238);
+  margin: 2em 1em 4em 3em;
+  padding: 1em;
+}
+.div3 {
+  border-radius: 3em;
+  font-size: 1.5em;
+  font-weight: bolder;
+  background-color: rgb(244, 245, 255);
+  padding: 0em;
+  margin-bottom: 0em;
+  margin-top: 1em;
+  margin-left: 4em;
+}
+
+.tableBg2 {
+  font-size: 1em;
+  
+}
+
+
+.div2 {
+  background-color: rgb(189, 223, 228);
+}
+.inputBasic {
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+}
+.inputMargin {
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.boxAlign {
+  float: right;
+  margin: 0.5%;
+  width: 3em;
+  
+}
+/* 
+.boxAlign2 {
+  float: right;
+  margin: 0.5%;
+} */
+.address {
+  border-radius: 2em;
+  clear: both;
+  width: 100%;
+  margin:1em 1em 1em 10em;
+  padding: 1em;
+}
+
+.addressBox {
+  padding: 0.75em;
+  border-radius: 0em;
+}
+
+/* .divSize2 {
+  float: right;
+  width: 32%;
+  height: 32%;
+  background-color: rgb(186, 189, 226);
+  margin: 1em;
+  padding: 1em;
+} */
+/* .headerDiv {
+  width: 100%;
+  height: 10em;
+} */
+.pic {
+  float: right;
+  margin-left: 2em;
+  
+
+}
+
+.heading {
+ 
+  text-align: center;
+  overflow: hidden;
+  margin: 1em 1em 1em 1em;
+  
+}
+/* 
+.zoom:hover {
+  transform: scale(1.5);
+} */
+
+.div1 {
+  display: flex;
+  flex-wrap: wrap-reverse;
+  margin: 2em;
+  line-height: 0.75;
+  /* font-size: 1.5em; */
+}
+.div1 > div {
+  flex: 1;
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 1em;
+  line-height: normal;
+  width: 33rem;
+  text-align: center;
+
+  font-size: 1.2em;
+  font-weight: bolder;
+  
+}
+.div1 > div:nth-child(1) {
+  text-align: left;
+  width: 25%;
+}
+.div1 > div:nth-child(2) {
+font-size: 1.5em;
+}
+
+/* input {
+  font-size: 1em;
+  padding-left: 0.2em;
+} */
+.boxSize {
+  width: 1em;
+  height: 1em;  
+}
+.tech {
+  margin-left: 5em;
+}
+.inputBasicArea {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  
+  font-size: 1em;
+  
+}
+button#print {
+  border-radius: 2em;
+  height: 80%;
+  margin-left: 25em;
+  background: rgb(12, 240, 77);
+  border: 1px solid transparent;
+  color: rgb(26, 8, 8);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.flex-row {
+  display: flex;
+  
+}
+.wrapper {
+  border: 0px solid #3cff00;
+}
+canvas#signature-pad {
+  background: #fff;
+  width: 100%;
+  height: 90%;
+  cursor: crosshair;
+}
+button#clear {
+  border-radius: 2em;
+  height: 100%;
+  background: rgb(240, 35, 12);
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.zoom:click {
+  transform: rotate(90deg);
+}
+
+button#clear span {
+  transform: rotate(90deg);
+
+}
+.printClear {
+  background:  rgb(244, 245, 255);
+ 
+}
+
+@media print {
+  button#clear {
+    display: none;
+  }
+
+  button#print {
+    display: none;
+  }
+  .flexInner {
+    margin-top: 6em;
+    margin-bottom: 2em;
+  }
+}
+
+
+@media (min-device-width: 200px) and (max-device-width: 600px) { 
+/* 
+ .flexInner {
+    font-size: 1.5em;
+    width: auto;
+    margin-left: 1em;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244, 245, 255);
+    width: 30em;
+   
+    
+  }
+  .pic {
+    
+      float: right;
+      height: 2em;
+      width: 3em;
+    
+  }
+
+  .divSize {
+    width: auto;
+    width: 18em;
+    background-color: rgb(217, 219, 238);
+    margin: 2em 1em 1em 0em;
+    padding: 1em;
+    line-height: 1;
+  }
+   
+
+  .divSize1 {
+    width: 18em;
+
+    margin: 4em 1em 0em 0em;
+    padding: 1em;
+   
+  }
+  .divSize3 {
+    width: 18em;
+    background-color: rgb(217, 219, 238);
+    margin: 2em 1em 1em 1em;
+    padding: 0em;
+    
+  }
+
+ /*.divSize {
+    margin-left: 1%;
+  }
+
+  .tech {
+    margin-top: 1em;
+    margin-left: 0em;
+  }
+
+  .headerDiv {
+    width: 160%;
+  }
+  textarea {
+    font-size: 1em;
+  }
+  
+  .div1 {
+    font-size: 4em;
+    margin-left: 1em;
+    margin-right: 1em;
+    color: rgb(118, 57, 57);
+    line-height: 1;
+  }
+  */
+  /* .heading {
+    font-size: 0em;
+  }
+
+  input {
+    size: 0em;
+  }
+  .boxSize {
+    width: 0.75em;
+    height: 0.75em;
+  }
+
+  .heading {
+    text-align: center;
+  }
+  */
+  
+   /* table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    float: left;
+  }
+  .table {
+    font-size: 2em;
+  }  */
+
+  /* .div3 {
+    font-size: 0em;
+    font-weight: bolder;
+    background-color: rgb(244, 245, 255);
+    padding: 0em;
+    margin-bottom: 0em;
+    margin-top: 1em;
+    margin-left: 4em;
+  }
+ */
+
+/* }  */
+}

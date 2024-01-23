@@ -1,0 +1,29 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.5em;
+  color: #6f2121;
+}
+.main-container1 {
+  font-size: 2em;
+  color: #6f2121;
+  margin: 1em;
+  text-align: center;
+}
+
+.main-container2{
+  font-size: 1.5em;
+  color: #6f2121;
+  margin: 0em;
+  text-align: left;
+}
+
+.list {
+  display: inline-block;
+  text-align: left;
+  margin-left: 4em;
+  padding: 0em;
+  line-height: 3em;
+}
