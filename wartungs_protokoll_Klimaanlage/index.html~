@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="UTF-8">
+  <head>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <div class="div1">
+    <img src="/img/cold_logo.jpg" alt="Cold4you Logo" height="120em" width="500em"/>
+    <h1 class="heading">Wartungs Protokol für Kälteanlage</h1>
+<form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <label>Kunde:</label>
+  <input type="text" size="49"></input>
+  <br>
+  <br>
+  <label>Adresse:</label>
+  <input type="address" size="48"></input>
+  <br>
+  <br>
+  <label>Anlage:</label>
+  <input type="text" size="49"></input>
+  <br>
+  <br>
+  <label>Kältemittel:</label>
+  <input type="text" size="45"></input>
+  <br>
+  <br>
+  <label>Austellungs Ort:</label>
+  <input type="text" size="41"></input>
+  <br>
+  <br>
+  <label>Type:</label>
+  <input type="text" size="50"></input>
+  <br><br><br>
+  <br>
+  <input type="checkbox">Kontrolle Ölstand</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Kontrolle Säuretest</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Kontrolle Kürbelwannenheizung</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Kontrolle Kältemittelfüllstand</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Kontrolle Hd/Nd Pressostat EIN/AUS</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Kontrolle Verdichter Läufgeräusche</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Überprüfung aller mechanischen und elektrische Regelorgane</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Sichtkontrolle aller elektrischen und kältetechnischen Anlagenteilen</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Überprüfung alle KD-Ventilatoren</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Drehzahlregler KD-Ventilatoren</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br><br>
+  <input type="checkbox">Kabelbefestigung</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+  <br>
+  <input type="checkbox">Überprüfung aller elektrischen Regelorgane (Schütz, Relais, Schützschalter etc)</input>
+  <input type="text" placeholder="bemerkungen"/>
+  <br>
+</input>
+
+
+
+
+
+
+</form>
+    </div>
+  </body>
+</html>
