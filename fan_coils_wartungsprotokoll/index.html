@@ -210,7 +210,8 @@
   function clearButton(){
     document.getElementById(print).class="printClear";
   }
-
+  const currentDate = new Date().toDateString();
+  
   const form = document.getElementById("form1");
   const kunde = document.getElementById("kunde1");
   const Anlage = document.getElementById("standort1");
@@ -220,7 +221,7 @@
   const kundeValue_storage = localStorage.getItem("kunde1");
   const standortValue_storage = localStorage.getItem("standort1");
   const technikerValue_storage = localStorage.getItem("techniker1");
-  const date1Value_storage = localStorage.getItem("date11");
+  // const date1Value_storage = localStorage.getItem("date11");
 
   document.getElementById("kunde1").value = kundeValue_storage;
   document.getElementById("standort1").value = standortValue_storage;
@@ -251,7 +252,7 @@ function saveAlert(){
   localStorage.setItem("kunde1", kundeValue);
   localStorage.setItem("standort1", standortValue);
   localStorage.setItem("techniker1", technikerValue);
-  localStorage.setItem("date11", date1Value);
+  localStorage.setItem("date11", currentDate);
 
    
   
