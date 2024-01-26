@@ -353,17 +353,17 @@
   const kunde = document.getElementById("kunde");
   const Anlage = document.getElementById("standort");
   const techniker = document.getElementById("techniker");
-  const date1 = document.getElementById("date1");
+  // const date1 = document.getElementById("date1");
 
   const kundeValue_storage = localStorage.getItem("kunde");
   const standortValue_storage = localStorage.getItem("standort");
   const technikerValue_storage = localStorage.getItem("techniker");
-  const date1Value_storage = localStorage.getItem("date1");
+  // const date1Value_storage = localStorage.getItem("date1");
 
   document.getElementById("kunde").value = kundeValue_storage;
   document.getElementById("standort").value = standortValue_storage;
   document.getElementById("techniker").value = technikerValue_storage;
-  document.getElementById("date1").value = date1Value_storage;
+  // document.getElementById("date1").value = date1Value_storage;
 
   
 
@@ -389,7 +389,7 @@ function saveAlert(){
   localStorage.setItem("kunde", kundeValue);
   localStorage.setItem("standort", standortValue);
   localStorage.setItem("techniker", technikerValue);
-  localStorage.setItem("date1", date1Value);
+  // localStorage.setItem("date1", date1Value);
 
    
   
