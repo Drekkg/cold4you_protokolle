@@ -289,7 +289,7 @@ button#clear span {
 
 
 @media (min-device-width: 200px) and (max-device-width: 600px) {
-/* 
+ 
  .flexInner {
     font-size: 1.5em;
     width: auto;
@@ -334,7 +334,7 @@ button#clear span {
     
   }
 
- /*.divSize {
+ .divSize {
     margin-left: 1%;
   }
 
@@ -357,8 +357,8 @@ button#clear span {
     color: rgb(118, 57, 57);
     line-height: 1;
   }
-  */
-  /* .heading {
+  
+   .heading {
     font-size: 0em;
   }
 
@@ -373,7 +373,7 @@ button#clear span {
   .heading {
     text-align: center;
   }
-  */
+  
   
    table,
   thead,
@@ -387,7 +387,7 @@ button#clear span {
     font-size: 4em;
   } 
 
-  /* .div3 {
+  .div3 {
     font-size: 0em;
     font-weight: bolder;
     background-color: rgb(244, 245, 255);
@@ -396,7 +396,7 @@ button#clear span {
     margin-top: 1em;
     margin-left: 4em;
   }
- */
+
 
 } 
 
