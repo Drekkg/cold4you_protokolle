@@ -47,7 +47,7 @@
       <table class="table">   
         <tr class="addressBox">
         <th class="addressBox">Auftraggeber:</th>
-        <th><input  type="text" id="kunde" value="" onchange="myfunction()" size="40" name="" required /></th>
+        <th><input  type="text" id="kunde" value=""  size="40" name="" required /></th>
         
         </tr>
         <tr class="addressBox">
@@ -59,7 +59,7 @@
        
         <tr class="addressBox">
           <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="Anlage" value="" size="40" onchange="myFunction()" required/></th>
+          <th><input type="text" id="Anlage" value="" size="40"  required/></th>
         </tr>
     
       <tr class="addressBox">
@@ -215,7 +215,7 @@
             
          <div class="div3">
            <label class="addressBox">Datum:</label>
-           <input type="date" id="date11" value="" onchange="myFunction()" >
+           <input type="date" id="date11" value=""  >
          
 
           </div>
@@ -314,15 +314,15 @@ var kunde = document.getElementById("kunde").value;
 function saveAlert(){
   console.log("saveAlert");
 
-  const kundeValue = kunde.value;
-  const standortValue = Anlage.value;
-  const technikerValue = techniker.value;
-  const date1Value = date1.value;
+  // const kundeValue = kunde.value;
+  // const standortValue = Anlage.value;
+  // const technikerValue = techniker.value;
+  // const date1Value = date1.value;
 
-  localStorage.setItem("kunde", kundeValue);
-  localStorage.setItem("standort", standortValue);
-  localStorage.setItem("techniker", technikerValue);
-  localStorage.setItem("date1", date1Value);
+  // localStorage.setItem("kunde", kundeValue);
+  // localStorage.setItem("standort", standortValue);
+  // localStorage.setItem("techniker", technikerValue);
+  // localStorage.setItem("date1", date1Value);
 
    
   
@@ -354,7 +354,7 @@ html2pdf().set(opt).from(element).save(document.getElementById("title_change").i
 }
 var opt = {
   margin:       1.1,
-  filename:     myFunction(),
+  filename:     "GAS_WARN",
   image:        { type: 'jpeg', quality: 1 },
   html2canvas:  { scale: 0.7, dpi: 600, },
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
