@@ -56,10 +56,10 @@ input, textarea {
   flex-wrap: wrap;
   background-color: rgb(244, 245, 255);
   width: 84em;
-  padding-bottom: 2em;
-}
+  padding-bottom: 1em;
+}          
 .divSize1 {
-  border-radius: 1em;
+  border-radius: 0em;
   width: 33em;
   background-color: rgb(217, 219, 238);
   margin: 4em 1em 0em 3em;
@@ -74,10 +74,10 @@ input, textarea {
   padding: 1em;
 }
 .divSize3 {
-  border-radius: 1em;
+  border-radius: 1em; 
   width: 33em;
   background-color: rgb(217, 219, 238);
-  margin: 2em 1em 4em 3em;
+  margin: 2em 1em 2em 3em;
   padding: 1em;
 }
 .div3 {
@@ -114,6 +114,12 @@ input, textarea {
   float: right;
   margin: 0.5%;
   width: 3em;
+  
+}
+.boxAlign3 {
+  float: right;
+  margin-left:0.5rem;
+  width: 2em;
   
 }
 /* 

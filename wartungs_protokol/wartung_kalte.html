@@ -466,7 +466,7 @@ const currentDate = new Date().toISOString().slice(0, 10);
   document.getElementById("kunde").value = kundeValue_storage;
   document.getElementById("standort").value = standortValue_storage;
   document.getElementById("techniker").value = technikerValue_storage;
-  document.getElementById("date1").value = date1Value_storage;
+ // document.getElementById("date1").value = date1Value_storage;
 
   
 
@@ -522,6 +522,7 @@ html2pdf().set(opt).from(element).save(document.getElementById("title_change").i
 
 
 }
+
 var opt = {
   margin:       1.2,
   filename:     myFunction(),
