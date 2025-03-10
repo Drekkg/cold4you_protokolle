@@ -15,7 +15,7 @@
 
  
 
-  <form class="form" id="form" onsubmit="saveAlert(); return false">
+  <form class="form" id="form" onsubmit="saveAlert(); return false">c
   <body id="el-to-print">
 
     <div>
@@ -47,7 +47,7 @@
       <table class="table">   
         <tr class="addressBox">
         <th class="addressBox">Auftraggeber:</th>
-        <th><input  type="text" id="kunde" value="" onchange="myfunction()" size="40" name="" required /></th>
+        <th><input  type="text" id="kunde" value="" onchange="myFunction()" size="40" name="" required /></th>
         
         </tr>
         <tr class="addressBox">
@@ -286,12 +286,12 @@
   const kunde = document.getElementById("kunde");
   const Anlage = document.getElementById("standort");
   const techniker = document.getElementById("techniker");
-  const date1 = document.getElementById("date1");
+  const date1 = document.getElementById("date11");
 
   const kundeValue_storage = localStorage.getItem("kunde");
   const standortValue_storage = localStorage.getItem("standort");
   const technikerValue_storage = localStorage.getItem("techniker");
-  const date1Value_storage = localStorage.getItem("date1");
+  // const date1Value_storage = localStorage.getItem("date1");
 
   document.getElementById("kunde").value = kundeValue_storage;
   document.getElementById("standort").value = standortValue_storage;

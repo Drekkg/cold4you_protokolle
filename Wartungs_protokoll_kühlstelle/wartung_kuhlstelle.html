@@ -124,7 +124,7 @@
             <label>Anmerkungen</label>
             <br>
         
-            <textarea class="inputBasicArea" name="Text1" cols="50" rows="8"></textarea>
+            <textarea class="inputBasicArea" name="Text1" id="anmerkung" cols="50" rows="8"></textarea>
              </div>
 
           </div>
@@ -205,6 +205,8 @@
   const Anlage = document.getElementById("standort1");
   const techniker = document.getElementById("techniker1");
   const date1 = document.getElementById("date11");
+  const title = document.getElementById("Anlage");
+  const anmerkung = document.getElementById("anmerkung");
 
   const kundeValue_storage = localStorage.getItem("kunde1");
   const standortValue_storage = localStorage.getItem("standort1");
@@ -240,6 +242,8 @@ function saveAlert(){
   localStorage.setItem("standort1", standortValue);
   localStorage.setItem("techniker1", technikerValue);
   localStorage.setItem("date11", date1Value);
+  localStorage.setItem("title", title.value);
+  localStorage.setItem("anmerkung", anmerkung.value);
 
    
   
