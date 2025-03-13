@@ -404,7 +404,7 @@
             <label>Anmerkungen</label>
             <br>
         
-            <textarea class="inputBasicArea" name="anmerkung" cols="50" rows="8"></textarea>
+            <textarea class="inputBasicArea" name="anmerkung" id="anmerkung" cols="50" rows="8"></textarea>
              </div>
 
           </div>
@@ -498,6 +498,67 @@
   // document.getElementById("date1").value = date1Value_storage;
 
   
+  // Open (or create) the database
+  const request = indexedDB.open("Cold4YouDB", 1);
+
+  request.onupgradeneeded = function(event) {
+    const db = event.target.result;
+
+    // Create an object store for the form data
+    const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
+
+    // Define what data items the object store will contain
+    objectStore.createIndex("kunde", "kunde", { unique: false });
+    objectStore.createIndex("standort", "standort", { unique: false });
+    objectStore.createIndex("techniker", "techniker", { unique: false });
+    objectStore.createIndex("date1", "date1", { unique: false });
+    objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
+  };
+
+  request.onsuccess = function(event) {
+    const db = event.target.result;
+
+    // Function to save form data to IndexedDB
+    function saveFormData() {
+      const kundeValue = document.getElementById("kunde").value;
+      const standortValue = document.getElementById("standort").value;
+      const technikerValue = document.getElementById("techniker").value;
+      const date1Value = document.getElementById("date11").value;
+      const anmerkungValue = document.getElementById("anmerkung").value;
+
+      const transaction = db.transaction(["formData"], "readwrite");
+      const objectStore = transaction.objectStore("formData");
+
+      const data = {
+        kunde: kundeValue,
+        standort: standortValue,
+        techniker: technikerValue,
+        date1: date1Value,
+        anmerkung: anmerkungValue,
+      };
+
+      const request = objectStore.add(data);
+
+      request.onsuccess = function() {
+        console.log("Form data saved to IndexedDB");
+      };
+
+      request.onerror = function() {
+        console.log("Error saving form data to IndexedDB");
+      };
+    }
+
+    // Call saveFormData function when form is submitted
+    document.getElementById("form").onsubmit = function(event) {
+      event.preventDefault();
+      saveFormData();
+      saveAlert();
+    };
+  };
+
+  request.onerror = function(event) {
+    console.log("Error opening IndexedDB:", event.target.errorCode);
+  };
 
 function myFunction() {
 var title = document.getElementById("Anlage").value;
