@@ -1,25 +1,18 @@
 <!DOCTYPE html>
 <html>
-  <meta charset="UTF-8"  name="viewport" content="width=device-width", initial-scale="1" >
-
   <head>
-    <title id="title_change">
-    </title>
+  <meta charset="UTF-8">
+  <meta  name="viewport" content="width=device-width", initial-scale="1" >
+  <title id="title_change"></title>
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.png">
-    
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
   </head>
-
- 
 
   <form class="form" id="form" onsubmit="saveAlert(); return false">
   <body id="el-to-print">
-
     <div>
-
      <div class="div1">
        <div>
        <h3>Cold4you Gewerbekälte GmbH</h3>
@@ -34,10 +27,7 @@
        <div>
         <img src="cold_logo.jpg" alt="image" width="500rem" height="200rem">
        </div>
-   
     </div>
-
-      
       </div> 
       
      <div class="flexContainer"> 
@@ -93,115 +83,6 @@
   <input type="text" class="inputBasic" placeholder="Bemerkungen"  size="30" maxlength="37"/>
   </div>
 
-  <!-- <div class="divSize">
-    <label> <input type="checkbox" class="boxSize" />
-    Sollwert</label>
-    <br>
-    <label class="boxAlign">&#8451;</label>
-    <input type="number" step="0.1" class="boxAlign"  />
-    <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
-  </div>
-  -->
-<!--   
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" />Überprüfung Kaderheizung</label>
-  <label><input type="checkbox" class="boxSize" />Nicht vorhanden</label>
-  <br>
-  <input type="text" class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" />
-    Befüllen der Anlage mit Kältemittel. Gesamt Füllgewicht.</label>
-    <label class="boxAlign">kg</label>
-    <input type="number" step="0.1" class="boxAlign" size="2" />
-    <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
- </div>
-
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" /> Kontrolle Verdichter Laufgeräusche</label>
-    <br>
-    <input type="text" class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" /> Überprüfung aller mechanischen und elektrischen Regelorgane</label>
-  <br>
-  <input type="text"  class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-  <div class="divSize">
-    <label> <input type="checkbox" class="boxSize"  /> Überprüfung aller KD-Ventilatoren</label>
-    <label><input type="checkbox" class="boxSize"/>NZ</label>
-  <br>
-  <input type="text" class="inputBasic"  placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" /> Drehzahlregler KD-Ventilatoren</label>
-    <label><input type="checkbox" class="boxSize"/>Nicht vorhanden</label>
-  <br>
-  <input type="text"  class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-  <div class="divSize">
-    <label><input type="checkbox" class="boxSize" /> Überprüfung aller elektrischen Regelorgane (Schutz, Relais, Schutzschalter etc)</label>
-  <br>
-  <input type="text"  class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
-  </div>
-
-
-
-  <br>
-  <br>
-  <br>
-
-
-    <div class="divSize">
-      <label><input type="checkbox" class="boxSize"/>
-      Messung Frostschutz </label>
-      <label><input type="checkbox" class="boxSize"/>NZ</label>
-      <br>
-      <label class="boxAlign">&#8451;</label>
-      <input type="number" step="0.1"  class="boxAlign" size="2"/>
-      <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
-    </div>
-
-    <div class="divSize">
-      <label><input type="checkbox" class="boxSize" />
-     Einstellung der Druckschalter Notbetrieb</label>
-      <label class="boxAlign">bar</label>
-      <input type="number" step="0.1" class="boxAlign" size="2" />
-      <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
-   </div>
-    
-   <div class="divSize">
-    <label><input type="checkbox" class="boxSize" />
-   Einstellung der Druckschalter ND/HD</label>
-    <label class="boxAlign">bar</label>
-    <input type="number" step="0.1" class="boxAlign" size="2" />
-    <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
- </div>
-  
-
-
-          
-        
-      
-        
-          
-          
-
-          <div class="divSize">
-            <label ><input type="checkbox" class="boxSize" /> Prüfbüch erstellt</label>
-            <label><input type="checkbox" class="boxSize" />NZ</label>
-            <br>
-            <input type="text" class="inputBasic" placeholder="Bemerkungen"  size="30" maxlength="37"/>
-          </div>
-           -->
-          
-          
-         
             <div class="divSize3">
             <label>Anmerkungen</label>
             <br>
