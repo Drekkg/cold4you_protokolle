@@ -17,16 +17,31 @@
   padding: 1em;
 
 }
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin: 1rem;
 
-.list {
-  display: inline-block;
-  font-size: 1.5rem;
-  text-align: left;
-  margin-left: 4em;
-  padding: 0em;
-  line-height: 3em;
-  list-style: none;
-  background-color: rgb(246, 247, 249);
-  padding: 1em;
 }
 
+.list {
+
+  font-size: 1.5rem;
+  text-align: left;
+  margin-left: 1em;
+  padding: 0em;
+  line-height: 2em;
+  list-style: none;
+
+  padding: 1em;
+
+}
+li {
+  text-decoration: none;
+  background-color: rgb(246, 247, 249);
+  margin-top: 1em;
+  padding: 1em;
+  border-radius: 0.5em;
+}
