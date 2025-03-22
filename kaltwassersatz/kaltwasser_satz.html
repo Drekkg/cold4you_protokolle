@@ -514,9 +514,19 @@
     objectStore.createIndex("date1", "date1", { unique: false });
     objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
   };
+  
+request.onerror = (event) => {
+  console.error("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = (event) => {
+  db = event.target.result;
+  const transaction = db.transaction(["formData"], "readwrite");
+  const objectStore = transaction.objectStore("formData");
+  const happy = objectStore.getAll();
 
-  request.onsuccess = function(event) {
-    const db = event.target.result;
+  console.log("success" + JSON.stringify(happy.result));
+};
+
 
     // Function to save form data to IndexedDB
     function saveFormData() {
@@ -548,17 +558,14 @@
       };
     }
 
-    // Call saveFormData function when form is submitted
-    document.getElementById("form").onsubmit = function(event) {
-      event.preventDefault();
-      saveFormData();
-      saveAlert();
-    };
-  };
+   
 
-  request.onerror = function(event) {
-    console.log("Error opening IndexedDB:", event.target.errorCode);
-  };
+
+
+
+;
+
+
 
 function myFunction() {
 var title = document.getElementById("Anlage").value;
@@ -599,7 +606,13 @@ function saveAlert(){
     alert("PDF nicht gespeichert");
   }
 }
-
+ // Call saveFormData function when form is submitted
+ document.getElementById("form").onsubmit = function(event) {
+      event.preventDefault();
+      saveFormData();
+      saveAlert();
+    };
+  
 
 
 function savePDF() {
