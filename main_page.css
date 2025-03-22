@@ -24,7 +24,7 @@
 
 .list {
 
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
   margin-left: 1em;
   padding: 0em;
@@ -45,5 +45,5 @@ li {
 li > a {
   text-decoration: none;
   color: #6f2121;
-  font-size: 1.5rem;
+  font-size: 1rem;
 }
