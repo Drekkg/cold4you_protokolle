@@ -34,27 +34,27 @@
         <div>
             <div class="div4">
               <label>Kunde:</label>
-              <input type="text" id="kunde" size="25" >
+              <input type="text" id="kunde" size="25" required >
                 <label>Standort:</label>
-                <input type="text" id="standort" size="25" >
+                <input type="text" id="standort" size="25" required >
                   <label>Anlage:</label>
-                  <input type="text" id="Anlage" size="25" >
+                  <input type="text" id="Anlage" size="25" required >
                   </div> 
                   <div class="div4">
                     <label>Mängel:</label>
                     <br>
-                    <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8"></textarea>
+                    <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea>
                     </div>
             
       </div>
       <div class="div4">
            <label class="addressBox">Datum:</label>
-           <input type="date" id="date11" value="">
+           <input type="date" id="date11" value="" required>
           </div>
           
         <div class="div4">
           <label>Techniker:</label>
-          <input type="text" id="techniker" size="20" >
+          <input type="text" id="techniker" size="20" required >
           <button type="submit" class="seeThrough"  id="print" >Speichern</button>
           <button type="button" class="seeThrough"  id="close" >Schliessen</button>
           </div>
@@ -94,6 +94,8 @@ function saveAlert(event){
 
 function savePDF() {
   console.log("save pdf");
+  document.getElementById("form").style.display = "none";
+  document.getElementById("open").style.display = "block";
 var element = document.getElementById('el-to-print');
 html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
 
