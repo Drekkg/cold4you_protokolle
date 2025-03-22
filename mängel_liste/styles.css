@@ -103,11 +103,14 @@ h1 {
   font-size: 1.5em;
   font-weight: bolder;
   padding-bottom: 1em;
+  padding-top: 2em;
   margin-bottom: 0em;
-  margin-top: 1em;
+  margin-top: 0em;
   margin-left: 4em;
 }
-
+.div4 > label {
+  margin-left: 1em;
+}
 
 .tableBg2 {
   font-size: 1em;

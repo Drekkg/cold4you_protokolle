@@ -27,38 +27,24 @@
         <img src="cold_logo.jpg" alt="image" width="500rem" height="200rem">
        </div>
       </div> 
-      <div>
-        <ul>
-          <li>
-            <label>Kunde:</label>
-            <p></p>
-            </li>
-          <li>
-            <label>Standort:</label>
-            <p></p>
-            </li>
-          <li>
-            <label>Anlage:</label>
-            <p></p>
-            </li> 
-            <label>Techniker:</label>
-            <p></p>
-            </li>
-          <li>  
-            <label>Datum:</label>
-            <p></p>
-            </li>   
-            <li>
-            <label>Mängel:</label>
-            <ul>
-              <li>
-                <p></p>
-              </li>
-            </ul>
-        </ul>
+      <div class="flexContainer">      
+        <div>
+            <div class="div4">
+              <label>Kunde:</label>
+              <input type="text" id="kunde" size="25" >
+                <label>Standort:</label>
+                <input type="text" id="standort" size="25" >
+                  <label>Anlage:</label>
+                  <input type="text" id="Anlage" size="25" >
+                  </div> 
+                  <div class="div4">
+                    <label>Mängel:</label>
+                    <br>
+                    <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8"></textarea>
+                    </div>
+            
       </div>
-           <div class="flexContainer">      
-         <div class="div3">
+      <div class="div4">
            <label class="addressBox">Datum:</label>
            <input type="date" id="date11" value="">
           </div>
@@ -66,7 +52,7 @@
         <div class="div4">
           <label>Techniker:</label>
           <input type="text" id="techniker" size="20" >
-          <button type="submit" class="seeThrough"  id="print" >Speichern PDF</button>
+          <button type="submit" class="seeThrough"  id="print" >Speichern</button>
           </div>
        
         </div>
