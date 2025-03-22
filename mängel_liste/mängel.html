@@ -10,23 +10,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
 
-  <form class="form" id="form" onsubmit="saveAlert(event)">
   <body id="el-to-print">
-     <div class="div1">
-       <div>
-       <h3>Cold4you Gewerbekälte GmbH</h3>
-       <p style="font-size: large">Wiener Strasse 25, 2100 Korneuburg</p>
-       <p style="font-size: large">Tel: 02262 / 235 25 </p>
-       <p style="font-size: large">Email: office@cold4you.at </p>
-       <p style="font-size: large">www.cold4you.at </p>
-       </div>
-       <div>
-       <h1>Mängel Liste - Noch unter bearbeiten</h1>
-       </div>
-       <div>
+    <div class="div1">
+      <div>
+        <h3>Cold4you Gewerbekälte GmbH</h3>
+        <p style="font-size: large">Wiener Strasse 25, 2100 Korneuburg</p>
+        <p style="font-size: large">Tel: 02262 / 235 25 </p>
+        <p style="font-size: large">Email: office@cold4you.at </p>
+        <p style="font-size: large">www.cold4you.at </p>
+      </div>
+      <div>
+        <h1>Mängel Liste - Noch unter bearbeiten</h1>
+      </div>
+      <div>
         <img src="cold_logo.jpg" alt="image" width="500rem" height="200rem">
-       </div>
-      </div> 
+      </div>
+    </div> 
+    <div>
+      <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
+    </div>
+    <form class="form" id="form" onsubmit="saveAlert(event)">
       <div class="flexContainer">      
         <div>
             <div class="div4">
@@ -53,6 +56,7 @@
           <label>Techniker:</label>
           <input type="text" id="techniker" size="20" >
           <button type="submit" class="seeThrough"  id="print" >Speichern</button>
+          <button type="button" class="seeThrough"  id="close" >Schliessen</button>
           </div>
        
         </div>
@@ -65,7 +69,16 @@
    const currentDate = new Date().toISOString().slice(0, 10);
    document.getElementById("date11").value = currentDate;
 
-
+   document.getElementById("open").addEventListener("click", function() {
+    document.getElementById("form").style.display = "block";
+    document.getElementById("open").style.display = "none";
+  }); 
+  document.getElementById("close").addEventListener("click", function() {
+    document.getElementById("form").style.display = "none";
+    document.getElementById("open").style.display = "block";
+  }); 
+   
+   
 
 
 

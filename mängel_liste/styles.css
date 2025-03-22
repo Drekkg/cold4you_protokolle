@@ -258,6 +258,30 @@ button#print {
   cursor: pointer;
 }
 
+button#close {
+  border-radius: 2em;
+  padding: 1em;
+  height: 80%;
+  margin-left: 25em;
+  background: red;
+  border: 1px solid transparent;
+  color: rgb(26, 8, 8);
+  font-weight: 600;
+  cursor: pointer;
+
+}
+button#open {
+  border-radius: 2em;
+  padding: 1em;
+  height: 80%;
+  margin-left: 5em;
+  background: rgb(186, 186, 193);
+  border: 1px solid transparent;
+  color: rgb(26, 8, 8);
+  font-weight: 600;
+  cursor: pointer;
+
+}
 
 .flex-row {
   display: flex;
@@ -292,6 +316,9 @@ button#clear span {
 .printClear {
   background:  rgb(244, 245, 255);
  
+}
+#form {
+  display: none;
 }
 
 @media print {
