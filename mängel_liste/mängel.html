@@ -77,7 +77,18 @@
     document.getElementById("form").style.display = "none";
     document.getElementById("open").style.display = "block";
   }); 
-   
+  // Open (or create) the database
+  const request = indexedDB.open("Cold4YouDB", 1);
+
+  request.onupgradeneeded = function(event) {
+    const db = event.target.result; 
+  
+    // Create an object store for the form data
+    const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
+
+    // Define what data items the object store will contain
+  
+  };
    
 
 
