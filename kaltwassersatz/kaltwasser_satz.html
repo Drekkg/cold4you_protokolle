@@ -512,7 +512,7 @@
     objectStore.createIndex("standort", "standort", { unique: false });
     objectStore.createIndex("techniker", "techniker", { unique: false });
     objectStore.createIndex("date1", "date1", { unique: false });
-    objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
+    objectStore.createIndex("maengel", "maengel", { unique: false });
   };
   
 request.onerror = (event) => {
@@ -524,7 +524,7 @@ request.onsuccess = (event) => {
   const objectStore = transaction.objectStore("formData");
   const happy = objectStore.getAll();
 
-  console.log("success" + JSON.stringify(happy.result));
+
 };
 
 
@@ -534,7 +534,7 @@ request.onsuccess = (event) => {
       const standortValue = document.getElementById("standort").value;
       const technikerValue = document.getElementById("techniker").value;
       const date1Value = document.getElementById("date11").value;
-      const anmerkungValue = document.getElementById("anmerkung").value;
+      const maengelValue = document.getElementById("maengel").value;
 
       const transaction = db.transaction(["formData"], "readwrite");
       const objectStore = transaction.objectStore("formData");
