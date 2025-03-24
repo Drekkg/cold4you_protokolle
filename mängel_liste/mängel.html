@@ -79,16 +79,21 @@
   }); 
   // Open (or create) the database
   const request = indexedDB.open("Cold4YouDB", 1);
-
   request.onupgradeneeded = function(event) {
     const db = event.target.result; 
   
     // Create an object store for the form data
     const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
-
+    console.log("object store created");
     // Define what data items the object store will contain
-  
+    objectStore.createIndex("kunde", "kunde", { unique: true });
+    objectStore.createIndex("standort", "standort", { unique: false });
+    objectStore.createIndex("techniker", "techniker", { unique: false });
+    objectStore.createIndex("date1", "date1", { unique: false });
+    objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
   };
+  
+  
    
 
 

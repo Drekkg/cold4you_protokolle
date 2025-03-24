@@ -404,7 +404,7 @@
             <label>Anmerkungen</label>
             <br>
         
-            <textarea class="inputBasicArea" name="anmerkung" id="anmerkung" cols="50" rows="8"></textarea>
+            <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8"></textarea>
              </div>
 
           </div>
@@ -544,7 +544,7 @@ request.onsuccess = (event) => {
         standort: standortValue,
         techniker: technikerValue,
         date1: date1Value,
-        anmerkung: anmerkungValue,
+        maengel: maengelValue,
       };
 
       const request = objectStore.add(data);
