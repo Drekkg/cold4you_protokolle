@@ -92,6 +92,43 @@
     objectStore.createIndex("date1", "date1", { unique: false });
     objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
   };
+
+  request.onerror = (event) => {
+  console.error("Why didn't you allow my web app to use IndexedDB?!");
+};
+request.onsuccess = (event) => {
+  db = event.target.result;
+  const transaction = db.transaction(["formData"], "readwrite");
+  const objectStore = transaction.objectStore("formData");
+  const happy = objectStore.getAll();
+};
+
+  // Function to save form data to IndexedDB
+  function saveFormData() {
+      const kundeValue = document.getElementById("kunde").value;
+      const standortValue = document.getElementById("standort").value;
+      const technikerValue = document.getElementById("techniker").value;
+      const date1Value = document.getElementById("date11").value;
+      const maengelValue = document.getElementById("maengel").value;
+
+      const transaction = db.transaction(["formData"], "readwrite");
+      const objectStore = transaction.objectStore("formData");
+
+      const data = {
+        kunde: kundeValue,
+        standort: standortValue,
+        techniker: technikerValue,
+        date1: date1Value,
+        maengel: maengelValue,
+      };
+
+      const request = objectStore.add(data);
+
+      request.onsuccess = function() {
+        console.log("Form data saved to IndexedDB");
+      };
+    };
+
   
   
    
