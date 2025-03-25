@@ -49,7 +49,7 @@
       </div>
       <div class="div4">
            <label class="addressBox">Datum:</label>
-           <input type="date" id="date11" value="" required>
+           <input type="date" id="date1" value="" required>
           </div>
           
         <div class="div4">
@@ -67,7 +67,7 @@
     </body>
 <script>
    const currentDate = new Date().toISOString().slice(0, 10);
-   document.getElementById("date11").value = currentDate;
+   document.getElementById("date1").value = currentDate;
 
    document.getElementById("open").addEventListener("click", function() {
     document.getElementById("form").style.display = "block";
@@ -86,11 +86,11 @@
     const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
     console.log("object store created");
     // Define what data items the object store will contain
-    objectStore.createIndex("kunde", "kunde", { unique: true });
+    objectStore.createIndex("kunde", "kunde", { unique: false});
     objectStore.createIndex("standort", "standort", { unique: false });
     objectStore.createIndex("techniker", "techniker", { unique: false });
     objectStore.createIndex("date1", "date1", { unique: false });
-    objectStore.createIndex("anmerkung", "anmerkung", { unique: false });
+    objectStore.createIndex("maengel", "maengel", { unique: false });
   };
 
   request.onerror = (event) => {
@@ -108,7 +108,7 @@ request.onsuccess = (event) => {
       const kundeValue = document.getElementById("kunde").value;
       const standortValue = document.getElementById("standort").value;
       const technikerValue = document.getElementById("techniker").value;
-      const date1Value = document.getElementById("date11").value;
+      const date1Value = document.getElementById("date1").value;
       const maengelValue = document.getElementById("maengel").value;
 
       const transaction = db.transaction(["formData"], "readwrite");
@@ -162,5 +162,11 @@ var opt = {
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
   
 };
+ // Call saveFormData function when form is submitted
+ document.getElementById("form").onsubmit = function(event) {
+      event.preventDefault();
+      saveFormData();
+      saveAlert();
+    };
   </script>
 </html>

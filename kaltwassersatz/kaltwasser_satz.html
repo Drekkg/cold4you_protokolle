@@ -508,7 +508,7 @@
     const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
 
     // Define what data items the object store will contain
-    objectStore.createIndex("kunde", "kunde", { unique: true });
+    objectStore.createIndex("kunde", "kunde", { unique: false});
     objectStore.createIndex("standort", "standort", { unique: false });
     objectStore.createIndex("techniker", "techniker", { unique: false });
     objectStore.createIndex("date1", "date1", { unique: false });
@@ -556,14 +556,7 @@ request.onsuccess = (event) => {
       request.onerror = function() {
         console.log("Error saving form data to IndexedDB");
       };
-    }
-
-   
-
-
-
-
-;
+    };
 
 
 
