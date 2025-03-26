@@ -81,14 +81,17 @@
     document.getElementById("open").style.display = "none";
   }); 
   document.getElementById("close").addEventListener("click", function() {
-    document.getElementById("form").style.display = "none";
-    document.getElementById("open").style.display = "block";
+  document.getElementById("form").style.display = "none";
+  document.getElementById("open").style.display = "block";
   }); 
+
+
   // Open (or create) the database
-  const request = indexedDB.open("Cold4YouDB", 1);
+const request = indexedDB.open("Cold4YouDB", 1);
+
+
   request.onupgradeneeded = function(event) {
-    const db = event.target.result; 
-  
+  const db = event.target.result; 
     // Create an object store for the form data
     const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
     console.log("object store created");
@@ -104,12 +107,8 @@
   request.onerror = (event) => {
   console.error("Why didn't you allow my web app to use IndexedDB?!");
 };
-request.onsuccess = (event) => {
-  db = event.target.result;
-  const transaction = db.transaction(["formData"], "readwrite");
-  const objectStore = transaction.objectStore("formData");
 
-};
+
 
   // Function to save form data to IndexedDB
   function saveFormData() {
@@ -182,9 +181,19 @@ var opt = {
 };
  // Call saveFormData function when form is submitted
  document.getElementById("form").onsubmit = function(event) {
-      event.preventDefault();
       saveFormData();
       saveAlert();
     };
+    request.onsuccess = (event) => {
+  db = event.target.result;
+  const transaction = db.transaction(["formData"], "readwrite");
+ const objectStore = transaction.objectStore("formData");
+ const getAllRequest = objectStore.getAll();
+ getAllRequest.onsuccess = function(event) {
+    const data = event.target.result; // All data from the object store
+    console.log("Retrieved data:", data);
+  };
+};
+
   </script>
 </html>

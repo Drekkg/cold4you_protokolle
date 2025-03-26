@@ -554,7 +554,7 @@ request.onsuccess = (event) => {
       };
 
       request.onerror = function() {
-        console.log("Error saving form data to IndexedDB");
+        console.log("Error saving form data to IndexedDB", event.target.errorCode);
       };
     };
 
@@ -604,6 +604,7 @@ function saveAlert(){
       event.preventDefault();
       saveFormData();
       saveAlert();
+      console.log("save alert SSSSSSSSD");
     };
   
 
