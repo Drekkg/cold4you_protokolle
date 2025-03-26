@@ -68,6 +68,13 @@
 <script>
    const currentDate = new Date().toISOString().slice(0, 10);
    document.getElementById("date1").value = currentDate;
+   const kundeValue_storage = localStorage.getItem("kunde");
+  const standortValue_storage = localStorage.getItem("standort");
+  const technikerValue_storage = localStorage.getItem("techniker");
+
+  document.getElementById("kunde").value = kundeValue_storage;
+  document.getElementById("standort").value = standortValue_storage;
+  document.getElementById("techniker").value = technikerValue_storage;
 
    document.getElementById("open").addEventListener("click", function() {
     document.getElementById("form").style.display = "block";
@@ -111,6 +118,11 @@ request.onsuccess = (event) => {
       const date1Value = document.getElementById("date1").value;
       const maengelValue = document.getElementById("maengel").value;
 
+  localStorage.setItem("kunde", kundeValue);
+  localStorage.setItem("standort", standortValue);
+  localStorage.setItem("techniker", technikerValue);
+  localStorage.setItem("date1", date1Value);
+
       const transaction = db.transaction(["formData"], "readwrite");
       const objectStore = transaction.objectStore("formData");
 
@@ -142,6 +154,10 @@ function saveAlert(event){
   
       savePDF();
       console.log("save alert")
+  document.getElementById("form").style.display = "none";
+  document.getElementById("open").style.display = "block";
+ 
+
 }
 
 
