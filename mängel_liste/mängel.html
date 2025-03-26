@@ -139,6 +139,7 @@ request.onsuccess = (event) => {
 
 function saveAlert(event){
   // event.preventDefault();
+  
       savePDF();
       console.log("save alert")
 }
@@ -146,11 +147,11 @@ function saveAlert(event){
 
 
 function savePDF() {
+  var element = document.getElementById('el-to-print');
+  html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
   console.log("save pdf");
-  document.getElementById("form").style.display = "none";
-  document.getElementById("open").style.display = "block";
-var element = document.getElementById('el-to-print');
-html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
+  // document.getElementById("form").style.display = "none";
+  // document.getElementById("open").style.display = "block";
 
 
 }
