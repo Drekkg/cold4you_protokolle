@@ -92,6 +92,7 @@
     // Create an object store for the form data
     const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
     console.log("object store created");
+
     // Define what data items the object store will contain
     objectStore.createIndex("kunde", "kunde", { unique: false});
     objectStore.createIndex("standort", "standort", { unique: false });
@@ -107,7 +108,7 @@ request.onsuccess = (event) => {
   db = event.target.result;
   const transaction = db.transaction(["formData"], "readwrite");
   const objectStore = transaction.objectStore("formData");
-  const happy = objectStore.getAll();
+
 };
 
   // Function to save form data to IndexedDB
@@ -153,7 +154,7 @@ function saveAlert(event){
   // event.preventDefault();
   
       savePDF();
-      console.log("save alert")
+  console.log("save alert")
   document.getElementById("form").style.display = "none";
   document.getElementById("open").style.display = "block";
  
