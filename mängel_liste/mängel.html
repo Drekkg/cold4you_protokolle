@@ -43,7 +43,12 @@
                   <div class="div4">
                     <label>Mängel:</label>
                     <br>
-                    <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea>
+                    <!-- <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea> -->
+                    <input type="text" name="maengel" size="35" value="" /><br>
+                    <input type="text" name="maengel" size="35" value="" /><br>
+                    <input type="text" name="maengel" size="35" value="" /><br>
+                    <input type="text" name="maengel" size="35" value="" /><br>
+                    <input type="text" name="maengel" size="35" value="" /><br>
                     </div>
             
       </div>
@@ -123,7 +128,7 @@ const request = indexedDB.open("Cold4YouDB", 1);
   };
 
   request.onerror = (event) => {
-  console.error("Why didn't you allow my web app to use IndexedDB?!");
+  console.error("IndexedDB ERROR");
 };
 
 
@@ -134,7 +139,7 @@ const request = indexedDB.open("Cold4YouDB", 1);
       const standortValue = document.getElementById("standort").value;
       const technikerValue = document.getElementById("techniker").value;
       const date1Value = document.getElementById("date1").value;
-      const maengelValue = document.getElementById("maengel").value;
+      const maengelValue = document.getElementByName("maengel").value;
 
   localStorage.setItem("kunde", kundeValue);
   localStorage.setItem("standort", standortValue);
