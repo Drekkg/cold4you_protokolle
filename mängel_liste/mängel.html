@@ -63,6 +63,24 @@
       </div>
       </div>
       </form>
+      <!-- Add a container to display the data -->
+<div id="data-container">
+  <h3>Stored Data</h3>
+  <table id="data-table" border="1">
+    <thead>
+      <tr>
+        <th>Kunde</th>
+        <th>Standort</th>
+        <th>Techniker</th>
+        <th>Datum</th>
+        <th>Mängel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data rows will be dynamically added here -->
+    </tbody>
+  </table>
+</div>
 
     </body>
 <script>
@@ -141,14 +159,6 @@ const request = indexedDB.open("Cold4YouDB", 1);
       };
     };
 
-  
-  
-   
-
-
-
-
-
 function saveAlert(event){
   // event.preventDefault();
   
@@ -184,16 +194,54 @@ var opt = {
       saveFormData();
       saveAlert();
     };
-    request.onsuccess = (event) => {
+
+    // open db and get the data from the object store 
+  request.onsuccess = (event) => {
   db = event.target.result;
-  const transaction = db.transaction(["formData"], "readwrite");
+
+ const transaction = db.transaction(["formData"], "readonly");
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function(event) {
     const data = event.target.result; // All data from the object store
-    console.log("Retrieved data:", data);
+    data.forEach((item) => {
+      console.log(item.techniker)
+    })
+//Display the data on the page
+    const tableBody = document.getElementById("data-table").querySelector("tbody");
+      tableBody.innerHTML = ""; // Clear existing rows
+
+      data.forEach((item) => {
+        const row = document.createElement("tr");
+
+        // Add table cells for each field
+        row.innerHTML = `
+          <td>${item.kunde || ""}</td>
+          <td>${item.standort || ""}</td>
+          <td>${item.techniker || ""}</td>
+          <td>${item.date1 || ""}</td>
+          <td>${item.maengel || ""}</td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+    
+
+    getAllRequest.onerror = function (event) {
+      console.error("Error retrieving data:", event.target.errorCode);
+    };
+  
+
+  request.onerror = function (event) {
+    console.error("Error opening database:", event.target.errorCode);
   };
+  };
+   
+ 
 };
+
+
+ 
 
   </script>
 </html>
