@@ -45,11 +45,11 @@
                     <br>
                     <!-- <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea> -->
                     <input type="text" name="maengel1"  id="maengel1" size="45" value="" /><br>
-                    <input type="text" name="maengel2"  id="maengel1" size="45" value="" /><br>
-                    <input type="text" name="maengel3"  id="maengel1" size="45" value="" /><br>
-                    <input type="text" name="maengel4"  id="maengel1" size="45" value="" /><br>
-                    <input type="text" name="maengel5"  id="maengel1" size="45" value="" /><br>
-                    <input type="text" name="maengel6"  id="maengel1" size="45" value="" /><br>
+                    <input type="text" name="maengel2"  id="maengel2" size="45" value="" /><br>
+                    <input type="text" name="maengel3"  id="maengel3" size="45" value="" /><br>
+                    <input type="text" name="maengel4"  id="maengel4" size="45" value="" /><br>
+                    <input type="text" name="maengel5"  id="maengel5" size="45" value="" /><br>
+                    <input type="text" name="maengel6"  id="maengel6" size="45" value="" /><br>
                     </div>
             
       </div>
@@ -112,9 +112,7 @@
 
 
   // Open (or create) the database
-const request = indexedDB.open("Cold4YouDB", 1);
-
-
+  const request = indexedDB.open("Cold4YouDB", 1);
   request.onupgradeneeded = function(event) {
   const db = event.target.result; 
     // Create an object store for the form data
@@ -126,7 +124,12 @@ const request = indexedDB.open("Cold4YouDB", 1);
     objectStore.createIndex("standort", "standort", { unique: false });
     objectStore.createIndex("techniker", "techniker", { unique: false });
     objectStore.createIndex("date1", "date1", { unique: false });
-    objectStore.createIndex("maengel", "maengel", { unique: false });
+    objectStore.createIndex("maengel1", "maengel1", { unique: false });
+    objectStore.createIndex("maengel2", "maengel2", { unique: false });
+    objectStore.createIndex("maengel3", "maengel3", { unique: false });
+    objectStore.createIndex("maengel4", "maengel4", { unique: false });
+    objectStore.createIndex("maengel5", "maengel5", { unique: false });
+    objectStore.createIndex("maengel6", "maengel6", { unique: false });
   };
 
   request.onerror = (event) => {
@@ -141,7 +144,12 @@ const request = indexedDB.open("Cold4YouDB", 1);
       const standortValue = document.getElementById("standort").value;
       const technikerValue = document.getElementById("techniker").value;
       const date1Value = document.getElementById("date1").value;
-      const maengelValue = document.getElementsByName("maengel");
+      const maengelValue1 = document.getElementById("maengel1").value;
+      const maengelValue2 = document.getElementById("maengel2").value;
+      const maengelValue3 = document.getElementById("maengel3").value;
+      const maengelValue4 = document.getElementById("maengel4").value;
+      const maengelValue5 = document.getElementById("maengel5").value;
+      const maengelValue6 = document.getElementById("maengel6").value;
 
   localStorage.setItem("kunde", kundeValue);
   localStorage.setItem("standort", standortValue);
@@ -156,7 +164,12 @@ const request = indexedDB.open("Cold4YouDB", 1);
         standort: standortValue,
         techniker: technikerValue,
         date1: date1Value,
-        maengel: maengelValue,
+        maengel1: maengelValue1,
+        maengel2: maengelValue2,
+        maengel3: maengelValue3,
+        maengel4: maengelValue4,
+        maengel5: maengelValue5,
+        maengel6: maengelValue6,
       };
 
       const request = objectStore.add(data);
@@ -210,7 +223,7 @@ var opt = {
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function(event) {
-    const data = event.target.result; // All data from the object store
+ const data = event.target.result; // All data from the object store
 
 //Display the data on the page
     const tableBody = document.getElementById("data-table").querySelector("tbody");
@@ -225,7 +238,12 @@ var opt = {
           <td>${item.standort || ""}</td>
           <td>${item.techniker || ""}</td>
           <td>${item.date1 || ""}</td>
-          <td>${item.maengel || ""}</td>
+          <td>${item.maengel1 || ""}</td>
+          <td>${item.maengel2 || ""}</td>
+          <td>${item.maengel3 || ""}</td>
+          <td>${item.maengel4 || ""}</td>
+          <td>${item.maengel5 || ""}</td>
+          <td>${item.maengel6 || ""}</td>
         `
 
         tableBody.appendChild(row);
