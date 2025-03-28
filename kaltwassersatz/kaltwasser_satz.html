@@ -400,12 +400,23 @@
           
           
          
-            <div class="divSize3">
+            <!-- <div class="divSize3">
             <label>Anmerkungen</label>
             <br>
         
             <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8"></textarea>
-             </div>
+             </div> -->
+             <div class="div4">
+              <label>Mängel:</label>
+              <br>
+              <!-- <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea> -->
+              <input type="text" name="maengel1"  id="maengel1" size="65" value="" /><br>
+              <input type="text" name="maengel2"  id="maengel2" size="65" value="" /><br>
+              <input type="text" name="maengel3"  id="maengel3" size="65" value="" /><br>
+              <input type="text" name="maengel4"  id="maengel4" size="65" value="" /><br>
+              <input type="text" name="maengel5"  id="maengel5" size="65" value="" /><br>
+              <input type="text" name="maengel6"  id="maengel6" size="65" value="" /><br>
+              </div>
 
           </div>
 
@@ -451,6 +462,7 @@
     </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- <script src="../indexDB.js"></script> -->
 <script>
   const currentDate = new Date().toISOString().slice(0, 10);
    document.getElementById("date11").value = currentDate;
@@ -499,64 +511,63 @@
 
   
   // Open (or create) the database
-  const request = indexedDB.open("Cold4YouDB", 1);
+  // const request = indexedDB.open("Cold4YouDB", 1);
 
-  request.onupgradeneeded = function(event) {
-    const db = event.target.result;
+  // request.onupgradeneeded = function(event) {
+  //   const db = event.target.result;
 
-    // Create an object store for the form data
-    const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
+  //   // Create an object store for the form data
+  //   const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
 
-    // Define what data items the object store will contain
-    objectStore.createIndex("kunde", "kunde", { unique: false});
-    objectStore.createIndex("standort", "standort", { unique: false });
-    objectStore.createIndex("techniker", "techniker", { unique: false });
-    objectStore.createIndex("date1", "date1", { unique: false });
-    objectStore.createIndex("maengel", "maengel", { unique: false });
-  };
+  //   // Define what data items the object store will contain
+  //   objectStore.createIndex("kunde", "kunde", { unique: false});
+  //   objectStore.createIndex("standort", "standort", { unique: false });
+  //   objectStore.createIndex("techniker", "techniker", { unique: false });
+  //   objectStore.createIndex("date1", "date1", { unique: false });
+  //   objectStore.createIndex("maengel", "maengel", { unique: false });
+  // };
   
-request.onerror = (event) => {
-  console.error("Why didn't you allow my web app to use IndexedDB?!");
-};
-request.onsuccess = (event) => {
-  db = event.target.result;
-  const transaction = db.transaction(["formData"], "readwrite");
-  const objectStore = transaction.objectStore("formData");
-  const happy = objectStore.getAll();
+// request.onerror = (event) => {
+//   console.error("Why didn't you allow my web app to use IndexedDB?!");
+// };
+// request.onsuccess = (event) => {
+//   db = event.target.result;
+//   const transaction = db.transaction(["formData"], "readwrite");
+//   const objectStore = transaction.objectStore("formData");
 
 
-};
+// };
 
 
     // Function to save form data to IndexedDB
-    function saveFormData() {
-      const kundeValue = document.getElementById("kunde").value;
-      const standortValue = document.getElementById("standort").value;
-      const technikerValue = document.getElementById("techniker").value;
-      const date1Value = document.getElementById("date11").value;
-      const maengelValue = document.getElementById("maengel").value;
+    // function saveFormData() {
+    //   const kundeValue = document.getElementById("kunde").value;
+    //   const standortValue = document.getElementById("standort").value;
+    //   const technikerValue = document.getElementById("techniker").value;
+    //   const date1Value = document.getElementById("date11").value;
+    //   const maengelValue = document.getElementById("maengel").value;
 
-      const transaction = db.transaction(["formData"], "readwrite");
-      const objectStore = transaction.objectStore("formData");
+    //   const transaction = db.transaction(["formData"], "readwrite");
+    //   const objectStore = transaction.objectStore("formData");
 
-      const data = {
-        kunde: kundeValue,
-        standort: standortValue,
-        techniker: technikerValue,
-        date1: date1Value,
-        maengel: maengelValue,
-      };
+    //   const data = {
+    //     kunde: kundeValue,
+    //     standort: standortValue,
+    //     techniker: technikerValue,
+    //     date1: date1Value,
+    //     maengel: maengelValue,
+    //   };
 
-      const request = objectStore.add(data);
+    //   const request = objectStore.add(data);
 
-      request.onsuccess = function() {
-        console.log("Form data saved to IndexedDB");
-      };
+    //   request.onsuccess = function() {
+    //     console.log("Form data saved to IndexedDB");
+    //   };
 
-      request.onerror = function() {
-        console.log("Error saving form data to IndexedDB", event.target.errorCode);
-      };
-    };
+    //   request.onerror = function() {
+    //     console.log("Error saving form data to IndexedDB", event.target.errorCode);
+    //   };
+    // };
 
 
 
@@ -592,6 +603,7 @@ function saveAlert(){
      
     } else {
       savePDF();
+      alert("savepdf")
     }
   }
   
@@ -600,12 +612,12 @@ function saveAlert(){
   }
 }
  // Call saveFormData function when form is submitted
- document.getElementById("form").onsubmit = function(event) {
-      event.preventDefault();
-      saveFormData();
-      saveAlert();
-      console.log("save alert SSSSSSSSD");
-    };
+//  document.getElementById("form").onsubmit = function(event) {
+//       event.preventDefault();
+//       saveFormData();
+//       saveAlert();
+    
+//     };
   
 
 
