@@ -98,6 +98,7 @@
   document.getElementById("kunde").value = kundeValue_storage;
   document.getElementById("standort").value = standortValue_storage;
   document.getElementById("techniker").value = technikerValue_storage;
+  
 
    document.getElementById("open").addEventListener("click", function() {
     document.getElementById("form").style.display = "block";
@@ -139,7 +140,7 @@ const request = indexedDB.open("Cold4YouDB", 1);
       const standortValue = document.getElementById("standort").value;
       const technikerValue = document.getElementById("techniker").value;
       const date1Value = document.getElementById("date1").value;
-      const maengelValue = document.getElementByName("maengel").value;
+      const maengelValue = document.getElementsByName("maengel");
 
   localStorage.setItem("kunde", kundeValue);
   localStorage.setItem("standort", standortValue);
@@ -165,7 +166,7 @@ const request = indexedDB.open("Cold4YouDB", 1);
     };
 
 function saveAlert(event){
-  // event.preventDefault();
+   
   
       savePDF();
   console.log("save alert")
@@ -209,9 +210,7 @@ var opt = {
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function(event) {
     const data = event.target.result; // All data from the object store
-    data.forEach((item) => {
-      console.log(item.techniker)
-    })
+
 //Display the data on the page
     const tableBody = document.getElementById("data-table").querySelector("tbody");
       tableBody.innerHTML = ""; // Clear existing rows
