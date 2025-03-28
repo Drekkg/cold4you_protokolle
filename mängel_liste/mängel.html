@@ -79,7 +79,7 @@
         <th>Standort</th>
         <th>Techniker</th>
         <th>Datum</th>
-        <th>Mängel</th>
+        <th colspan="6">Mängel</th>
       </tr>
     </thead>
     <tbody>
@@ -245,12 +245,12 @@ document.getElementById("form").addEventListener("keydown", function(event) {
           <td>${item.standort || ""}</td>
           <td>${item.techniker || ""}</td>
           <td>${item.date1 || ""}</td>
-          <td>${item.maengel1 || ""}</td>
-          <td>${item.maengel2 || ""}</td>
-          <td>${item.maengel3 || ""}</td>
-          <td>${item.maengel4 || ""}</td>
-          <td>${item.maengel5 || ""}</td>
-          <td>${item.maengel6 || ""}</td>
+          <td>1: ${item.maengel1 || ""}</td>
+          <td>2: ${item.maengel2 || ""}</td>
+          <td>3: ${item.maengel3 || ""}</td>
+          <td>4: ${item.maengel4 || ""}</td>
+          <td>5: ${item.maengel5 || ""}</td>
+          <td>6: ${item.maengel6 || ""}</td>
         `
 
         tableBody.appendChild(row);
