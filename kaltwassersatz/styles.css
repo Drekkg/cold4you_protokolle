@@ -73,6 +73,15 @@ input, textarea {
   margin: 2em 1em 1em 3em;
   padding: 1em;
 }
+
+.divSizeMaengel {
+  border-radius: 1em;
+  width: 42em;
+  background-color: rgb(217, 219, 238);
+  margin: 2em 2em 1em 3em;
+  padding: 2em;
+}
+
 .divSize3 {
   border-radius: 1em; 
   width: 33em;

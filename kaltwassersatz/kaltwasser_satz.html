@@ -59,7 +59,7 @@
        
         <tr class="addressBox">
           <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="Anlage" value="Coffee" size="40" onchange="myFunction()" required/></th>
+          <th><input type="text" id="anlage" value="Coffee" size="40" onchange="myFunction()" required/></th>
         </tr>
     
       <tr class="addressBox">
@@ -406,7 +406,7 @@
         
             <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8"></textarea>
              </div> -->
-             <div class="div4">
+             <div  class="divSizeMaengel">
               <label>Mängel:</label>
               <br>
               <!-- <textarea class="inputBasicArea" name="maengel" id="maengel" cols="50" rows="8" required></textarea> -->
@@ -498,7 +498,7 @@
 
   const form = document.getElementById("form");
   const kunde = document.getElementById("kunde");
-  const Anlage = document.getElementById("standort");
+  const anlage = document.getElementById("standort");
   const techniker = document.getElementById("techniker");
   const dateCurrent = document.getElementById("dateCurrent");
 
@@ -513,84 +513,11 @@
   // document.getElementById( dateCurrent").value = date1Value_storage;
 
   
-  // Open (or create) the database
-  const request = indexedDB.open("Cold4YouDB", 1);
-
-  request.onupgradeneeded = function(event) {
-    const db = event.target.result;
-
-    // Create an object store for the form data
-    const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
-
-    // Define what data items the object store will contain
-    objectStore.createIndex("kunde", "kunde", { unique: false});
-    objectStore.createIndex("standort", "standort", { unique: false });
-    objectStore.createIndex("techniker", "techniker", { unique: false });
-    objectStore.createIndex("dateCurrent",  "dateCurrent", { unique: false });
-    objectStore.createIndex("maengel1", "maengel1", { unique: false });
-    objectStore.createIndex("maengel2", "maengel2", { unique: false });
-    objectStore.createIndex("maengel3", "maengel3", { unique: false });
-    objectStore.createIndex("maengel4", "maengel4", { unique: false });
-    objectStore.createIndex("maengel5", "maengel5", { unique: false });
-    objectStore.createIndex("maengel6", "maengel6", { unique: false });
-  };
   
-request.onerror = (event) => {
-  console.error("Why didn't you allow my web app to use IndexedDB?!");
-};
-request.onsuccess = (event) => {
-  db = event.target.result;
-  const transaction = db.transaction(["formData"], "readwrite");
-  const objectStore = transaction.objectStore("formData");
-
-
-};
-
-
-    // Function to save form data to IndexedDB
-    function saveFormData() {
-      const kundeValue = document.getElementById("kunde").value;
-      const standortValue = document.getElementById("standort").value;
-      const technikerValue = document.getElementById("techniker").value;
-      const date1Value = document.getElementById("dateCurrent").value;
-      const maengelValue1 = document.getElementById("maengel1").value;
-      const maengelValue2 = document.getElementById("maengel2").value;
-      const maengelValue3 = document.getElementById("maengel3").value;
-      const maengelValue4 = document.getElementById("maengel4").value;
-      const maengelValue5 = document.getElementById("maengel5").value;
-      const maengelValue6 = document.getElementById("maengel6").value;
-
-      const transaction = db.transaction(["formData"], "readwrite");
-      const objectStore = transaction.objectStore("formData");
-
-      const data = {
-        kunde: kundeValue,
-        standort: standortValue,
-        techniker: technikerValue,
-        dateCurrent: date1Value,
-        maengel1: maengelValue1,
-        maengel2: maengelValue2,
-        maengel3: maengelValue3,
-        maengel4: maengelValue4,
-        maengel5: maengelValue5,
-        maengel6: maengelValue6,
-      };
-
-      const request = objectStore.add(data);
-
-      request.onsuccess = function() {
-        console.log("Form data saved to IndexedDB");
-      };
-
-      request.onerror = function() {
-        console.log("Error saving form data to IndexedDB", event.target.errorCode);
-      };
-    };
-
 
 
 function myFunction() {
-var title = document.getElementById("Anlage").value;
+var title = document.getElementById("anlage").value;
 var standort = document.getElementById("standort").value.split("\n")[0];
 var datum = document.getElementById("dateCurrent").value;
 var kunde = document.getElementById("kunde").value;
@@ -604,7 +531,7 @@ function saveAlert() {
   console.log("saveAlert");
 
   const kundeValue = kunde.value;
-  const standortValue = Anlage.value;
+  const standortValue = standort.value;
   const technikerValue = techniker.value;
   const date1Value = dateCurrent.value;
 
@@ -641,7 +568,7 @@ html2pdf().set(opt).from(element).save(document.getElementById("title_change").i
 
 var opt = {
   // pagebreak:    { mode: 'avoid-all', before: '#page2' },
-  margin:       0.5,
+  margin:       0.4,
   filename:     myFunction(),
   image:        { type: 'jpeg', quality: 1 },
   html2canvas:  { scale: 1, dpi: 300, },
