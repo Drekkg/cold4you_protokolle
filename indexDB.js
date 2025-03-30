@@ -12,7 +12,7 @@ request.onupgradeneeded = function (event) {
   objectStore.createIndex("standort", "standort", { unique: false });
   objectStore.createIndex("anlage", "anlage", { unique: false });
   objectStore.createIndex("techniker", "techniker", { unique: false });
-  objectStore.createIndex("dateCurrent", "dateCurrent", { unique: false });
+  objectStore.createIndex("currentDate", "currentDate", { unique: false });
   objectStore.createIndex("maengel1", "maengel1", { unique: false });
   objectStore.createIndex("maengel2", "maengel2", { unique: false });
   objectStore.createIndex("maengel3", "maengel3", { unique: false });
@@ -52,7 +52,7 @@ function saveFormData() {
     standort: standortValue,
     anlage: anlageValue,
     techniker: technikerValue,
-    dateCurrent: date1Value,
+    currentDate: date1Value,
     maengel1: maengelValue1,
     maengel2: maengelValue2,
     maengel3: maengelValue3,
