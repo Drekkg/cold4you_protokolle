@@ -24,8 +24,10 @@ h1 {
 }
 
 .table {
-  font-size: 1.7em;
-  margin-left: 2em;
+    width: 90%;  
+    border: 2px solid black;
+    font-size: 1.3em;
+    margin: 1em;
   
 }
 .endBlock {
@@ -431,9 +433,7 @@ button#clear span {
   tr {
     display: block;
   }
-  .table {
-    font-size: 4em;
-  } 
+  
 
   .div3 {
     font-size: 0em;
