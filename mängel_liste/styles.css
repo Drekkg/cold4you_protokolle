@@ -248,6 +248,19 @@ font-size: 1.5em;
   font-size: 1em;
   
 }
+ .pdf-speichern{
+  border-radius: 2em;
+  padding: 1em;
+  height: 80%;
+  margin-left: 25em;
+  background: red;
+  border: 1px solid transparent;
+  color: rgb(26, 8, 8);
+  font-weight: 600;
+  cursor: pointer;
+  display:  inline-block !important;
+
+}
 button#print {
   border-radius: 2em;
   padding: 1em;
@@ -270,7 +283,6 @@ button#close {
   color: rgb(26, 8, 8);
   font-weight: 600;
   cursor: pointer;
-
 }
 button#open {
   border-radius: 2em;

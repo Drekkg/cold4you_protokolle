@@ -28,6 +28,7 @@
     </div> 
     <div>
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
+      <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
     </div>
     <form class="form" id="form">
       <div class="flexContainer">      
@@ -109,24 +110,27 @@
     document.getElementById("open").addEventListener("click", function() {
     document.getElementById("form").style.display = "block";
     document.getElementById("open").style.display = "none";
+    document.getElementById("savePdf").style.display = "none";
   }); 
   document.getElementById("close").addEventListener("click", function() {
   document.getElementById("form").style.display = "none";
-  document.getElementById("open").style.display = "block";
+  document.getElementById("open").style.display = "inline-block";
+  document.getElementById("savePdf").style.display = "inline-block";
+
   }); 
 
+document.getElementById("savePdf").addEventListener("click", function() {
+   saveAlert();
+  });
 
- 
-function saveAlert(event){
-    savePDF();
-  console.log("save alert")
- 
-
-  document.getElementById("form").style.display = "none";
-  document.getElementById("open").style.display = "block";
- 
-
-}
+  function saveAlert() {
+  if (confirm("PDF speichern?")){
+      savePDF();
+    }
+  else{
+    alert("PDF nicht gespeichert");
+  }
+};
 
 
 
@@ -134,9 +138,7 @@ function savePDF() {
   var element = document.getElementById('el-to-print');
   html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
   console.log("save pdf");
-  // document.getElementById("form").style.display = "none";
-  // document.getElementById("open").style.display = "block";
-
+ 
 
 }
 var opt = {
@@ -147,6 +149,7 @@ var opt = {
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
   
 };
+
 // Prevent enter key from submitting form 
 document.getElementById("form").addEventListener("keydown", function(event) {
   if(event.key === "Enter") {
@@ -156,8 +159,9 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 
  // Call saveFormData function when form is submitted
  document.getElementById("form").onsubmit = function(event) {
-      saveFormData();
-      saveAlert();
+      
+      document.getElementById("form").style.display = "none";
+      document.getElementById("open").style.display = "inline-block";
     };
 
     // open db and get the data from the object store 
@@ -205,12 +209,6 @@ document.getElementById("form").addEventListener("keydown", function(event) {
     console.error("Error opening database:", event.target.errorCode);
   };
   };
-   
- 
 };
-
-
- 
-
   </script>
 </html>
