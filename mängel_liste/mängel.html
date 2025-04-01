@@ -175,7 +175,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function (event) {
-  const data = event.target.result; // All data from the object store
+ const data = event.target.result; // All data from the object store
 
   // Display the data on the page
   const tableBody = document.getElementById("data-table").querySelector("tbody");
@@ -192,8 +192,12 @@ document.getElementById("form").addEventListener("keydown", function(event) {
         <td>${item.anlage || ""}</td>
         <td>${item.techniker || ""}</td>
         <td>${item.currentDate || ""}</td>
-        <td>${item.maengel1 || ""}</td>
-        <td>${item.maengel2 || ""}</td>
+        <td>1: ${item.maengel1 || ""}</td>
+        <td>2: ${item.maengel2 || ""}</td>
+        <td>3: ${item.maengel3 || ""}</td>
+        <td>4: ${item.maengel4 || ""}</td>
+        <td>5: ${item.maengel5 || ""}</td>
+        <td>6: ${item.maengel6 || ""}</td>
       `;
       tableBody.appendChild(row);
     });
@@ -215,7 +219,11 @@ document.getElementById("form").addEventListener("keydown", function(event) {
         (item.techniker && item.techniker.toLowerCase().includes(key)) ||
         (item.currentDate && item.currentDate.toLowerCase().includes(key)) ||
         (item.maengel1 && item.maengel1.toLowerCase().includes(key)) ||
-        (item.maengel2 && item.maengel2.toLowerCase().includes(key))
+        (item.maengel2 && item.maengel2.toLowerCase().includes(key)) ||
+        (item.maengel3 && item.maengel3.toLowerCase().includes(key)) ||
+        (item.maengel4 && item.maengel4.toLowerCase().includes(key)) ||
+        (item.maengel5 && item.maengel5.toLowerCase().includes(key)) ||
+        (item.maengel6 && item.maengel6.toLowerCase().includes(key)) 
       );
     });
 
