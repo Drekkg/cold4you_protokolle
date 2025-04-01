@@ -29,17 +29,18 @@
     <div>
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
       <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
+      <input type="text" id="search" size="25" placeholder="Search" />
     </div>
     <form class="form" id="form">
       <div class="flexContainer">      
         <div>
             <div class="div4">
               <label>Kunde:</label>
-              <input type="text" id="kunde" size="25" required >
+              <input type="text" id="kunde" size="25" required />
                 <label>Standort:</label>
-                <input type="text" id="standort" size="25" required >
+                <input type="text" id="standort" size="25" required />
                   <label>Anlage:</label>
-                  <input type="text" id="anlage" size="25" required >
+                  <input type="text" id="anlage" size="25" required />
                   </div> 
                   <div class="div4">
                     <label>Mängel:</label>
@@ -150,6 +151,8 @@ var opt = {
   
 };
 
+
+
 // Prevent enter key from submitting form 
 document.getElementById("form").addEventListener("keydown", function(event) {
   if(event.key === "Enter") {
@@ -159,7 +162,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 
  // Call saveFormData function when form is submitted
  document.getElementById("form").onsubmit = function(event) {
-      
+      saveFormData();
       document.getElementById("form").style.display = "none";
       document.getElementById("open").style.display = "inline-block";
     };
@@ -171,44 +174,56 @@ document.getElementById("form").addEventListener("keydown", function(event) {
  const transaction = db.transaction(["formData"], "readonly");
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
- getAllRequest.onsuccess = function(event) {
- const data = event.target.result; // All data from the object store
+ getAllRequest.onsuccess = function (event) {
+  const data = event.target.result; // All data from the object store
 
-//Display the data on the page
-    const tableBody = document.getElementById("data-table").querySelector("tbody");
-      tableBody.innerHTML = ""; // Clear existing rows
+  // Display the data on the page
+  const tableBody = document.getElementById("data-table").querySelector("tbody");
+  tableBody.innerHTML = ""; // Clear existing rows
 
-      data.forEach((item) => {
-        const row = document.createElement("tr");
+  // Function to render data into the table
+  function renderTable(filteredData) {
+    tableBody.innerHTML = ""; // Clear existing rows
+    filteredData.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.kunde || ""}</td>
+        <td>${item.standort || ""}</td>
+        <td>${item.anlage || ""}</td>
+        <td>${item.techniker || ""}</td>
+        <td>${item.currentDate || ""}</td>
+        <td>${item.maengel1 || ""}</td>
+        <td>${item.maengel2 || ""}</td>
+      `;
+      tableBody.appendChild(row);
+    });
+  }
 
-        // Add table cells for each field
-        row.innerHTML = `
-          <td>${item.kunde || ""}</td>
-          <td>${item.standort || ""}</td>
-          <td>${item.anlage || ""}</td>
-          <td>${item.techniker || ""}</td>
-          <td>${item.currentDate || ""}</td>
-          <td>1: ${item.maengel1 || ""}</td>
-          <td>2: ${item.maengel2 || ""}</td>
-          <td>3: ${item.maengel3 || ""}</td>
-          <td>4: ${item.maengel4 || ""}</td>
-          <td>5: ${item.maengel5 || ""}</td>
-          <td>6: ${item.maengel6 || ""}</td>
-        `
+  // Initially render all data
+  renderTable(data);
 
-        tableBody.appendChild(row);
-      });
-    
+  // Initialize search bar and filter the displayed data
+  document.getElementById("search").addEventListener("input", () => {
+    const key = document.getElementById("search").value.toLowerCase();
 
-    getAllRequest.onerror = function (event) {
-      console.error("Error retrieving data:", event.target.errorCode);
-    };
-  
+    // Filter the data based on the search key
+    const filteredData = data.filter((item) => {
+      return (
+        (item.kunde && item.kunde.toLowerCase().includes(key)) ||
+        (item.standort && item.standort.toLowerCase().includes(key)) ||
+        (item.anlage && item.anlage.toLowerCase().includes(key)) ||
+        (item.techniker && item.techniker.toLowerCase().includes(key)) ||
+        (item.currentDate && item.currentDate.toLowerCase().includes(key)) ||
+        (item.maengel1 && item.maengel1.toLowerCase().includes(key)) ||
+        (item.maengel2 && item.maengel2.toLowerCase().includes(key))
+      );
+    });
 
-  request.onerror = function (event) {
-    console.error("Error opening database:", event.target.errorCode);
-  };
-  };
+    // Render the filtered data
+    renderTable(filteredData);
+  });
+};
+
 };
   </script>
 </html>
