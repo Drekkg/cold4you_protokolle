@@ -59,7 +59,7 @@ input, textarea {
   padding-bottom: 1em;
 }          
 .divSize1 {
-  border-radius: 0em;
+  border-radius: 1em;
   width: 33em;
   background-color: rgb(217, 219, 238);
   margin: 4em 1em 0em 3em;
