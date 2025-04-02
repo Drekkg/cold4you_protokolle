@@ -174,10 +174,6 @@ input, textarea {
   margin: 1em 1em 1em 1em;
   
 }
-/* 
-.zoom:hover {
-  transform: scale(1.5);
-} */
 
 .div1 {
   display: flex;
@@ -207,10 +203,6 @@ input, textarea {
 font-size: 1.5em;
 }
 
-/* input {
-  font-size: 1em;
-  padding-left: 0.2em;
-} */
 .boxSize {
   width: 1em;
   height: 1em;  
