@@ -120,13 +120,24 @@
    </div>
   
        
-            <div class="divSize3">
+            <!-- <div class="divSize3">
             <label>Anmerkungen</label>
             <br>
         
             <textarea class="inputBasicArea" name="Text1" id="anmerkung" cols="50" rows="8"></textarea>
-             </div>
+             </div> -->
 
+          
+          <div  class="divSizeMaengel">
+            <label>Mängel:</label>
+            <br>
+            <input type="text" name="maengel1"  id="maengel1" size="65" value="" /><br>
+            <input type="text" name="maengel2"  id="maengel2" size="65" value="" /><br>
+            <input type="text" name="maengel3"  id="maengel3" size="65" value="" /><br>
+            <input type="text" name="maengel4"  id="maengel4" size="65" value="" /><br>
+            <input type="text" name="maengel5"  id="maengel5" size="65" value="" /><br>
+            <input type="text" name="maengel6"  id="maengel6" size="65" value="" /><br>
+            </div>
           </div>
 
           <div class="flexContainer">
@@ -206,7 +217,7 @@
   const techniker = document.getElementById("techniker1");
   const date1 = document.getElementById("date11");
   const title = document.getElementById("Anlage");
-  const anmerkung = document.getElementById("anmerkung");
+
 
   const kundeValue_storage = localStorage.getItem("kunde1");
   const standortValue_storage = localStorage.getItem("standort1");
@@ -243,7 +254,7 @@ function saveAlert(){
   localStorage.setItem("techniker1", technikerValue);
   localStorage.setItem("date11", date1Value);
   localStorage.setItem("title", title.value);
-  localStorage.setItem("anmerkung", anmerkung.value);
+  
 
    
   
