@@ -11,6 +11,8 @@ request.onupgradeneeded = function (event) {
   objectStore.createIndex("kunde", "kunde", { unique: false });
   objectStore.createIndex("standort", "standort", { unique: false });
   objectStore.createIndex("anlage", "anlage", { unique: false });
+  objectStore.createIndex("type", "type", { unique: false });
+  objectStore.createIndex("kaeltemittel", "kaeltemittel", { unique: false });
   objectStore.createIndex("techniker", "techniker", { unique: false });
   objectStore.createIndex("currentDate", "currentDate", { unique: false });
   objectStore.createIndex("maengel1", "maengel1", { unique: false });
@@ -36,6 +38,8 @@ function saveFormData() {
   const standortValue = document.getElementById("standort").value;
   const anlageValue = document.getElementById("anlage").value;
   const technikerValue = document.getElementById("techniker").value;
+  const typeValue = document.getElementById("type").value;
+  const kaeltemittelValue = document.getElementById("type").value;
   const date1Value = document.getElementById("dateCurrent").value;
   const maengelValue1 = document.getElementById("maengel1").value;
   const maengelValue2 = document.getElementById("maengel2").value;
@@ -51,6 +55,8 @@ function saveFormData() {
     kunde: kundeValue,
     standort: standortValue,
     anlage: anlageValue,
+    type: typeValue,
+    kaeltemittel: kaeltemittelValue,
     techniker: technikerValue,
     currentDate: date1Value,
     maengel1: maengelValue1,
