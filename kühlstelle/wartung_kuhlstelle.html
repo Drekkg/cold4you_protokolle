@@ -14,8 +14,7 @@
   </head>
 
  
-
-  <form class="form" id="form" onsubmit="saveAlert(); return false">
+  <form class="form" id="form">
   <body id="el-to-print">
 
     <div>
@@ -59,7 +58,7 @@
        
         <tr class="addressBox">
           <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="Anlage" value="" size="40" onchange="myFunction()" required/></th>
+          <th><input type="text" id="anlage" value="" size="40" onchange="myFunction()" required/></th>
         </tr>
     
       <tr class="addressBox">
@@ -206,10 +205,10 @@
 
   const form = document.getElementById("form");
   const kunde = document.getElementById("kunde");
-  const Anlage = document.getElementById("standort");
+  const anlage = document.getElementById("standort");
   const techniker = document.getElementById("techniker");
   const date = document.getElementById("dateCurrent");
-  const title = document.getElementById("Anlage");
+  const title = document.getElementById("anlage");
 
 
   const kundeValue_storage = localStorage.getItem("kunde");
@@ -224,7 +223,7 @@
   
 
 function myFunction() {
-var title = document.getElementById("Anlage").value;
+var title = document.getElementById("anlage").value;
 var standort = document.getElementById("standort").value.split("\n")[0];
 var datum = document.getElementById("dateCurrent").value;
 var kunde = document.getElementById("kunde").value;
@@ -236,9 +235,8 @@ var kunde = document.getElementById("kunde").value;
 
 function saveAlert(){
   console.log("saveAlert");
-
   const kundeValue = kunde.value;
-  const standortValue = Anlage.value;
+  const standortValue = anlage.value;
   const technikerValue = techniker.value;
   const dateValue = date.value;
 
@@ -268,8 +266,6 @@ function saveAlert(){
 
 
 function savePDF() {
- 
-
 var element = document.getElementById('el-to-print');
 document.getElementById("print").style.opacity = "0";
 document.getElementById("clear").style.opacity = "0";
@@ -285,5 +281,12 @@ var opt = {
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
   
 };
+ // Call saveFormData function when form is submitted
+ document.getElementById("form").onsubmit = function(event) {
+      event.preventDefault();
+      saveAlert();
+      saveFormData()
+    };
+
   </script>
 </html>
