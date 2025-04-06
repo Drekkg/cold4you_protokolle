@@ -30,44 +30,7 @@
 
 
 
-     <div class="flexContainer"> 
-     
-      <div class="address">
-   
-      <table class="table">   
-        <tr class="addressBox">
-        <th class="addressBox">Auftraggeber:</th>
-        <th><input  type="text" id="kunde" value="" onchange="myFunction()" size="40" name="" required /></th>
-        
-        </tr>
-        <tr class="addressBox">
-          <th class="text_area">Standort:</th>
-          <th>
-            <textarea class="tableBg2" id="standort" name="address" cols="41" rows="5" value="" required></textarea></th>
-        </tr>
-       
-       
-        <tr class="addressBox">
-          <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="anlage" value="" size="40" onchange="myFunction()" required/></th>
-        </tr>
-    
-      <tr class="addressBox">
-        <th class="addressBox">Type:</th>
-        <th> <input id="type" class="tableBg" type="text" size="40" value=""required/></th>
-      </tr>
-      <tr class="addressBox">
-        <th class="addressBox">Kältemittel:</th>
-        <th> <input id="kaeltemittel" class="tableBg" type="text" size="40"  value=""required/></th>
-      </tr>
-      <tr class="addressBox">
-        <th class="addressBox">Aufstellungsort:</th>
-        <th> <input id="aufstellung" class="tableBg" type="text" size="40" value="" required/></th>
-      </tr>
-      </table>
-      </div>
-
-</div> 
+ 
 
 
 
