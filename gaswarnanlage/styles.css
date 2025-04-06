@@ -3,6 +3,7 @@ input, textarea {
   font-size: 1em;
   padding-left: 0.2em;
  
+ 
 }
 
  
@@ -91,6 +92,19 @@ input, textarea {
   margin-top: 1em;
   margin-left: 4em;
 }
+
+.divSizeMaengel {
+  border-radius: 1em;
+  width: 42em;
+  background-color: rgb(217, 219, 238);
+  margin: 2em 2em 1em 3em;
+  padding: 2em 3em 2em 2em;
+}
+.divSizeMaengel input {
+  margin-top: .2em;
+}
+
+
 
 .tableBg2 {
   font-size: 1em;

@@ -12,7 +12,15 @@ h1 {
   margin-top: 1em;
   margin-bottom: 1em;
 }
- 
+td {
+  padding-left: 1em;
+}
+tr:nth-child(odd) {
+  background-color:  rgb(244, 244, 246);
+}
+
+
+
 .text_area {
   vertical-align: top;
   padding: 1em;
@@ -112,6 +120,10 @@ h1 {
 }
 .div4 > label {
   margin-left: 1em;
+}
+
+#km {
+  margin-left: 2.8em;
 }
 
 .tableBg2 {
@@ -248,12 +260,22 @@ font-size: 1.5em;
   font-size: 1em;
   
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
+ 
+}
+
+
  .pdf-speichern{
+  margin-left: 15em;
   border-radius: 2em;
   padding: 1em;
   height: 80%;
-  margin-left: 25em;
-  background: red;
+  background: rgb(126, 210, 78);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
   font-weight: 600;
@@ -261,6 +283,20 @@ font-size: 1.5em;
   display:  inline-block !important;
 
 }
+
+.search {
+  margin-right: 15em;
+  border-radius: 2em;
+  padding: 1em;
+  height: 80%;
+  background: rgb(232, 233, 238);
+  border: 1px solid transparent;
+  color: rgb(26, 8, 8);
+  font-weight: 600;
+  cursor: pointer;
+  display:  inline-block !important;
+}
+
 button#print {
   border-radius: 2em;
   padding: 1em;
@@ -285,10 +321,10 @@ button#close {
   cursor: pointer;
 }
 button#open {
+  margin-left: 3em;
   border-radius: 2em;
   padding: 1em;
   height: 80%;
-  margin-left: 5em;
   background: rgb(186, 186, 193);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);

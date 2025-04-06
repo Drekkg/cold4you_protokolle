@@ -47,32 +47,32 @@
       <table class="table">   
         <tr class="addressBox">
         <th class="addressBox">Auftraggeber:</th>
-        <th><input  type="text" id="kunde" value="" onchange="myfunction()" size="40" name="" required /></th>
+        <th><input id="kunde" type="text"  value="" onchange="myfunction()" size="40" name="" required /></th>
         
         </tr>
         <tr class="addressBox">
           <th class="text_area">Standort:</th>
           <th>
-            <textarea class="tableBg2" id="standort" name="address" cols="41" rows="5" required></textarea></th>
+            <textarea id="standort" class="tableBg2"  name="address" cols="41" rows="5" required></textarea></th>
         </tr>
        
        
         <tr class="addressBox">
           <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="Anlage" value="" size="40" onchange="myFunction()" required/></th>
+          <th><input  id="anlage" type="text" value="" size="40" onchange="myFunction()" required/></th>
         </tr>
     
       <tr class="addressBox">
         <th class="addressBox">Type:</th>
-        <th> <input id="type" class="tableBg" type="text" size="40" /></th>
+        <th> <input id="type" id="type" class="tableBg" type="text" size="40" /></th>
       </tr>
       <tr class="addressBox">
         <th class="addressBox">Kältemittel:</th>
-        <th> <input class="tableBg" type="text" size="40"  required/></th>
+        <th> <input id="kaeltemittel" class="tableBg" type="text"  size="40"  required/></th>
       </tr>
       <tr class="addressBox">
         <th class="addressBox">Aufstellungsort:</th>
-        <th> <input class="tableBg" type="text" size="40" required/></th>
+        <th> <input id="aufstellung" class="tableBg" type="text"  size="40" required/></th>
       </tr>
       </table>
       </div>
@@ -369,12 +369,30 @@
           
           
          
-            <div class="divSize3">
-            <label>Anmerkungen</label>
+          <div  class="divSizeMaengel">
+            <label>Mängel:</label>
             <br>
-        
-            <textarea class="inputBasicArea" name="Text1" cols="50" rows="8"></textarea>
-             </div>
+            <ol>
+              <li>
+            <input type="text" name="maengel1"  id="maengel1" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel2"  id="maengel2" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel3"  id="maengel3" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel4"  id="maengel4" size="65" value="" /><br>
+            </li>
+            <li>
+            <input type="text" name="maengel5"  id="maengel5" size="65" value="" /><br>
+            </li>
+            <li>
+            <input type="text" name="maengel6"  id="maengel6" size="65" value="" /><br>
+            </li>
+            </ol>
+            </div>
 
           </div>
 
@@ -382,7 +400,7 @@
             
          <div class="div3">
            <label class="addressBox">Datum:</label>
-           <input type="date" id="date1" value="" onchange="myFunction()" >
+           <input type="date" id="dateCurrent" value="" onchange="myFunction()" >
          
 
           </div>
@@ -420,116 +438,26 @@
     </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../indexDB.js"></script>
+<script src="../form-logic.js"></script>
 <script>
-
-const currentDate = new Date().toISOString().slice(0, 10);
-   document.getElementById("date1").value = currentDate;
-
-
-   var canvas = document.getElementById("signature-pad");
-  // canvas.addEventListener('click', resizeCanvas());
-  
-  //   function resizeCanvas() {
-   
-  //   canvas.width = 1000;
-  //   canvas.height = 600;
-   
-  // } 
-  // window.onresize = resizeCanvas;
-  // resizeCanvas();
-  
-  var signaturePad = new SignaturePad(canvas, {
-    backgroundColor: 'rgb(250,250,250)'
-    
-  });
-  
-  document.getElementById("clear").addEventListener('click', function(){
-    signaturePad.clear();
-  })
-
-
-  function clearButton(){
-    document.getElementById(print).class="printClear";
-  }
-
-  const form = document.getElementById("form");
-  const kunde = document.getElementById("kunde");
-  const Anlage = document.getElementById("standort");
-  const techniker = document.getElementById("techniker");
-  const date1 = document.getElementById("date1");
-
-  const kundeValue_storage = localStorage.getItem("kunde");
-  const standortValue_storage = localStorage.getItem("standort");
-  const technikerValue_storage = localStorage.getItem("techniker");
-  // const date1Value_storage = localStorage.getItem("date1");
-
-  document.getElementById("kunde").value = kundeValue_storage;
-  document.getElementById("standort").value = standortValue_storage;
-  document.getElementById("techniker").value = technikerValue_storage;
- // document.getElementById("date1").value = date1Value_storage;
-
-  
-
+// This code is unique to each form 
 function myFunction() {
-var title = document.getElementById("Anlage").value;
+var title = document.getElementById("anlage").value;
 var standort = document.getElementById("standort").value.split("\n")[0];
-var datum = document.getElementById("date1").value;
+var datum = document.getElementById("dateCurrent").value;
 var kunde = document.getElementById("kunde").value;
-
-
-
-  document.getElementById("title_change").innerHTML = "Wartung_" + kunde + "_" + standort + "_" + title + "_" + datum;
+document.getElementById("title_change").innerHTML = "Kaelteanlage_" + kunde + "_" + standort + "_" + title + "_" + datum;
 }
+//This object is unique to each form
 
-function saveAlert(){
-  console.log("saveAlert");
-
-  const kundeValue = kunde.value;
-  const standortValue = Anlage.value;
-  const technikerValue = techniker.value;
-  const date1Value = date1.value;
-
-  localStorage.setItem("kunde", kundeValue);
-  localStorage.setItem("standort", standortValue);
-  localStorage.setItem("techniker", technikerValue);
-  localStorage.setItem("date1", date1Value);
-
-   
-  
-  if (confirm("PDF speichern?")){
-    if (signaturePad.isEmpty()) {
-      alert("Bitte unterschreiben");
-     
-    } else {
-      savePDF();
-    }
-  }
-  
-  else{
-    alert("PDF nicht gespeichert");
-  }
-}
-
-
-
-function savePDF() {
- 
-
-var element = document.getElementById('el-to-print');
-document.getElementById("print").style.opacity = "0";
-document.getElementById("clear").style.opacity = "0";
-html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
-
-
-}
-
-var opt = {
-  margin:       1.2,
+  var opt = {
+  margin:       1.55,
   filename:     myFunction(),
   image:        { type: 'jpeg', quality: 1 },
   html2canvas:  { scale: 0.7, dpi: 600, },
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
   
 };
-  </script>
+</script>
 </html>

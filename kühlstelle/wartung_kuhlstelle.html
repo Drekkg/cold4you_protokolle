@@ -14,8 +14,7 @@
   </head>
 
  
-
-  <form class="form" id="form1" onsubmit="saveAlert(); return false">
+  <form class="form" id="form">
   <body id="el-to-print">
 
     <div>
@@ -47,19 +46,19 @@
       <table class="table">   
         <tr class="addressBox">
         <th class="addressBox">Auftraggeber:</th>
-        <th><input  type="text" id="kunde1" value="" onchange="myfunction()" size="40" name="" required /></th>
+        <th><input  type="text" id="kunde" value="" onchange="myfunction()" size="40" name="" required /></th>
         
         </tr>
         <tr class="addressBox">
           <th class="text_area">Standort:</th>
           <th>
-            <textarea class="tableBg2" id="standort1" name="address" cols="41" rows="5" required></textarea></th>
+            <textarea class="tableBg2" id="standort" name="address" cols="41" rows="5" required></textarea></th>
         </tr>
        
        
         <tr class="addressBox">
           <th class="addressBox">Anlagenbeschreibung:</th>
-          <th><input type="text" id="Anlage" value="" size="40" onchange="myFunction()" required/></th>
+          <th><input type="text" id="anlage" value="" size="40" onchange="myFunction()" required/></th>
         </tr>
     
       <tr class="addressBox">
@@ -68,11 +67,11 @@
       </tr>
       <tr class="addressBox">
         <th class="addressBox">Kältemittel:</th>
-        <th> <input class="tableBg" type="text" size="40"  required/></th>
+        <th> <input id="kaeltemittel" class="tableBg" type="text" size="40"  required/></th>
       </tr>
       <tr class="addressBox">
         <th class="addressBox">Aufstellungsort:</th>
-        <th> <input class="tableBg" type="text" size="40" required/></th>
+        <th> <input id="aufstellung" class="tableBg" type="text" size="40" required/></th>
       </tr>
       </table>
       </div>
@@ -99,8 +98,8 @@
   <input type="text" class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
   </div>
   <div class="divSize">
-    <label> <input type="checkbox" class="boxSize"  /> Überprüfung aller Verdampfer-Ventilatoren</label>
-    <label><input type="checkbox" class="boxSize"/>NZ</label>
+    <label><input type="checkbox" class="boxSize" />Überprüfung aller Verdampfer-Ventilatoren</label>
+    <label><input type="checkbox" class="boxSize" />NZ</label>
   <br>
   <input type="text" class="inputBasic"  placeholder="Bemerkungen" size="30" maxlength="37"/>
   </div>
@@ -112,35 +111,50 @@
   </div>
 
   <div class="divSize">
-    <label><input type="checkbox" class="boxSize" />
+    <label><input type="checkbox" class="boxSize" required />
     Überprüfung / Messung der Raumtemperatur</label>
     <label class="boxAlign">&#8451;</label>
-    <input type="number" step="0.1" class="boxAlign" />
+    <input type="number" step="0.1" class="boxAlign" required/>
     <input type="text" placeholder="Bemerkungen" class="inputMargin" size="30" maxlength="37"/>
    </div>
-  
-       
-            <div class="divSize3">
-            <label>Anmerkungen</label>
+            <div  class="divSizeMaengel">
+            <label>Mängel:</label>
             <br>
-        
-            <textarea class="inputBasicArea" name="Text1" id="anmerkung" cols="50" rows="8"></textarea>
-             </div>
-
+            <ol>
+              <li>
+            <input type="text" name="maengel1"  id="maengel1" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel2"  id="maengel2" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel3"  id="maengel3" size="65" value="" /><br>
+              </li>
+              <li>
+            <input type="text" name="maengel4"  id="maengel4" size="65" value="" /><br>
+            </li>
+            <li>
+            <input type="text" name="maengel5"  id="maengel5" size="65" value="" /><br>
+            </li>
+            <li>
+            <input type="text" name="maengel6"  id="maengel6" size="65" value="" /><br>
+            </li>
+            </ol>
+            </div>
           </div>
 
           <div class="flexContainer">
             
          <div class="div3">
            <label class="addressBox">Datum:</label>
-           <input type="date" id="date11" value="" onchange="myFunction()" >
+           <input type="date" id="dateCurrent" value="" onchange="myFunction()" >
          
 
-          </div>
+          </div>                                     
           
         <div class="div3">
           <label>Techniker:</label>
-          <input type="text" id="techniker1" size="20" >
+          <input type="text" id="techniker" size="20" required >
           </div>
        
  
@@ -155,9 +169,6 @@
         </div>
         <div >
           <button class="seeThrough" type="button" id="clear"><span>Löschen </span></button>
-        
-     
-        
           <button type="submit" class="seeThrough"  id="print" >Speichern PDF</button>
        
         </div>
@@ -171,21 +182,13 @@
     </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../indexDB.js"></script>
 <script>
   const currentDate = new Date().toISOString().slice(0, 10);
-   document.getElementById("date11").value = currentDate;
-   var canvas = document.getElementById("signature-pad");
-  // canvas.addEventListener('click', resizeCanvas());
-  
-  //   function resizeCanvas() {
-   
-  //   canvas.width = 1000;
-  //   canvas.height = 600;
-   
-  // } 
-  // window.onresize = resizeCanvas;
-  // resizeCanvas();
-  
+  document.getElementById("dateCurrent").value = currentDate;
+
+
+  var canvas = document.getElementById("signature-pad");
   var signaturePad = new SignaturePad(canvas, {
     backgroundColor: 'rgb(250,250,250)'
     
@@ -200,30 +203,30 @@
     document.getElementById(print).class="printClear";
   }
 
-  const form = document.getElementById("form1");
-  const kunde = document.getElementById("kunde1");
-  const Anlage = document.getElementById("standort1");
-  const techniker = document.getElementById("techniker1");
-  const date1 = document.getElementById("date11");
-  const title = document.getElementById("Anlage");
-  const anmerkung = document.getElementById("anmerkung");
+  const form = document.getElementById("form");
+  const kunde = document.getElementById("kunde");
+  const anlage = document.getElementById("standort");
+  const techniker = document.getElementById("techniker");
+  const date = document.getElementById("dateCurrent");
+  const title = document.getElementById("anlage");
 
-  const kundeValue_storage = localStorage.getItem("kunde1");
-  const standortValue_storage = localStorage.getItem("standort1");
-  const technikerValue_storage = localStorage.getItem("techniker1");
+
+  const kundeValue_storage = localStorage.getItem("kunde");
+  const standortValue_storage = localStorage.getItem("standort");
+  const technikerValue_storage = localStorage.getItem("techniker");
   // const date1Value_storage = localStorage.getItem("date11");
-  document.getElementById("kunde1").value = kundeValue_storage;
-  document.getElementById("standort1").value = standortValue_storage;
-  document.getElementById("techniker1").value = technikerValue_storage;
+  document.getElementById("kunde").value = kundeValue_storage;
+  document.getElementById("standort").value = standortValue_storage;
+  document.getElementById("techniker").value = technikerValue_storage;
   // document.getElementById("date11").value = date1Value_storage;
 
   
 
 function myFunction() {
-var title = document.getElementById("Anlage").value;
-var standort = document.getElementById("standort1").value.split("\n")[0];
-var datum = document.getElementById("date11").value;
-var kunde = document.getElementById("kunde1").value;
+var title = document.getElementById("anlage").value;
+var standort = document.getElementById("standort").value.split("\n")[0];
+var datum = document.getElementById("dateCurrent").value;
+var kunde = document.getElementById("kunde").value;
 
 
 
@@ -232,18 +235,17 @@ var kunde = document.getElementById("kunde1").value;
 
 function saveAlert(){
   console.log("saveAlert");
-
   const kundeValue = kunde.value;
-  const standortValue = Anlage.value;
+  const standortValue = anlage.value;
   const technikerValue = techniker.value;
-  const date1Value = date1.value;
+  const dateValue = date.value;
 
-  localStorage.setItem("kunde1", kundeValue);
-  localStorage.setItem("standort1", standortValue);
-  localStorage.setItem("techniker1", technikerValue);
-  localStorage.setItem("date11", date1Value);
+  localStorage.setItem("kunde", kundeValue);
+  localStorage.setItem("standort", standortValue);
+  localStorage.setItem("techniker", technikerValue);
+  localStorage.setItem("date", dateValue);
   localStorage.setItem("title", title.value);
-  localStorage.setItem("anmerkung", anmerkung.value);
+  
 
    
   
@@ -264,8 +266,6 @@ function saveAlert(){
 
 
 function savePDF() {
- 
-
 var element = document.getElementById('el-to-print');
 document.getElementById("print").style.opacity = "0";
 document.getElementById("clear").style.opacity = "0";
@@ -281,5 +281,12 @@ var opt = {
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
   
 };
+ // Call saveFormData function when form is submitted
+ document.getElementById("form").onsubmit = function(event) {
+      event.preventDefault();
+      saveAlert();
+      saveFormData()
+    };
+
   </script>
 </html>

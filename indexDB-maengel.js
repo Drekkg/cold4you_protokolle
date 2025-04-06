@@ -9,7 +9,10 @@ request.onupgradeneeded = function (event) {
   //  Define what data items the object store will contain
   objectStore.createIndex("kunde", "kunde", { unique: false });
   objectStore.createIndex("standort", "standort", { unique: false });
+  objectStore.createIndex("aufstellung", "aufstellung", { unique: false });
   objectStore.createIndex("anlage", "anlage", { unique: false });
+  objectStore.createIndex("type", "type", { unique: false });
+  objectStore.createIndex("kaeltemittel", "kaeltemittel", { unique: false });
   objectStore.createIndex("techniker", "techniker", { unique: false });
   objectStore.createIndex("currentDate", "currentDate", { unique: false });
   objectStore.createIndex("maengel1", "maengel1", { unique: false });
@@ -31,7 +34,10 @@ request.onerror = (event) => {
 function saveFormData() {
   const kundeValue = document.getElementById("kunde").value;
   const standortValue = document.getElementById("standort").value;
+  const aufstellungValue = document.getElementById("aufstellung").value;
   const anlageValue = document.getElementById("anlage").value;
+  const typeValue = document.getElementById("type").value;
+  const kaeltemittelValue = document.getElementById("kaeltemittel").value;
   const technikerValue = document.getElementById("techniker").value;
   const currentDateValue = document.getElementById("dateCurrent").value;
   const maengelValue1 = document.getElementById("maengel1").value;
@@ -52,7 +58,10 @@ function saveFormData() {
   const data = {
     kunde: kundeValue,
     standort: standortValue,
+    aufstellung: aufstellungValue,
     anlage: anlageValue,
+    type: typeValue,
+    kaeltemittel: kaeltemittelValue,
     techniker: technikerValue,
     currentDate: currentDateValue,
     maengel1: maengelValue1,

@@ -26,10 +26,10 @@
         <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500rem" height="200rem"></a>
       </div>
     </div> 
-    <div>
+    <div class="button-container">
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
       <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
-      <input type="text" id="search" size="25" placeholder="Search" />
+      <input type="text" class="search" id="search" size="25" placeholder="Search" />
     </div>
     <form class="form" id="form">
       <div class="flexContainer">      
@@ -37,11 +37,25 @@
             <div class="div4">
               <label>Kunde:</label>
               <input type="text" id="kunde" size="25" required />
+
                 <label>Standort:</label>
                 <input type="text" id="standort" size="25" required />
-                  <label>Anlage:</label>
-                  <input type="text" id="anlage" size="25" required />
+
+                <label>Aufstellungsort:</label>
+                <input type="text" id="aufstellung" size="25" required />
+
                   </div> 
+                  <div class="div4">
+                    <label>Anlage:</label>
+                    <input type="text" id="anlage" size="25" required />
+
+                    <label>Type:</label>
+                    <input type="text" id="type" size="25" required />
+
+                      <label id="km">Kältemittel:</label>
+                      <input type="text" id="kaeltemittel" size="10" required />
+
+                        </div> 
                   <div class="div4">
                     <label>Mängel:</label>
                     <br>
@@ -78,7 +92,10 @@
       <tr>
         <th>Kunde</th>
         <th>Standort</th>
+        <th>Aufstellungsort</th>
         <th>Anlage</th>
+        <th>Type</th>
+        <th>Kältemittel</th>
         <th>Techniker</th>
         <th>Datum</th>
         <th colspan="6">Mängel</th>
@@ -143,11 +160,12 @@ function savePDF() {
 
 }
 var opt = {
-  margin:       1.1,
+  margin:       [1,0,0,1],
   filename:     "Mängel_Liste",
   image:        { type: 'jpeg', quality: 1 },
   html2canvas:  { scale: 0.7, dpi: 600, },
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
+  pagebreak: {mode: 'avoid-all'},
   
 };
 
@@ -189,15 +207,20 @@ document.getElementById("form").addEventListener("keydown", function(event) {
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
         <td>${item.standort || ""}</td>
+        <td>${item.aufstellung || ""}</td>
         <td>${item.anlage || ""}</td>
+         <td>${item.type || ""}</td>
+         <td>${item.kaeltemittel || ""}</td>
         <td>${item.techniker || ""}</td>
         <td>${item.currentDate || ""}</td>
-        <td>1: ${item.maengel1 || ""}</td>
-        <td>2: ${item.maengel2 || ""}</td>
-        <td>3: ${item.maengel3 || ""}</td>
-        <td>4: ${item.maengel4 || ""}</td>
-        <td>5: ${item.maengel5 || ""}</td>
-        <td>6: ${item.maengel6 || ""}</td>
+        <td>
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
       `;
       tableBody.appendChild(row);
     });
@@ -215,7 +238,10 @@ document.getElementById("form").addEventListener("keydown", function(event) {
       return (
         (item.kunde && item.kunde.toLowerCase().includes(key)) ||
         (item.standort && item.standort.toLowerCase().includes(key)) ||
+        (item.aufstellung && item.aufstellung.toLowerCase().includes(key)) ||
         (item.anlage && item.anlage.toLowerCase().includes(key)) ||
+        (item.type && item.type.toLowerCase().includes(key)) ||
+        (item.kaeltemittel && item.kaeltemittel.toLowerCase().includes(key)) ||
         (item.techniker && item.techniker.toLowerCase().includes(key)) ||
         (item.currentDate && item.currentDate.toLowerCase().includes(key)) ||
         (item.maengel1 && item.maengel1.toLowerCase().includes(key)) ||
