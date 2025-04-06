@@ -160,11 +160,12 @@ function savePDF() {
 
 }
 var opt = {
-  margin:       1.1,
+  margin:       [1,0,0,1],
   filename:     "Mängel_Liste",
   image:        { type: 'jpeg', quality: 1 },
   html2canvas:  { scale: 0.7, dpi: 600, },
   jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
+  pagebreak: {mode: 'avoid-all'},
   
 };
 
@@ -212,12 +213,13 @@ document.getElementById("form").addEventListener("keydown", function(event) {
          <td>${item.kaeltemittel || ""}</td>
         <td>${item.techniker || ""}</td>
         <td>${item.currentDate || ""}</td>
-        <td>1: ${item.maengel1 || ""}</td>
-        <td>2: ${item.maengel2 || ""}</td>
-        <td>3: ${item.maengel3 || ""}</td>
-        <td>4: ${item.maengel4 || ""}</td>
-        <td>5: ${item.maengel5 || ""}</td>
-        <td>6: ${item.maengel6 || ""}</td>
+        <td><p>1: ${item.maengel1 || ""}</p>
+            <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
       `;
       tableBody.appendChild(row);
     });
