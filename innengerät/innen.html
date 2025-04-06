@@ -110,18 +110,6 @@
   <br>
   <input type="text"  class="inputBasic" placeholder="Bemerkungen" size="30" maxlength="37"/>
   </div>
-
-
-  
-  
-
-     
- 
-
-      
-    <!-- </div> -->
-    <!-- <div class="flexInner"> -->
-    
           <div class="divSize">
             <label><input type="checkbox" class="boxSize" />
             Funktion Tauwasserablauf Innengeräte</label>
@@ -201,19 +189,14 @@
         </div>
         <div >
           <button class="seeThrough" type="button" id="clear"><span>Löschen </span></button>
-        
-     
-        
           <button type="submit" class="seeThrough"  id="print" >Speichern PDF</button>
        
         </div>
       </div>
       </div>
-     
       </div>
       </div>
       </form>
-
     </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -225,7 +208,7 @@ var title = document.getElementById("anlage").value;
 var standort = document.getElementById("standort").value.split("\n")[0];
 var datum = document.getElementById("dateCurrent").value;
 var kunde = document.getElementById("kunde").value;
-document.getElementById("title_change").innerHTML = "Wartung_Klima" + kunde + "_" + standort + "_" + title + "_" + datum;
+document.getElementById("title_change").innerHTML = "Wartung_Klima_" + kunde + "_" + standort + "_" + title + "_" + datum;
 }
 var opt = {
   margin:       1.1,
