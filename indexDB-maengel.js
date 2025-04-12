@@ -78,9 +78,14 @@ function saveFormData() {
     console.log("Form data saved to IndexedDB");
   };
 
+  if (!data || typeof data !== "object") {
+    console.error("Invalid data provided:", data);
+    return;
+  } else {
+    console.log("data good");
+  }
   const postData = async (data) => {
     const url = "http://localhost/db.php";
-
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -91,7 +96,8 @@ function saveFormData() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error1 status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP error status: ${response.status}, Response: ${errorText}`);
       }
       const result = await response.json();
       console.log("successs:", result);

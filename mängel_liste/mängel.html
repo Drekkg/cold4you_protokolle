@@ -59,12 +59,12 @@
                   <div class="div4">
                     <label>Mängel:</label>
                     <br>
-                    <input type="text" name="maengel1"  id="maengel1" size="65" value="" /><br>
-                    <input type="text" name="maengel2"  id="maengel2" size="65" value="" /><br>
-                    <input type="text" name="maengel3"  id="maengel3" size="65" value="" /><br>
-                    <input type="text" name="maengel4"  id="maengel4" size="65" value="" /><br>
-                    <input type="text" name="maengel5"  id="maengel5" size="65" value="" /><br>
-                    <input type="text" name="maengel6"  id="maengel6" size="65" value="" /><br>
+                    <input type="text" name="maengel1"  id="maengel1" size="65" value="" maxlength="149"/><br>
+                    <input type="text" name="maengel2"  id="maengel2" size="65" value="" maxlength="149"/><br>
+                    <input type="text" name="maengel3"  id="maengel3" size="65" value="" maxlength="149"/><br>
+                    <input type="text" name="maengel4"  id="maengel4" size="65" value="" maxlength="149" /><br>
+                    <input type="text" name="maengel5"  id="maengel5" size="65" value="" maxlength="149"/><br>
+                    <input type="text" name="maengel6"  id="maengel6" size="65" value="" maxlength="149"/><br>
                     </div>
             
       </div>
@@ -171,7 +171,7 @@ var opt = {
 
 
 
-// Prevent enter key from submitting form 
+//Prevent enter key from submitting form 
 document.getElementById("form").addEventListener("keydown", function(event) {
   if(event.key === "Enter") {
     event.preventDefault();
@@ -179,12 +179,14 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 })
 
  // Call saveFormData function when form is submitted
- document.getElementById("form").onsubmit = function(event) {
-  event.preventDefault();
+ document.getElementById("form").addEventListener("submit", function(event) {
+  // event.preventDefault();
       saveFormData();
+      
+
       document.getElementById("form").style.display = "none";
       document.getElementById("open").style.display = "inline-block";
-    };
+    });
 
     // open db and get the data from the object store 
   request.onsuccess = (event) => {
@@ -228,7 +230,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
   }
 
   // Initially render all data
-  renderTable(data);
+  // renderTable(data);
 
   // Initialize search bar and filter the displayed data
   document.getElementById("search").addEventListener("input", () => {
@@ -258,7 +260,69 @@ document.getElementById("form").addEventListener("keydown", function(event) {
     renderTable(filteredData);
   });
 };
-
 };
+
+
+const fetchData = async () => {
+    const url = "http://localhost/db.php";
+
+    try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("Data from server:", result);
+
+        if (result.success) {
+            renderTable(result.data); // Pass the data to the renderTable function
+        } else {
+            console.error("Error fetching data:", result.error || "Unknown error");
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
+};
+
+
+
+const renderTable = (data) => {
+  // if (!Array.isArray(data) || data.kunde != null) {
+  //   console.warn("No data to render");
+  //   return; // Stop rendering if data is empty or invalid
+  // }
+
+    const table = document.getElementById("data-table"); // Ensure you have a table with this ID in your HTML
+    table.innerHTML = ""; // Clear existing table rows
+
+    // Add table headers
+    const headers = Object.keys(data[0] || {});
+    const headerRow = document.createElement("tr");
+    headers.forEach((header) => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+
+    // Add table rows
+    data.forEach((row) => {
+        const tr = document.createElement("tr");
+        headers.forEach((header) => {
+            const td = document.createElement("td");
+            td.textContent = row[header];
+            tr.appendChild(td);
+        });
+        table.appendChild(tr);
+    });
+};
+fetchData();
   </script>
 </html>
