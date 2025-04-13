@@ -180,7 +180,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 
  // Call saveFormData function when form is submitted
  document.getElementById("form").addEventListener("submit", function(event) {
-  // event.preventDefault();
+ event.preventDefault();
       saveFormData();
       
 
@@ -264,7 +264,8 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 
 
 const fetchData = async () => {
-    const url = "http://localhost/db.php";
+    const url = "https://www.deadcowboy.at/db.php";
+  
 
     try {
         const response = await fetch(url, {

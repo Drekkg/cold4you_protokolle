@@ -85,7 +85,8 @@ function saveFormData() {
     console.log("data good");
   }
   const postData = async (data) => {
-    const url = "http://localhost/db.php";
+    const url = "https://www.deadcowboy.at/db.php";
+
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -101,6 +102,7 @@ function saveFormData() {
       }
       const result = await response.json();
       console.log("successs:", result);
+      location.reload();
     } catch (error) {
       console.error("Error", error);
     }
