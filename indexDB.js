@@ -80,7 +80,7 @@ function saveFormData() {
     console.log("Error saving form data to IndexedDB", event.target.errorCode);
   };
   const postData = async (data) => {
-    const url = "http://localhost/db.php";
+    const url = "https://www.deadcowboy.at/db.php";
 
     try {
       const response = await fetch(url, {
@@ -92,10 +92,12 @@ function saveFormData() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error1 status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP error status: ${response.status}, Response: ${errorText}`);
       }
       const result = await response.json();
       console.log("successs:", result);
+      location.reload();
     } catch (error) {
       console.error("Error", error);
     }
