@@ -280,7 +280,7 @@ font-size: 1.5em;
   color: rgb(26, 8, 8);
   font-weight: 600;
   cursor: pointer;
-  display:  inline-block !important;
+  display:  inline-block;
 
 }
 

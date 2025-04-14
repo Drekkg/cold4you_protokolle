@@ -79,4 +79,26 @@ function saveFormData() {
   request.onerror = function () {
     console.log("Error saving form data to IndexedDB", event.target.errorCode);
   };
+  const postData = async (data) => {
+    const url = "http://localhost/db.php";
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error1 status: ${response.status}`);
+      }
+      const result = await response.json();
+      console.log("successs:", result);
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  postData(data);
 }

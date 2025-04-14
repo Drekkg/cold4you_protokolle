@@ -77,4 +77,35 @@ function saveFormData() {
   request.onsuccess = function () {
     console.log("Form data saved to IndexedDB");
   };
+
+  if (!data || typeof data !== "object") {
+    console.error("Invalid data provided:", data);
+    return;
+  } else {
+    console.log("data good");
+  }
+  const postData = async (data) => {
+    const url = "https://www.deadcowboy.at/db.php";
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP error status: ${response.status}, Response: ${errorText}`);
+      }
+      const result = await response.json();
+      console.log("successs:", result);
+      location.reload();
+    } catch (error) {
+      console.error("Error", error);
+    }
+  };
+  postData(data);
 }
