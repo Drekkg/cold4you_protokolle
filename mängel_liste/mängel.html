@@ -233,36 +233,11 @@ document.getElementById("form").addEventListener("keydown", function(event) {
   // renderTable(data);
 
   // Initialize search bar and filter the displayed data
-  document.getElementById("search").addEventListener("input", () => {
-    const key = document.getElementById("search").value.toLowerCase();
-
-    // Filter the data based on the search key
-    const filteredData = data.filter((item) => {
-      return (
-        (item.kunde && item.kunde.toLowerCase().includes(key)) ||
-        (item.standort && item.standort.toLowerCase().includes(key)) ||
-        (item.aufstellung && item.aufstellung.toLowerCase().includes(key)) ||
-        (item.anlage && item.anlage.toLowerCase().includes(key)) ||
-        (item.type && item.type.toLowerCase().includes(key)) ||
-        (item.kaeltemittel && item.kaeltemittel.toLowerCase().includes(key)) ||
-        (item.techniker && item.techniker.toLowerCase().includes(key)) ||
-        (item.currentDate && item.currentDate.toLowerCase().includes(key)) ||
-        (item.maengel1 && item.maengel1.toLowerCase().includes(key)) ||
-        (item.maengel2 && item.maengel2.toLowerCase().includes(key)) ||
-        (item.maengel3 && item.maengel3.toLowerCase().includes(key)) ||
-        (item.maengel4 && item.maengel4.toLowerCase().includes(key)) ||
-        (item.maengel5 && item.maengel5.toLowerCase().includes(key)) ||
-        (item.maengel6 && item.maengel6.toLowerCase().includes(key)) 
-      );
-    });
-
-    // Render the filtered data
-    renderTable(filteredData);
-  });
+  
 };
 };
 
-
+let tableData = [];
 const fetchData = async () => {
     const url = "https://www.deadcowboy.at/db.php";
   
@@ -283,7 +258,8 @@ const fetchData = async () => {
         console.log("Data from server:", result);
 
         if (result.success) {
-            renderTable(result.data); // Pass the data to the renderTable function
+           tableData = result.data;
+          renderTable(result.data); // Pass the data to the renderTable function
         } else {
             console.error("Error fetching data:", result.error || "Unknown error");
         }
@@ -295,6 +271,7 @@ const fetchData = async () => {
 
 
 const renderTable = (data) => {
+
   // if (!Array.isArray(data) || data.kunde != null) {
   //   console.warn("No data to render");
   //   return; // Stop rendering if data is empty or invalid
@@ -324,6 +301,38 @@ const renderTable = (data) => {
         table.appendChild(tr);
     });
 };
-fetchData();
+(async () => {
+    await fetchData(); // Wait for fetchData to complete
+    ; // Now tableData should have the fetched data
+    
+
+document.getElementById("search").addEventListener("input", () => {
+    const key = document.getElementById("search").value.toLowerCase();
+
+    // Filter the data based on the search key
+    const filteredData = tableData.filter((item) => {
+      return (
+        (item.kunde && item.kunde.toLowerCase().includes(key)) ||
+        (item.standort && item.standort.toLowerCase().includes(key)) ||
+        (item.aufstellung && item.aufstellung.toLowerCase().includes(key)) ||
+        (item.anlage && item.anlage.toLowerCase().includes(key)) ||
+        (item.type && item.type.toLowerCase().includes(key)) ||
+        (item.kaeltemittel && item.kaeltemittel.toLowerCase().includes(key)) ||
+        (item.techniker && item.techniker.toLowerCase().includes(key)) ||
+        (item.currentDate && item.currentDate.toLowerCase().includes(key)) ||
+        (item.maengel1 && item.maengel1.toLowerCase().includes(key)) ||
+        (item.maengel2 && item.maengel2.toLowerCase().includes(key)) ||
+        (item.maengel3 && item.maengel3.toLowerCase().includes(key)) ||
+        (item.maengel4 && item.maengel4.toLowerCase().includes(key)) ||
+        (item.maengel5 && item.maengel5.toLowerCase().includes(key)) ||
+        (item.maengel6 && item.maengel6.toLowerCase().includes(key)) 
+      );
+    });
+
+    // Render the filtered data
+    renderTable(filteredData);
+  });
+})();
+
   </script>
 </html>
