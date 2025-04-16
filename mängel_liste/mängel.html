@@ -260,7 +260,7 @@ const fetchData = async () => {
         if (result.success) {
            tableData = result.data;
           renderTable(result.data); // Pass the data to the renderTable function
-        } else {
+    
             console.error("Error fetching data:", result.error || "Unknown error");
         }
     } catch (error) {
@@ -292,6 +292,18 @@ tableBody.innerHTML = "";
         <p>5: ${item.maengel5 || ""}</p>
         <p>6: ${item.maengel6 || ""}</p>
         </td>
+        <td>
+          <p>
+        <button>Löschen</button>
+        </p>
+        <p>
+        <button>Bearbeiten</button>
+        </p>
+        <p>
+        <button>Archiviren</button>
+        </p>
+        </td>
+        
       `;
       tableBody.appendChild(row);
     });
