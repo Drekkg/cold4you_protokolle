@@ -199,35 +199,35 @@ document.getElementById("form").addEventListener("keydown", function(event) {
  const data = event.target.result; // All data from the object store
 
   // Display the data on the page
-  const tableBody = document.getElementById("data-table").querySelector("tbody");
-  tableBody.innerHTML = ""; // Clear existing rows
+  // const tableBody = document.getElementById("data-table").querySelector("tbody");
+  // tableBody.innerHTML = ""; 
 
   // Function to render data into the table
-  function renderTable(filteredData) {
-    tableBody.innerHTML = ""; // Clear existing rows
-    filteredData.forEach((item) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${item.kunde || ""}</td>
-        <td>${item.standort || ""}</td>
-        <td>${item.aufstellung || ""}</td>
-        <td>${item.anlage || ""}</td>
-         <td>${item.type || ""}</td>
-         <td>${item.kaeltemittel || ""}</td>
-        <td>${item.techniker || ""}</td>
-        <td>${item.currentDate || ""}</td>
-        <td>
-        <p>1: ${item.maengel1 || ""}</p>
-        <p>2: ${item.maengel2 || ""}</p>
-        <p>3: ${item.maengel3 || ""}</p>
-        <p>4: ${item.maengel4 || ""}</p>
-        <p>5: ${item.maengel5 || ""}</p>
-        <p>6: ${item.maengel6 || ""}</p>
-        </td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
+  // function renderTable(filteredData) {
+  //   tableBody.innerHTML = ""; // Clear existing rows
+  //   filteredData.forEach((item) => {
+  //     const row = document.createElement("tr");
+  //     row.innerHTML = `
+  //       <td>${item.kunde || ""}</td>
+  //       <td>${item.standort || ""}</td>
+  //       <td>${item.aufstellung || ""}</td>
+  //       <td>${item.anlage || ""}</td>
+  //        <td>${item.type || ""}</td>
+  //        <td>${item.kaeltemittel || ""}</td>
+  //       <td>${item.techniker || ""}</td>
+  //       <td>${item.currentDate || ""}</td>
+  //       <td>
+  //       <p>1: ${item.maengel1 || ""}</p>
+  //       <p>2: ${item.maengel2 || ""}</p>
+  //       <p>3: ${item.maengel3 || ""}</p>
+  //       <p>4: ${item.maengel4 || ""}</p>
+  //       <p>5: ${item.maengel5 || ""}</p>
+  //       <p>6: ${item.maengel6 || ""}</p>
+  //       </td>
+  //     `;
+  //     tableBody.appendChild(row);
+  //   });
+  // }
 
   // Initially render all data
   // renderTable(data);
@@ -267,40 +267,69 @@ const fetchData = async () => {
         console.error("Error fetching data:", error);
     }
 };
+const tableBody = document.getElementById("data-table").querySelector("tbody");
+tableBody.innerHTML = ""; 
 
-
-
-const renderTable = (data) => {
-
-  // if (!Array.isArray(data) || data.kunde != null) {
-  //   console.warn("No data to render");
-  //   return; // Stop rendering if data is empty or invalid
-  // }
-
-    const table = document.getElementById("data-table"); // Ensure you have a table with this ID in your HTML
-    table.innerHTML = ""; // Clear existing table rows
-
-    // Add table headers
-    const headers = Object.keys(data[0] || {});
-    const headerRow = document.createElement("tr");
-    headers.forEach((header) => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        headerRow.appendChild(th);
+ // Function to render data into the table
+ function renderTable(data) {
+    tableBody.innerHTML = ""; // Clear existing rows
+    data.forEach((item) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.kunde || ""}</td>
+        <td>${item.standort || ""}</td>
+        <td>${item.aufstellung || ""}</td>
+        <td>${item.anlage || ""}</td>
+         <td>${item.type || ""}</td>
+         <td>${item.kaeltemittel || ""}</td>
+        <td>${item.techniker || ""}</td>
+        <td>${item.currentDate || ""}</td>
+        <td>
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
+      `;
+      tableBody.appendChild(row);
     });
-    table.appendChild(headerRow);
+  }
 
-    // Add table rows
-    data.forEach((row) => {
-        const tr = document.createElement("tr");
-        headers.forEach((header) => {
-            const td = document.createElement("td");
-            td.textContent = row[header];
-            tr.appendChild(td);
-        });
-        table.appendChild(tr);
-    });
-};
+// const renderTable = (data) => {
+
+//   // if (!Array.isArray(data) || data.kunde != null) {
+//   //   console.warn("No data to render");
+//   //   return; // Stop rendering if data is empty or invalid
+//   // }
+
+//     const table = document.getElementById("data-table"); 
+//     table.innerHTML = ""; // Clear existing table rows
+
+//     // Add table headers
+//     const headers = Object.keys(data[0] || {});
+//     const headerRow = document.createElement("tr");
+//     headers.forEach((header) => {
+//         const th = document.createElement("th");
+//         th.textContent = header;
+//         headerRow.appendChild(th);
+//     });
+//     table.appendChild(headerRow);
+
+//     // Add table rows
+//     data.forEach((row) => {
+//         const tr = document.createElement("tr");
+//         headers.forEach((header) => {
+//             const td = document.createElement("td");
+//             td.textContent = row[header];
+//             tr.appendChild(td);
+//         });
+//         table.appendChild(tr);
+//     });
+// };
+
+
 (async () => {
     await fetchData(); // Wait for fetchData to complete
    
