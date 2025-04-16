@@ -293,21 +293,32 @@ tableBody.innerHTML = "";
         <p>6: ${item.maengel6 || ""}</p>
         </td>
         <td>
-          <p>
-        <button>Löschen</button>
+           <p>
+         <button class="delete-btn" id="${item.id}"> ${item.id} Löschen</button>
         </p>
-        <p>
-        <button>Bearbeiten</button>
-        </p>
-        <p>
-        <button>Archiviren</button>
-        </p>
-        </td>
+         <p>
+         <button class="edit-btn" id="${item.id}"> ${item.id} Bearbeiten</button>
+         </p>
+         <p>
+         <button class="arch-btn" id="${item.id}"> ${item.id}Archivieren</button>
+         </p>
+       </td>
         
       `;
       tableBody.appendChild(row);
+      document.addEventListener("click", (event) => {
+  // Handle Delete Button
+  if (event.target.classList.contains("delete-btn")) {
+    const id = event.target.id; // Get the item ID
+    console.log(`Delete button clicked for item ID: ${id}`);
+    // Call a function to delete the item
+    // deleteItem(id);
+  }})
+
+
     });
   }
+
 
 // const renderTable = (data) => {
 
