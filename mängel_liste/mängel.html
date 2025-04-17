@@ -260,6 +260,7 @@ const fetchData = async () => {
         if (result.success) {
            tableData = result.data;
           renderTable(result.data); // Pass the data to the renderTable function
+        } else {
     
             console.error("Error fetching data:", result.error || "Unknown error");
         }
@@ -294,13 +295,13 @@ tableBody.innerHTML = "";
         </td>
         <td>
            <p>
-         <button class="delete-btn" id="${item.id}"> ${item.id} Löschen</button>
+         <button class="delete-btn" id="${item.id}">Löschen</button>
         </p>
          <p>
-         <button class="edit-btn" id="${item.id}"> ${item.id} Bearbeiten</button>
+         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
          </p>
          <p>
-         <button class="arch-btn" id="${item.id}"> ${item.id}Archivieren</button>
+         <button class="arch-btn" id="${item.id}">Archivieren</button>
          </p>
        </td>
         
