@@ -275,7 +275,7 @@ tableBody.innerHTML = "";
  function renderTable(data) {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
-      console.log(item.archived);
+      console.log("item" + item.archived);
       if(item.archived) {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -312,18 +312,24 @@ tableBody.innerHTML = "";
       document.addEventListener("click", (event) => {
   // Handle archive Button
   if (event.target.classList.contains("arch-btn")) {
-    const id = event.target.id; // Get the item ID
-    console.log(`Arch button clicked for item ID: ${id} ${data}`);
-    archiveItem(id, data[id]);
+    const id = event.target.id; 
+    console.log(`Arch button clicked for item ID: `);
+    const selectedData = tableData.find((item) => item.id === id);
+    console.log(`tabledata: ${JSON.stringify(selectedData)}`);
+    selectedData.archived = "1";
+    archiveItem(id, selectedData);
   }})
 
       } 
     });
   }
 
+
+
   const archiveItem = async (id, updatedData) => {
  
-  const url = `https://www.deadcowboy.at/db.php?${id}`;
+  const url = `https://www.deadcowboy.at/db.php?id=${id}`;
+  // const url = "https://www.deadcowboy.at/db.php";
 
   try {
     const response = await fetch(url, {
