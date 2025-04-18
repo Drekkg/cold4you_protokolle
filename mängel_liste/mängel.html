@@ -240,7 +240,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 let tableData = [];
 const fetchData = async () => {
     const url = "https://www.deadcowboy.at/db.php";
-  
+   
 
     try {
         const response = await fetch(url, {
@@ -275,6 +275,8 @@ tableBody.innerHTML = "";
  function renderTable(data) {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
+      console.log(item.archived);
+      if(item.archived) {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
@@ -308,18 +310,46 @@ tableBody.innerHTML = "";
       `;
       tableBody.appendChild(row);
       document.addEventListener("click", (event) => {
-  // Handle Delete Button
-  if (event.target.classList.contains("delete-btn")) {
+  // Handle archive Button
+  if (event.target.classList.contains("arch-btn")) {
     const id = event.target.id; // Get the item ID
-    console.log(`Delete button clicked for item ID: ${id}`);
-    // Call a function to delete the item
-    // deleteItem(id);
+    console.log(`Arch button clicked for item ID: ${id} ${data}`);
+    archiveItem(id, data[id]);
   }})
 
-
+      } 
     });
   }
 
+  const archiveItem = async (id, updatedData) => {
+ 
+  const url = `https://www.deadcowboy.at/db.php?${id}`;
+
+  try {
+    const response = await fetch(url, {
+      method: "PUT", // Use PUT or POST for updates
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedData), // Send the updated data as JSON
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update item with ID ${id}. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("Update response:", result);
+
+    if (result.success) {
+      alert("Data updated successfully!");
+    } else {
+      console.error("Error updating data:", result.error || "Unknown error");
+    }
+  } catch (error) {
+    console.error("Error updating data:", error.message);
+  }
+};
 
 // const renderTable = (data) => {
 
