@@ -29,6 +29,7 @@
     <div class="button-container">
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
       <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
+      <button type="button" class="seeThrough"  id="arch" >Archive</button>
       <input type="text" class="search" id="search" size="25" placeholder="Search" />
     </div>
     <form class="form" id="form">
@@ -129,17 +130,21 @@
     document.getElementById("form").style.display = "block";
     document.getElementById("open").style.display = "none";
     document.getElementById("savePdf").style.display = "none";
+    document.getElementById("arch").style.display = "none";
   }); 
   document.getElementById("close").addEventListener("click", function() {
   document.getElementById("form").style.display = "none";
   document.getElementById("open").style.display = "inline-block";
   document.getElementById("savePdf").style.display = "inline-block";
+  document.getElementById("arch").style.display = "inline-block";
 
   }); 
 
 document.getElementById("savePdf").addEventListener("click", function() {
    saveAlert();
   });
+
+
 
   function saveAlert() {
   if (confirm("PDF speichern?")){
@@ -305,9 +310,8 @@ tableBody.innerHTML = "";
          <p>
          <button class="arch-btn" id="${item.id}">Archivieren</button>
          </p>
-       </td>
-        
-      `;
+       </td>`;
+
       tableBody.appendChild(row);
       document.addEventListener("click", (event) => {
   // Handle archive Button
@@ -318,20 +322,18 @@ tableBody.innerHTML = "";
     console.error(`No data found for ID: ${id}`);
     return;
   }
-
     selectedData.archived = "1";
-    console.log(`This should btabledata: ${JSON.stringify(selectedData.archived)}`);
     archiveItem(id, selectedData);
   }})
-
       } 
     });
-  }
+  };
+
+
 
 
 
   const archiveItem = async (id, selectedData) => {
- 
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
   // const url = "http://localhost/db.php?id=${id}";
@@ -363,44 +365,10 @@ tableBody.innerHTML = "";
   }
 };
 
-// const renderTable = (data) => {
-
-//   // if (!Array.isArray(data) || data.kunde != null) {
-//   //   console.warn("No data to render");
-//   //   return; // Stop rendering if data is empty or invalid
-//   // }
-
-//     const table = document.getElementById("data-table"); 
-//     table.innerHTML = ""; // Clear existing table rows
-
-//     // Add table headers
-//     const headers = Object.keys(data[0] || {});
-//     const headerRow = document.createElement("tr");
-//     headers.forEach((header) => {
-//         const th = document.createElement("th");
-//         th.textContent = header;
-//         headerRow.appendChild(th);
-//     });
-//     table.appendChild(headerRow);
-
-//     // Add table rows
-//     data.forEach((row) => {
-//         const tr = document.createElement("tr");
-//         headers.forEach((header) => {
-//             const td = document.createElement("td");
-//             td.textContent = row[header];
-//             tr.appendChild(td);
-//         });
-//         table.appendChild(tr);
-//     });
-// };
-
 
 (async () => {
-    await fetchData(); // Wait for fetchData to complete
-   
+    await fetchData();
     
-
 document.getElementById("search").addEventListener("input", () => {
     const key = document.getElementById("search").value.toLowerCase();
 
@@ -428,6 +396,68 @@ document.getElementById("search").addEventListener("input", () => {
     renderTable(filteredData);
   });
 })();
+
+
+  (async () => {
+    await fetchData();
+    document.getElementById("arch").addEventListener("click", () => 
+  { tableBody.innerHTML = "";
+  const col = document.createElement("h3")
+  col.innerHTML = "Archive";
+  tableBody.appendChild(col);
+      tableData.forEach((item) => {
+      if(item.archived === "1") { 
+      
+      
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="archive-heading">${item.kunde || ""}</td>
+        <td>${item.standort || ""}</td>
+        <td>${item.aufstellung || ""}</td>
+        <td>${item.anlage || ""}</td>
+        <td>${item.type || ""}</td>
+        <td>${item.kaeltemittel || ""}</td>
+        <td>${item.techniker || ""}</td>
+        <td>${item.currentDate || ""}</td>
+        <td>
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
+        <td>
+         <p>
+         <button class="delete-btn" id="${item.id}">Löschen</button>
+        </p>
+         <p>
+         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
+         </p>
+        
+       </td>`;
+       
+      tableBody.appendChild(row);
+  //     document.addEventListener("click", (event) => {
+  // // Handle archive Button
+  // if (event.target.classList.contains("arch-btn")) {
+  //   const id = event.target.id; 
+  //   const selectedData = tableData.find((item) => item.id === id);
+  //   if (!selectedData) {
+  //   console.error(`No data found for ID: ${id}`);
+  //   return;
+  // }
+  //   selectedData.archived = "1";
+  //   archiveItem(id, selectedData);
+  // }})
+      } 
+    });
+  })
+
+
+
+  })();
+
 
   </script>
 </html>
