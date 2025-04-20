@@ -70,7 +70,7 @@ function saveFormData() {
     maengel4: maengelValue4,
     maengel5: maengelValue5,
     maengel6: maengelValue6,
-    archived: false,
+    archived: "0",
   };
 
   const request = objectStore.add(data);
@@ -86,6 +86,7 @@ function saveFormData() {
     console.log("data good");
   }
   console.log("data" + data);
+
   const postData = async (data) => {
     const url = "https://www.deadcowboy.at/db.php";
     try {

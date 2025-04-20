@@ -86,7 +86,7 @@
       </form>
       <!-- Add a container to display the data -->
 <div id="data-container">
-  <h3>Stored Data</h3>
+  <!-- <h3>Stored Data</h3> -->
   <table id="data-table" class="table" border="1">
     <thead>
       <tr>
@@ -239,7 +239,8 @@ document.getElementById("form").addEventListener("keydown", function(event) {
 
 let tableData = [];
 const fetchData = async () => {
-    const url = "https://www.deadcowboy.at/db.php";
+    // const url = "http://localhost/db.php";
+    const url = `https://www.deadcowboy.at/db.php`;
    
 
     try {
@@ -259,7 +260,7 @@ const fetchData = async () => {
 
         if (result.success) {
            tableData = result.data;
-          renderTable(result.data); // Pass the data to the renderTable function
+          renderTable(result.data); 
         } else {
     
             console.error("Error fetching data:", result.error || "Unknown error");
@@ -275,8 +276,7 @@ tableBody.innerHTML = "";
  function renderTable(data) {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
-      console.log("item" + item.archived);
-      if(item.archived) {
+      if(item.archived != "1") {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
@@ -313,10 +313,14 @@ tableBody.innerHTML = "";
   // Handle archive Button
   if (event.target.classList.contains("arch-btn")) {
     const id = event.target.id; 
-    console.log(`Arch button clicked for item ID: `);
     const selectedData = tableData.find((item) => item.id === id);
-    console.log(`tabledata: ${JSON.stringify(selectedData)}`);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+
     selectedData.archived = "1";
+    console.log(`This should btabledata: ${JSON.stringify(selectedData.archived)}`);
     archiveItem(id, selectedData);
   }})
 
@@ -326,18 +330,19 @@ tableBody.innerHTML = "";
 
 
 
-  const archiveItem = async (id, updatedData) => {
+  const archiveItem = async (id, selectedData) => {
  
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
+  // const url = "http://localhost/db.php?id=${id}";
 
   try {
     const response = await fetch(url, {
-      method: "PUT", // Use PUT or POST for updates
+      method: "PUT", 
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData), // Send the updated data as JSON
+      body: JSON.stringify(selectedData), 
     });
 
     if (!response.ok) {
@@ -345,10 +350,11 @@ tableBody.innerHTML = "";
     }
 
     const result = await response.json();
-    console.log("Update response:", result);
 
     if (result.success) {
-      alert("Data updated successfully!");
+      alert("Eintrag Archivieret");
+      location.reload();
+
     } else {
       console.error("Error updating data:", result.error || "Unknown error");
     }
