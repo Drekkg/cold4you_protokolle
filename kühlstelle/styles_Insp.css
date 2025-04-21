@@ -111,11 +111,11 @@ input, textarea {
 .div2 {
   background-color: rgb(189, 223, 228);
 }
-.inputBasic {
+/* .inputBasic {
   margin-top: 1em;
   margin-bottom: 1em;
 
-}
+} */
 .inputMargin {
   margin-bottom: 1em;
   margin-top: 1em;
