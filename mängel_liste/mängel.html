@@ -201,44 +201,7 @@ document.getElementById("form").addEventListener("keydown", function(event) {
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function (event) {
- const data = event.target.result; // All data from the object store
-
-  // Display the data on the page
-  // const tableBody = document.getElementById("data-table").querySelector("tbody");
-  // tableBody.innerHTML = ""; 
-
-  // Function to render data into the table
-  // function renderTable(filteredData) {
-  //   tableBody.innerHTML = ""; // Clear existing rows
-  //   filteredData.forEach((item) => {
-  //     const row = document.createElement("tr");
-  //     row.innerHTML = `
-  //       <td>${item.kunde || ""}</td>
-  //       <td>${item.standort || ""}</td>
-  //       <td>${item.aufstellung || ""}</td>
-  //       <td>${item.anlage || ""}</td>
-  //        <td>${item.type || ""}</td>
-  //        <td>${item.kaeltemittel || ""}</td>
-  //       <td>${item.techniker || ""}</td>
-  //       <td>${item.currentDate || ""}</td>
-  //       <td>
-  //       <p>1: ${item.maengel1 || ""}</p>
-  //       <p>2: ${item.maengel2 || ""}</p>
-  //       <p>3: ${item.maengel3 || ""}</p>
-  //       <p>4: ${item.maengel4 || ""}</p>
-  //       <p>5: ${item.maengel5 || ""}</p>
-  //       <p>6: ${item.maengel6 || ""}</p>
-  //       </td>
-  //     `;
-  //     tableBody.appendChild(row);
-  //   });
-  // }
-
-  // Initially render all data
-  // renderTable(data);
-
-  // Initialize search bar and filter the displayed data
-  
+ const data = event.target.result; 
 };
 };
 
