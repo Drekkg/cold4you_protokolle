@@ -318,15 +318,14 @@ tableBody.innerHTML = "";
       tableBody.appendChild(row);
       document.addEventListener("click", (event) => {
   // Handle archive Button
-  if (event.target.classList.contains("arch-btn")) {
+  if (event.target.classList.contains("delete-btn")) {
     const id = event.target.id; 
     const selectedData = tableData.find((item) => item.id === id);
     if (!selectedData) {
     console.error(`No data found for ID: ${id}`);
     return;
   }
-    selectedData.archived = "1";
-    archiveItem(id, selectedData);
+    deleteItem(id, selectedData);
   }})
 
       }
@@ -366,6 +365,38 @@ tableBody.innerHTML = "";
   }
 };
 
+
+const deleteItem = async (id, selectedData) => {
+  const url = `https://www.deadcowboy.at/db.php?id=${id}`;
+  // const url = "https://www.deadcowboy.at/db.php";
+  // const url = "http://localhost/db.php?id=${id}";
+
+  try {
+    const response = await fetch(url, {
+      method: "DELETE", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedData), 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete item with ID ${id}. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Eintrag gelöscht");
+      fetchData();
+
+    } else {
+      console.error("Error updating data:", result.error);
+    }
+  } catch (error) {
+    console.error("Error updating data:", error.message);
+  }
+};
 
 (async () => {
     await fetchData();
