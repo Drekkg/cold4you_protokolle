@@ -267,12 +267,6 @@ tableBody.innerHTML = "";
         <p>6: ${item.maengel6 || ""}</p>
         </td>
         <td>
-           <p>
-         <button class="delete-btn" id="${item.id}">Löschen</button>
-        </p>
-         <p>
-         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
-         </p>
          <p>
          <button class="arch-btn" id="${item.id}">Archivieren</button>
          </p>
@@ -340,9 +334,6 @@ tableBody.innerHTML = "";
   };
 
 
-
-
-
   const archiveItem = async (id, selectedData) => {
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
@@ -403,7 +394,6 @@ document.getElementById("search").addEventListener("input", () => {
     });
 
     // Render the filtered data
-  
     renderTable(filteredData);
 
   });
