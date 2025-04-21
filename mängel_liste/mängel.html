@@ -325,7 +325,11 @@ tableBody.innerHTML = "";
     console.error(`No data found for ID: ${id}`);
     return;
   }
-    deleteItem(id, selectedData);
+    if(confirm("Eintrag Löschen?")){
+    deleteItem(id, selectedData)}
+    else {
+      alert("Eintrag nicht gelöscht");
+    };
   }})
 
       }
