@@ -370,6 +370,9 @@ button#clear span {
 #form {
   display: none;
 }
+.arch-td {
+  background-color: rgb(247, 247, 145);
+}
 
 @media print {
   button#clear {

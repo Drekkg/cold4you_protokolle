@@ -20,7 +20,7 @@
         <p style="font-size: large">www.cold4you.at </p>
       </div>
       <div>
-        <h1>Mängel Liste - Noch unter bearbeiten</h1>
+        <h1>Mängel Liste - Noch im bearbeitung</h1>
       </div>
       <div>
         <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500rem" height="200rem"></a>
@@ -285,18 +285,18 @@ tableBody.innerHTML = "";
     selectedData.archived = "1";
     archiveItem(id, selectedData);
   }})
-      } else if(archivedFlag && item.archived === "1") {
-        const row = document.createElement("tr");
+      } else if (archivedFlag && item.archived === "1") {
+      const row = document.createElement("tr");
       row.innerHTML = `
-        <td>${item.kunde || ""}</td>
-        <td>${item.standort || ""}</td>
-        <td>${item.aufstellung || ""}</td>
-        <td>${item.anlage || ""}</td>
-         <td>${item.type || ""}</td>
-         <td>${item.kaeltemittel || ""}</td>
-        <td>${item.techniker || ""}</td>
-        <td>${item.currentDate || ""}</td>
-        <td>
+        <td class="arch-td">${item.kunde || ""}</td>
+        <td class="arch-td">${item.standort || ""}</td>
+        <td class="arch-td">${item.aufstellung || ""}</td>
+        <td class="arch-td">${item.anlage || ""}</td>
+         <td class="arch-td">${item.type || ""}</td>
+         <td class="arch-td">${item.kaeltemittel || ""}</td>
+        <td class="arch-td">${item.techniker || ""}</td>
+        <td class="arch-td">${item.currentDate || ""}</td>
+        <td class="arch-td">
         <p>1: ${item.maengel1 || ""}</p>
         <p>2: ${item.maengel2 || ""}</p>
         <p>3: ${item.maengel3 || ""}</p>
