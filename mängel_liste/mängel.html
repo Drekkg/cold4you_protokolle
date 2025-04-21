@@ -113,6 +113,8 @@
 <script>
   //Initialise the date variable to hold the current date 
   // Get value from local storage to autofill important inputs of form
+  
+  let archivedFlag = false;
 
    const currentDate = new Date().toISOString().slice(0, 10);
    document.getElementById("dateCurrent").value = currentDate;
@@ -143,6 +145,7 @@
 document.getElementById("savePdf").addEventListener("click", function() {
    saveAlert();
   });
+
 
 
 
@@ -244,7 +247,7 @@ tableBody.innerHTML = "";
  function renderTable(data) {
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
-      if(item.archived != "1") {
+      if(!archivedFlag && item.archived != "1") {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
@@ -288,7 +291,51 @@ tableBody.innerHTML = "";
     selectedData.archived = "1";
     archiveItem(id, selectedData);
   }})
-      } 
+      } else if(archivedFlag && item.archived === "1") {
+        const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.kunde || ""}</td>
+        <td>${item.standort || ""}</td>
+        <td>${item.aufstellung || ""}</td>
+        <td>${item.anlage || ""}</td>
+         <td>${item.type || ""}</td>
+         <td>${item.kaeltemittel || ""}</td>
+        <td>${item.techniker || ""}</td>
+        <td>${item.currentDate || ""}</td>
+        <td>
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
+        <td>
+           <p>
+         <button class="delete-btn" id="${item.id}">Löschen</button>
+        </p>
+         <p>
+         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
+         </p>
+         <p>
+         </p>
+       </td>`;
+
+      tableBody.appendChild(row);
+      document.addEventListener("click", (event) => {
+  // Handle archive Button
+  if (event.target.classList.contains("arch-btn")) {
+    const id = event.target.id; 
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+    selectedData.archived = "1";
+    archiveItem(id, selectedData);
+  }})
+
+      }
     });
   };
 
@@ -356,71 +403,16 @@ document.getElementById("search").addEventListener("input", () => {
     });
 
     // Render the filtered data
+  
     renderTable(filteredData);
+
   });
 })();
 
-
-  (async () => {
-    await fetchData();
-    document.getElementById("arch").addEventListener("click", () => 
-  { tableBody.innerHTML = "";
-  const col = document.createElement("h3")
-  col.innerHTML = "Archive";
-  tableBody.appendChild(col);
-      tableData.forEach((item) => {
-      if(item.archived === "1") { 
-      
-      
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td class="archive-heading">${item.kunde || ""}</td>
-        <td>${item.standort || ""}</td>
-        <td>${item.aufstellung || ""}</td>
-        <td>${item.anlage || ""}</td>
-        <td>${item.type || ""}</td>
-        <td>${item.kaeltemittel || ""}</td>
-        <td>${item.techniker || ""}</td>
-        <td>${item.currentDate || ""}</td>
-        <td>
-        <p>1: ${item.maengel1 || ""}</p>
-        <p>2: ${item.maengel2 || ""}</p>
-        <p>3: ${item.maengel3 || ""}</p>
-        <p>4: ${item.maengel4 || ""}</p>
-        <p>5: ${item.maengel5 || ""}</p>
-        <p>6: ${item.maengel6 || ""}</p>
-        </td>
-        <td>
-         <p>
-         <button class="delete-btn" id="${item.id}">Löschen</button>
-        </p>
-         <p>
-         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
-         </p>
-        
-       </td>`;
-       
-      tableBody.appendChild(row);
-  //     document.addEventListener("click", (event) => {
-  // // Handle archive Button
-  // if (event.target.classList.contains("arch-btn")) {
-  //   const id = event.target.id; 
-  //   const selectedData = tableData.find((item) => item.id === id);
-  //   if (!selectedData) {
-  //   console.error(`No data found for ID: ${id}`);
-  //   return;
-  // }
-  //   selectedData.archived = "1";
-  //   archiveItem(id, selectedData);
-  // }})
-      } 
-    });
-  })
-
-
-
-  })();
-
+  document.getElementById("arch").addEventListener("click", () => {
+  archivedFlag = !archivedFlag;
+  renderTable(tableData);                    
+});
 
   </script>
 </html>
