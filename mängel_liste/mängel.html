@@ -275,18 +275,7 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-      tableBody.addEventListener("click", (event) => {
-  // Handle archive Button
-  if (event.target.classList.contains("arch-btn")) {
-    const id = event.target.id; 
-    const selectedData = tableData.find((item) => item.id === id);
-    if (!selectedData) {
-    console.error(`No data found for ID: ${id}`);
-    return;
-  }
-    selectedData.archived = "1";
-    archiveItem(id, selectedData);
-  }})
+    
       } else if (archivedFlag && item.archived === "1") {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -311,7 +300,7 @@ tableBody.innerHTML = "";
          <button class="delete-btn" id="${item.id}">Löschen</button>
         </p>
          <p>
-         <button class="edit-btn" id="3">Bearbeiten</button>
+         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
          </p>
          <p>
          </p>
@@ -326,17 +315,44 @@ function handleTableBodyClick(event) {
   if (event.target.classList.contains("delete-btn")) {
     const id = event.target.id;
     const selectedData = tableData.find((item) => item.id === id);
-
     if (!selectedData) {
       console.error(`No data found for ID: ${id}`);
       return;
     }
-
     // Handle the delete button click
     deleteItem(id, selectedData);
   }
+
+  if (event.target.classList.contains("arch-btn")) {
+    const id = event.target.id; 
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+    selectedData.archived = "1";
+    archiveItem(id, selectedData);
+  }
+
+if (event.target.classList.contains("edit-btn")) {
+    const id = event.target.id; 
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+    selectedData.archived = "0";
+    archiveItem(id, selectedData);
+  }
 }
+
+
+
+
 tableBody.addEventListener("click", handleTableBodyClick);
+
+
+
   const archiveItem = async (id, selectedData) => {
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
