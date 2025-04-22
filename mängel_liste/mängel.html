@@ -11,6 +11,7 @@
   </head>
 
   <body id="el-to-print">
+    <div id="spinner" class="spinner" style="display: none;"></div>
     <div class="div1">
       <div>
         <h3>Cold4you Gewerbekälte GmbH</h3>
@@ -87,6 +88,7 @@
       </form>
       <!-- Add a container to display the data -->
 <div id="data-container">
+  
   <!-- <h3>Stored Data</h3> -->
   <table id="data-table" class="table" border="1">
     <thead>
@@ -273,7 +275,7 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-      document.addEventListener("click", (event) => {
+      tableBody.addEventListener("click", (event) => {
   // Handle archive Button
   if (event.target.classList.contains("arch-btn")) {
     const id = event.target.id; 
@@ -309,34 +311,32 @@ tableBody.innerHTML = "";
          <button class="delete-btn" id="${item.id}">Löschen</button>
         </p>
          <p>
-         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
+         <button class="edit-btn" id="3">Bearbeiten</button>
          </p>
          <p>
          </p>
        </td>`;
 
       tableBody.appendChild(row);
-      document.addEventListener("click", (event) => {
-  // Handle archive Button
+   }}
+  );
+};
+function handleTableBodyClick(event) {
+  // Check if the clicked element has the "delete-btn" class
   if (event.target.classList.contains("delete-btn")) {
-    const id = event.target.id; 
+    const id = event.target.id;
     const selectedData = tableData.find((item) => item.id === id);
+
     if (!selectedData) {
-    console.error(`No data found for ID: ${id}`);
-    return;
+      console.error(`No data found for ID: ${id}`);
+      return;
+    }
+
+    // Handle the delete button click
+    deleteItem(id, selectedData);
   }
-    if(confirm("Eintrag Löschen?")){
-    deleteItem(id, selectedData)}
-    else {
-      alert("Eintrag nicht gelöscht");
-    };
-  }})
-
-      }
-    });
-  };
-
-
+}
+tableBody.addEventListener("click", handleTableBodyClick);
   const archiveItem = async (id, selectedData) => {
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
@@ -371,6 +371,11 @@ tableBody.innerHTML = "";
 
 
 const deleteItem = async (id, selectedData) => {
+
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "block"; // Show spinner
+if(confirm("Eintrag Loeschen")){
+  console.log("confirm clicked")
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
   // const url = "http://localhost/db.php?id=${id}";
@@ -399,7 +404,9 @@ const deleteItem = async (id, selectedData) => {
     }
   } catch (error) {
     console.error("Error updating data:", error.message);
-  }
+  } finally {
+    spinner.style.display = "none"; // Hide spinner
+  }}
 };
 
 (async () => {
@@ -434,10 +441,25 @@ document.getElementById("search").addEventListener("input", () => {
   });
 })();
 
-  document.getElementById("arch").addEventListener("click", () => {
+//   document.getElementById("arch").addEventListener("click", () => {
+//   archivedFlag = !archivedFlag;
+//   renderTable(tableData);                    
+// });
+const archButton = document.getElementById("arch");
+
+// Define the event handler as a named function
+const toggleArchivedFlag = () => {
   archivedFlag = !archivedFlag;
-  renderTable(tableData);                    
-});
+  renderTable(tableData);
+};
+
+// Remove any existing event listener before adding a new one
+
+archButton.addEventListener("click", toggleArchivedFlag);
+
+
+
+
 
   </script>
 </html>
