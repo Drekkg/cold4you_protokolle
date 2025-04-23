@@ -11,6 +11,7 @@
   </head>
 
   <body id="el-to-print">
+    <div id="spinner" class="spinner" style="display: none;"></div>
     <div class="div1">
       <div>
         <h3>Cold4you Gewerbekälte GmbH</h3>
@@ -20,7 +21,7 @@
         <p style="font-size: large">www.cold4you.at </p>
       </div>
       <div>
-        <h1>Mängel Liste - Noch unter bearbeiten</h1>
+        <h1>Mängel Liste - Noch im bearbeitung</h1>
       </div>
       <div>
         <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500rem" height="200rem"></a>
@@ -29,6 +30,7 @@
     <div class="button-container">
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
       <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
+      <button type="button" class="seeThrough"  id="arch" >Archive</button>
       <input type="text" class="search" id="search" size="25" placeholder="Search" />
     </div>
     <form class="form" id="form">
@@ -86,7 +88,8 @@
       </form>
       <!-- Add a container to display the data -->
 <div id="data-container">
-  <h3>Stored Data</h3>
+  
+  <!-- <h3>Stored Data</h3> -->
   <table id="data-table" class="table" border="1">
     <thead>
       <tr>
@@ -112,6 +115,8 @@
 <script>
   //Initialise the date variable to hold the current date 
   // Get value from local storage to autofill important inputs of form
+  
+  let archivedFlag = false;
 
    const currentDate = new Date().toISOString().slice(0, 10);
    document.getElementById("dateCurrent").value = currentDate;
@@ -129,17 +134,22 @@
     document.getElementById("form").style.display = "block";
     document.getElementById("open").style.display = "none";
     document.getElementById("savePdf").style.display = "none";
+    document.getElementById("arch").style.display = "none";
   }); 
   document.getElementById("close").addEventListener("click", function() {
   document.getElementById("form").style.display = "none";
   document.getElementById("open").style.display = "inline-block";
   document.getElementById("savePdf").style.display = "inline-block";
+  document.getElementById("arch").style.display = "inline-block";
 
   }); 
 
 document.getElementById("savePdf").addEventListener("click", function() {
    saveAlert();
   });
+
+
+
 
   function saveAlert() {
   if (confirm("PDF speichern?")){
@@ -196,51 +206,15 @@ document.getElementById("form").addEventListener("keydown", function(event) {
  const objectStore = transaction.objectStore("formData");
  const getAllRequest = objectStore.getAll();
  getAllRequest.onsuccess = function (event) {
- const data = event.target.result; // All data from the object store
-
-  // Display the data on the page
-  const tableBody = document.getElementById("data-table").querySelector("tbody");
-  tableBody.innerHTML = ""; // Clear existing rows
-
-  // Function to render data into the table
-  function renderTable(filteredData) {
-    tableBody.innerHTML = ""; // Clear existing rows
-    filteredData.forEach((item) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${item.kunde || ""}</td>
-        <td>${item.standort || ""}</td>
-        <td>${item.aufstellung || ""}</td>
-        <td>${item.anlage || ""}</td>
-         <td>${item.type || ""}</td>
-         <td>${item.kaeltemittel || ""}</td>
-        <td>${item.techniker || ""}</td>
-        <td>${item.currentDate || ""}</td>
-        <td>
-        <p>1: ${item.maengel1 || ""}</p>
-        <p>2: ${item.maengel2 || ""}</p>
-        <p>3: ${item.maengel3 || ""}</p>
-        <p>4: ${item.maengel4 || ""}</p>
-        <p>5: ${item.maengel5 || ""}</p>
-        <p>6: ${item.maengel6 || ""}</p>
-        </td>
-      `;
-      tableBody.appendChild(row);
-    });
-  }
-
-  // Initially render all data
-  // renderTable(data);
-
-  // Initialize search bar and filter the displayed data
-  
+ const data = event.target.result; 
 };
 };
 
 let tableData = [];
 const fetchData = async () => {
-    const url = "https://www.deadcowboy.at/db.php";
-  
+    // const url = "http://localhost/db.php";
+    const url = `https://www.deadcowboy.at/db.php`;
+   
 
     try {
         const response = await fetch(url, {
@@ -259,53 +233,201 @@ const fetchData = async () => {
 
         if (result.success) {
            tableData = result.data;
-          renderTable(result.data); // Pass the data to the renderTable function
+          renderTable(result.data); 
         } else {
+    
             console.error("Error fetching data:", result.error || "Unknown error");
         }
     } catch (error) {
         console.error("Error fetching data:", error);
     }
 };
+const tableBody = document.getElementById("data-table").querySelector("tbody");
+tableBody.innerHTML = ""; 
 
+ // Function to render data into the table
+ function renderTable(data) {
+    tableBody.innerHTML = ""; // Clear existing rows
+    data.forEach((item) => {
+      if(!archivedFlag && item.archived != "1") {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.kunde || ""}</td>
+        <td>${item.standort || ""}</td>
+        <td>${item.aufstellung || ""}</td>
+        <td>${item.anlage || ""}</td>
+         <td>${item.type || ""}</td>
+         <td>${item.kaeltemittel || ""}</td>
+        <td>${item.techniker || ""}</td>
+        <td>${item.currentDate || ""}</td>
+        <td>
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
+        <td>
+         <p>
+         <button class="arch-btn" id="${item.id}">Archivieren</button>
+         </p>
+       </td>`;
 
-
-const renderTable = (data) => {
-
-  // if (!Array.isArray(data) || data.kunde != null) {
-  //   console.warn("No data to render");
-  //   return; // Stop rendering if data is empty or invalid
-  // }
-
-    const table = document.getElementById("data-table"); // Ensure you have a table with this ID in your HTML
-    table.innerHTML = ""; // Clear existing table rows
-
-    // Add table headers
-    const headers = Object.keys(data[0] || {});
-    const headerRow = document.createElement("tr");
-    headers.forEach((header) => {
-        const th = document.createElement("th");
-        th.textContent = header;
-        headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
-
-    // Add table rows
-    data.forEach((row) => {
-        const tr = document.createElement("tr");
-        headers.forEach((header) => {
-            const td = document.createElement("td");
-            td.textContent = row[header];
-            tr.appendChild(td);
-        });
-        table.appendChild(tr);
-    });
-};
-(async () => {
-    await fetchData(); // Wait for fetchData to complete
-   
+      tableBody.appendChild(row);
     
+      } else if (archivedFlag && item.archived === "1") {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td class="arch-td">${item.kunde || ""}</td>
+        <td class="arch-td">${item.standort || ""}</td>
+        <td class="arch-td">${item.aufstellung || ""}</td>
+        <td class="arch-td">${item.anlage || ""}</td>
+         <td class="arch-td">${item.type || ""}</td>
+         <td class="arch-td">${item.kaeltemittel || ""}</td>
+        <td class="arch-td">${item.techniker || ""}</td>
+        <td class="arch-td">${item.currentDate || ""}</td>
+        <td class="arch-td">
+        <p>1: ${item.maengel1 || ""}</p>
+        <p>2: ${item.maengel2 || ""}</p>
+        <p>3: ${item.maengel3 || ""}</p>
+        <p>4: ${item.maengel4 || ""}</p>
+        <p>5: ${item.maengel5 || ""}</p>
+        <p>6: ${item.maengel6 || ""}</p>
+        </td>
+        <td>
+           <p>
+         <button class="delete-btn" id="${item.id}">Löschen</button>
+        </p>
+         <p>
+         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
+         </p>
+         <p>
+         </p>
+       </td>`;
 
+      tableBody.appendChild(row);
+   }}
+  );
+};
+function handleTableBodyClick(event) {
+  // Check if the clicked element has the "delete-btn" class
+  if (event.target.classList.contains("delete-btn")) {
+    const id = event.target.id;
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+      console.error(`No data found for ID: ${id}`);
+      return;
+    }
+    // Handle the delete button click
+    deleteItem(id, selectedData);
+  }
+
+  if (event.target.classList.contains("arch-btn")) {
+    const id = event.target.id; 
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+    selectedData.archived = "1";
+    archiveItem(id, selectedData);
+  }
+
+if (event.target.classList.contains("edit-btn")) {
+    const id = event.target.id; 
+    const selectedData = tableData.find((item) => item.id === id);
+    if (!selectedData) {
+    console.error(`No data found for ID: ${id}`);
+    return;
+  }
+    selectedData.archived = "0";
+    archiveItem(id, selectedData);
+  }
+}
+
+
+
+
+tableBody.addEventListener("click", handleTableBodyClick);
+
+
+
+  const archiveItem = async (id, selectedData) => {
+  const url = `https://www.deadcowboy.at/db.php?id=${id}`;
+  // const url = "https://www.deadcowboy.at/db.php";
+  // const url = "http://localhost/db.php?id=${id}";
+
+  try {
+    const response = await fetch(url, {
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedData), 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update item with ID ${id}. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Eintrag Archivieret");
+      location.reload();
+
+    } else {
+      console.error("Error updating data:", result.error || "Unknown error");
+    }
+  } catch (error) {
+    console.error("Error updating data:", error.message);
+  }
+};
+
+
+const deleteItem = async (id, selectedData) => {
+
+  const spinner = document.getElementById("spinner");
+  spinner.style.display = "block"; // Show spinner
+if(confirm("Eintrag Loeschen")){
+  console.log("confirm clicked")
+  const url = `https://www.deadcowboy.at/db.php?id=${id}`;
+  // const url = "https://www.deadcowboy.at/db.php";
+  // const url = "http://localhost/db.php?id=${id}";
+
+  try {
+    const response = await fetch(url, {
+      method: "DELETE", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedData), 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete item with ID ${id}. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Eintrag gelöscht");
+      fetchData();
+
+    } else {
+      console.error("Error updating data:", result.error);
+    }
+  } catch (error) {
+    console.error("Error updating data:", error.message);
+  } finally {
+    spinner.style.display = "none"; // Hide spinner
+  }}
+};
+
+(async () => {
+    await fetchData();
+    
 document.getElementById("search").addEventListener("input", () => {
     const key = document.getElementById("search").value.toLowerCase();
 
@@ -331,8 +453,29 @@ document.getElementById("search").addEventListener("input", () => {
 
     // Render the filtered data
     renderTable(filteredData);
+
   });
 })();
+
+//   document.getElementById("arch").addEventListener("click", () => {
+//   archivedFlag = !archivedFlag;
+//   renderTable(tableData);                    
+// });
+const archButton = document.getElementById("arch");
+
+// Define the event handler as a named function
+const toggleArchivedFlag = () => {
+  archivedFlag = !archivedFlag;
+  renderTable(tableData);
+};
+
+// Remove any existing event listener before adding a new one
+
+archButton.addEventListener("click", toggleArchivedFlag);
+
+
+
+
 
   </script>
 </html>

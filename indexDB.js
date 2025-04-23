@@ -68,6 +68,7 @@ function saveFormData() {
     maengel4: maengelValue4,
     maengel5: maengelValue5,
     maengel6: maengelValue6,
+    archived: "0",
   };
 
   const request = objectStore.add(data);
@@ -79,6 +80,7 @@ function saveFormData() {
   request.onerror = function () {
     console.log("Error saving form data to IndexedDB", event.target.errorCode);
   };
+
   const postData = async (data) => {
     const url = "https://www.deadcowboy.at/db.php";
 
@@ -96,8 +98,7 @@ function saveFormData() {
         throw new Error(`HTTP error status: ${response.status}, Response: ${errorText}`);
       }
       const result = await response.json();
-      console.log("successs:", result);
-      location.reload();
+      console.log("success:", result);
     } catch (error) {
       console.error("Error", error);
     }
