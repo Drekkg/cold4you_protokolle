@@ -247,6 +247,8 @@ tableBody.innerHTML = "";
 
  // Function to render data into the table
  function renderTable(data) {
+   const archButton = document.getElementById("arch");
+   archButton.style.backgroundColor = "rgb(186, 186, 193)";
     tableBody.innerHTML = ""; // Clear existing rows
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
@@ -277,6 +279,7 @@ tableBody.innerHTML = "";
       tableBody.appendChild(row);
     
       } else if (archivedFlag && item.archived === "1") {
+        archButton.style.backgroundColor = "yellow";
       const row = document.createElement("tr");
       row.innerHTML = `
         <td class="arch-td">${item.kunde || ""}</td>
@@ -300,13 +303,17 @@ tableBody.innerHTML = "";
          <button class="delete-btn" id="${item.id}">Löschen</button>
         </p>
          <p>
-         <button class="edit-btn" id="${item.id}">Bearbeiten</button>
+         <button class="undo-btn" id="${item.id}">Wiederherstellen</button>
          </p>
          <p>
          </p>
        </td>`;
 
       tableBody.appendChild(row);
+   } else {
+   const heading = document.createElement("h3");
+    heading.innerHTML = "Keine Daten";
+    tableBody.appendChild(heading);
    }}
   );
 };
@@ -334,7 +341,7 @@ function handleTableBodyClick(event) {
     archiveItem(id, selectedData);
   }
 
-if (event.target.classList.contains("edit-btn")) {
+if (event.target.classList.contains("undo-btn")) {
     const id = event.target.id; 
     const selectedData = tableData.find((item) => item.id === id);
     if (!selectedData) {
@@ -342,7 +349,7 @@ if (event.target.classList.contains("edit-btn")) {
     return;
   }
     selectedData.archived = "0";
-    archiveItem(id, selectedData);
+    restoreItem(id, selectedData);
   }
 }
 
@@ -376,6 +383,37 @@ tableBody.addEventListener("click", handleTableBodyClick);
     if (result.success) {
       alert("Eintrag Archivieret");
       location.reload();
+
+    } else {
+      console.error("Error updating data:", result.error || "Unknown error");
+    }
+  } catch (error) {
+    console.error("Error updating data:", error.message);
+  }
+};
+const restoreItem = async (id, selectedData) => {
+  const url = `https://www.deadcowboy.at/db.php?id=${id}`;
+  // const url = "https://www.deadcowboy.at/db.php";
+  // const url = "http://localhost/db.php?id=${id}";
+
+  try {
+    const response = await fetch(url, {
+      method: "PUT", 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(selectedData), 
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update item with ID ${id}. Status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.success) {
+      alert("Eintrag Wiederhergestellt");
+      renderTable(tableData);
 
     } else {
       console.error("Error updating data:", result.error || "Unknown error");
@@ -472,10 +510,5 @@ const toggleArchivedFlag = () => {
 // Remove any existing event listener before adding a new one
 
 archButton.addEventListener("click", toggleArchivedFlag);
-
-
-
-
-
   </script>
 </html>
