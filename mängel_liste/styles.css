@@ -314,7 +314,7 @@ button#close {
   padding: 1em;
   height: 80%;
   margin-left: 25em;
-  background: red;
+  background: rgb(255, 196, 0);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
   font-weight: 600;
