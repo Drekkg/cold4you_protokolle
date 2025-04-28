@@ -279,8 +279,9 @@ tableBody.innerHTML = "";
 
       tableBody.appendChild(row);
     
-      } else if (archivedFlag && item.archived === "1") {
+      } else  {
         archButton.style.backgroundColor = "yellow";
+        if(archivedFlag && item.archived === "1") {
       const row = document.createElement("tr");
       row.innerHTML = `
         <td class="arch-td">${item.kunde || ""}</td>
@@ -311,8 +312,9 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-   }
-  }
+   
+          }
+  }}
   );
 };
 
@@ -498,9 +500,8 @@ document.getElementById("search").addEventListener("input", () => {
 //   archivedFlag = !archivedFlag;
 //   renderTable(tableData);                    
 // });
-const archButton = document.getElementById("arch");
 
-// Define the event handler as a named function
+const archButton = document.getElementById("arch");
 const toggleArchivedFlag = () => {
   archivedFlag = !archivedFlag;
   renderTable(tableData);
