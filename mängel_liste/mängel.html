@@ -250,6 +250,7 @@ tableBody.innerHTML = "";
    const archButton = document.getElementById("arch");
    archButton.style.backgroundColor = "rgb(186, 186, 193)";
     tableBody.innerHTML = ""; // Clear existing rows
+   
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
       const row = document.createElement("tr");
@@ -310,13 +311,11 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-   } else {
-   const heading = document.createElement("h3");
-    heading.innerHTML = "Keine Daten";
-    tableBody.appendChild(heading);
-   }}
+   }
+  }
   );
 };
+
 function handleTableBodyClick(event) {
   // Check if the clicked element has the "delete-btn" class
   if (event.target.classList.contains("delete-btn")) {
