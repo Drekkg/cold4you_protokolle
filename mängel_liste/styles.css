@@ -13,7 +13,9 @@ h1 {
   margin-bottom: 1em;
 }
 td {
+  min-width: 6em;
   padding-left: 1em;
+  
 }
 tr:nth-child(odd) {
   background-color:  rgb(244, 244, 246);
@@ -268,7 +270,10 @@ font-size: 1.5em;
   flex-direction: row;
  
 }
-
+.archiv-button {
+  font-weight: bold;
+  border-radius: 30%;
+}
 
  .pdf-speichern{
   margin-left: 15em;
@@ -372,6 +377,7 @@ button#clear span {
 }
 .arch-td {
   background-color: rgb(247, 247, 145);
+ 
 }
 .spinner {
   border: 4px solid #f3f3f3; /* Light grey */
@@ -498,7 +504,7 @@ button#clear span {
   }
   
   
-   table,
+  table,
   thead,
   tbody,
   th,
@@ -506,8 +512,7 @@ button#clear span {
   tr {
     display: block;
   }
-  
-
+ 
   .div3 {
     font-size: 0em;
     font-weight: bolder;
