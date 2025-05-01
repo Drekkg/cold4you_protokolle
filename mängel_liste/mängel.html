@@ -280,7 +280,7 @@ tableBody.innerHTML = "";
 
       tableBody.appendChild(row);
     
-      } else  {
+      } else {
         archButton.style.backgroundColor = "yellow";
         if(archivedFlag && item.archived === "1") {
       const row = document.createElement("tr");
@@ -462,7 +462,8 @@ if(confirm("Eintrag Loeschen")){
     console.error("Error updating data:", error.message);
   } finally {
     spinner.style.display = "none"; // Hide spinner
-  }}
+   }
+  }
 };
 
 (async () => {
