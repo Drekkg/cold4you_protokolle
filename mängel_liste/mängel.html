@@ -384,7 +384,9 @@ tableBody.addEventListener("click", handleTableBodyClick);
 
     if (result.success) {
       alert("Eintrag Archivieret");
-      location.reload();
+      // location.reload();
+      renderTable(tableData);
+    
 
     } else {
       console.error("Error updating data:", result.error || "Unknown error");
