@@ -37,7 +37,7 @@ td {
 
 }
 
-.table th,
+
 .table td {
 
   border: 1px solid #080808;
@@ -46,7 +46,10 @@ td {
 }
 
 .table th {
-  background-color: #f2f2f2;
+  padding: 8px;
+  border: 1px solid aliceblue;
+  background-color: #1e1d1d;
+  color: aliceblue;
   text-align: left;
   
 }
