@@ -278,13 +278,14 @@ tr:nth-child(odd) {
   font-weight: bolder;
   
 }
-.div1 > div:nth-child(1) {
+
+ .div1 > div:nth-child(1) {
   text-align: left;
   width: 25%;
 }
 .div1 > div:nth-child(2) {
 font-size: 1.5em;
-}
+} 
 
 /* input {
   font-size: 1em;
@@ -301,7 +302,6 @@ font-size: 1.5em;
   margin-top: 0.5em;
   margin-bottom: 1em;
   margin-left: 1em;
-  
   font-size: 1em;
   
 }
@@ -316,12 +316,11 @@ font-size: 1.5em;
   border-radius: 10px;
   margin: 1em .1em 0 1em;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: stretch;
   flex-direction: row;
+  width: 99%;
 }
-
-
 
 .archiv-button {
   font-weight: bold;
@@ -472,7 +471,11 @@ button#clear span {
 
 
 @media (min-device-width: 200px) and (max-device-width: 600px) {
- 
+  .button-container {
+    width: 100%; /* Ensure it takes the full width of the parent */
+    max-width: 300px; /* Optional: Limit the maximum width */
+    margin: 0 auto; /* Center the container */
+  }
  .flexInner {
     font-size: 1.5em;
     width: auto;
