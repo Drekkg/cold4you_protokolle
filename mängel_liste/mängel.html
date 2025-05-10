@@ -253,7 +253,8 @@ tableBody.innerHTML = "";
    
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
-      archButton.style.backgroundColor = "rgb(186, 186, 193)";
+      archButton.style.backgroundColor = "rgb(221, 221, 226)";
+
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.kunde || ""}</td>

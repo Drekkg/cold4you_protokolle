@@ -78,8 +78,8 @@ td {
 }
 
 
-tr:nth-child(odd) {
-  background-color:  rgb(244, 244, 246);
+tr:nth-child(even) {
+  background-color:rgba(244, 245, 255, 0.56)
 }
 
 
@@ -333,7 +333,7 @@ font-size: 1.5em;
   border-radius: 2em;
   padding: 1em;
   height: 80%;
-  background: rgb(186, 186, 193);
+  background: rgb(221, 221, 226);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
   font-weight: 600;
@@ -383,7 +383,7 @@ button#open {
   border-radius: 2em;
   padding: 1em;
   height: 80%;
-  background: rgb(186, 186, 193);
+  background: rgb(221, 221, 226);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
   font-weight: 600;
