@@ -11,7 +11,8 @@
   </head>
 
   <body id="el-to-print">
-    <div id="spinner" class="spinner" style="display: none;"></div>
+    <div id="spinner" class="spinner" style="display: none;">
+    </div>
     <div class="div1">
       <div>
         <h3>Cold4you Gewerbekälte GmbH</h3>
@@ -58,7 +59,7 @@
                       <input type="text" id="kaeltemittel" size="10" />
 
                         </div> 
-                  <div class="div4">
+                  <div class="divSizeMaengel">
                     <label>Mängel:</label>
                     <br>
                     <input type="text" name="maengel1"  id="maengel1" size="65" value="" maxlength="149"/><br>
@@ -252,7 +253,7 @@ tableBody.innerHTML = "";
    
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
-      archButton.style.backgroundColor = "rgb(186, 186, 193)";
+      archButton.style.backgroundColor = "rgb(221, 221, 226)";
       const row = document.createElement("tr");
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
@@ -280,7 +281,9 @@ tableBody.innerHTML = "";
       tableBody.appendChild(row);
     
       } else {
+        if(archivedFlag) {
         archButton.style.backgroundColor = "yellow";
+      }
         if(archivedFlag && item.archived === "1") {
       const row = document.createElement("tr");
       row.innerHTML = `
@@ -394,6 +397,8 @@ tableBody.addEventListener("click", handleTableBodyClick);
     console.error("Error updating data:", error.message);
   }
 };
+
+
 const restoreItem = async (id, selectedData) => {
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
   // const url = "https://www.deadcowboy.at/db.php";
@@ -428,9 +433,9 @@ const restoreItem = async (id, selectedData) => {
 
 
 const deleteItem = async (id, selectedData) => {
-
   const spinner = document.getElementById("spinner");
   spinner.style.display = "block"; // Show spinner
+
 if(confirm("Eintrag Loeschen")){
   console.log("confirm clicked")
   const url = `https://www.deadcowboy.at/db.php?id=${id}`;
@@ -464,7 +469,10 @@ if(confirm("Eintrag Loeschen")){
   } finally {
     spinner.style.display = "none"; // Hide spinner
    }
+  } else {
+  spinner.style.display = "none"; // Hide spinner
   }
+
 };
 
 (async () => {
