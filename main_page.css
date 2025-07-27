@@ -47,3 +47,13 @@ li > a {
   color: #6f2121;
   font-size: 1rem;
 }
+
+@media (max-width: 602px) {
+  .list-container {
+    
+    flex-direction: column;
+
+  
+  
+  }
+}

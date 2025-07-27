@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <meta  name="viewport" content="width=device-width", initial-scale="1" >
+  <title id="title_change"></title>
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.png">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+
+  <form class="form" id="form" onsubmit="saveAlert(); return false">
+  <body id="el-to-print">
+    <div>
+     <div class="div1">
+       <div>
+       <h3>Cold4you Gewerbekälte GmbH</h3>
+       <p style="font-size: large">Wiener Strasse 25, 2100 Korneuburg</p>
+       <p style="font-size: large">Tel: 02262 / 235 25 </p>
+       <p style="font-size: large">Email: office@cold4you.at </p>
+       <p style="font-size: large">www.cold4you.at </p>
+       </div>
+       <div>
+       <h1>Dichtungsaufnahme</h1>
+       </div>
+       <div>
+        <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500rem" height="200rem"></a>
+       </div>
+    </div>
+      </div> 
+      <div class="flexContainer"> 
+        <div class="address">
+        <table class="table">
+          <tr class="addressBox">
+            <th class="addressBox">Auftraggeber:</th>
+            <th><input  type="text" id="kunde" value="" onchange="myFunction()" size="40" name="" required /></th>
+            </tr>
+          <tr class="addressBox">
+            <th class="text_area">Standort:</th>
+            <th>
+              <textarea class="tableBg2" id="standort" name="address" cols="41" rows="5" value="" required></textarea></th>
+          </tr>
+          <tr class="addressBox">
+            <th class="addressBox">Auftragsnummer:</th>
+            <th><input type="text" id="anlage" value="" size="40" onchange="myFunction()" required/></th>
+          </tr>
+          <tr class="addressBox">
+            <th class="addressBox">Techniker:</th>
+            <th><input type="text" id="techniker" size="40"></th>
+          </tr>
+
+          <tr class="addressBox">
+          <th class="addressBox">Datum:</th>
+          <th><input type="date" id="dateCurrent" value=""
+            /></th>
+        </tr>
+        </table>
+        </div>
+  </div> 
+<div>
+  <h1>Dichtung: </h1>
+
+<div class="flexInner"  id="unit">
+<div class="divSize">
+  <label>Standort</label>
+  <input type="text" placeholder="z.B. Küche, Bar" size="24" id="anlagestandort"/>
+<br>
+      <label>Anlagenbeschreibung</label>
+      <input type="text" placeholder="z.B. Kühlpult 4 Lade" />
+<br>
+  <label>Profile Nr.</label>
+  <input type="text"  size="15" maxlength="37"/>
+  <label>Menge</label>
+  <input type="text" size="3" maxlength="37"/>
+  <br>
+
+  <div id="abmessung0">
+  <div class="abmessungenStyle">
+  <label>Abmessungen </label>
+  <label >Höhe</label>
+  <input type="number" class="shortInput" step="0.100" />
+  <label>cm</label>
+  <label>Breite</label>
+  <input type="number" class="shortInput" step="0.100"/>
+  <label >cm</label>
+  </div>
+  </div>
+  
+  <p><a href="https://www.dsu-nl.com/de-DE" target="_blank" class="dichtungLink">Nicht gefunden? klick hier</a>
+  <button type="button" class="neueAbmessungButton" id="0" onclick="addNeueAbmessungen(event)">Neue Abmessungen für gleiche Profil</button>
+  </p>
+  <button type="button" class="neueAnlage" id="neueAnlage" onclick="addNeueAnlage()">Neue Anlage</button>   
+</div>
+
+</div>
+</div> 
+      <div class="flexContainer">
+      <div class="div3">
+        <label>Unterschrift:</label>
+    
+      <div class="flex-row">
+        <div class="wrapper">
+          <canvas id="signature-pad" width="800" height="300" class="zoom"></canvas>
+        </div>
+        <div >
+          <button class="seeThrough" type="button" id="clear"><span>Löschen </span></button>
+          <button type="submit" class="seeThrough"  id="print" >Speichern PDF</button>
+       
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </form>
+
+    
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="../indexDB.js"></script>
+<script src="../form-logic.js"></script>
+<script>
+let abmessungCounter = 0; 
+let dichtungCounter = 1;
+const neueAbmessungInput = `
+<label>Abmessungen </label>
+  <label >Höhe</label>
+  <input type="number" class="shortInput" step="0.100" />
+  <label>cm</label>
+  <label>Breite</label>
+  <input type="number" class="shortInput" step="0.100"/>
+  <label >cm</label>
+  ` 
+
+function addNeueAnlage() {
+  abmessungCounter ++;
+  const neueAnlageWrapper = document.createElement("div");
+  neueAnlageWrapper.innerHTML =  `
+<div class="divSize">
+  <label>Standort</label>
+  <input type="text" placeholder="z.B. Küche, Bar" class="inputMarginStandort" size="24"/>
+<br>
+      <label>Anlagenbeschreibung</label>
+      <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="inputMargin"/>
+<br>
+  <label>Profile Nr.</label>
+  <input type="text" class="inputMargin" size="15" maxlength="37"/>
+  <label>Menge</label>
+  <input type="text" class="inputMargin" size="3" maxlength="37"/>
+  <br>
+
+  <div id="abmessung${abmessungCounter}">
+  <div class="abmessungenStyle">
+  <label>Abmessungen </label>
+  <label >Höhe</label>
+  <input type="number" class="shortInput" step="0.100" />
+  <label>cm</label>
+  <label>Breite</label>
+  <input type="number" class="shortInput" step="0.100"/>
+  <label >cm</label>
+  </div>
+  </div>
+  
+  <p><a href="https://www.dsu-nl.com/de-DE" target="_blank" class="dichtungLink">Nicht gefunden? klick hier</a>
+  <button type="button" class="neueAbmessungButton" id="${abmessungCounter}" onclick="addNeueAbmessungen(event)">Neue Abmessungen für gleiche Profil</button>
+  </p>
+  <button type="button" class="neueAnlage" id="neueAnlage" onclick="addNeueAnlage()" >Neue Anlage</button>   
+</div>
+`;
+  document.getElementById("unit").appendChild(neueAnlageWrapper);
+
+}
+
+
+function addNeueAbmessungen(event) {
+  let abmessungId = event.target.id;
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("abmessungenStyle");
+  wrapper.innerHTML = neueAbmessungInput;
+  
+  document.getElementById(`abmessung${abmessungId}`).appendChild(wrapper);
+}
+
+
+
+function myFunction() {
+var title = document.getElementById("anlage").value;
+var standort = document.getElementById("standort").value.split("\n")[0];
+var datum = document.getElementById("dateCurrent").value;
+var kunde = document.getElementById("kunde").value;
+  document.getElementById("title_change").innerHTML = "Dichtung_" + "_" + kunde + "_" + standort + "_" + title + "_" + datum;
+}
+
+var opt = {
+  margin:       1.1,
+  filename:     "Dichtung",
+  image:        { type: 'jpeg', quality: 1 },
+  html2canvas:  { scale: 0.7, dpi: 600, },
+  jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
+  
+};
+  </script>
+  </body>
+</html>
