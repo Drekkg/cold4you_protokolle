@@ -70,6 +70,7 @@ function savePDF() {
   html2pdf().set(opt).from(element).save(document.getElementById("title_change").innerHTML);
 }
 
+
 // var opt = {
 //   // pagebreak:    { mode: 'avoid-all', before: '#page2' },
 //   margin: 0.4,
