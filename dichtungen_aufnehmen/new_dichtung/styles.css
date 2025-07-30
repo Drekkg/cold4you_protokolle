@@ -1,0 +1,13 @@
+.addressContainer {
+    background-color: rgb(244, 245, 255);
+}
+
+.table th,
+.table td {
+    background-color: rgb(244, 245, 255) !important;
+    padding: 1rem !important;
+}
+
+.anlageContainer { 
+    background-color: rgb(217, 219, 238);
+}
