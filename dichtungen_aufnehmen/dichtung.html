@@ -1,216 +1,316 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-  <meta charset="UTF-8">
-  <meta  name="viewport" content="width=device-width, initial-scale=1" >
-  <title id="title_change"></title>
-    <link rel="icon" type="image/x-icon" href="/favicon/favicon.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title id="title_change"></title>
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"
+      integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
-
   <body id="el-to-print">
-  <form class="form" id="form" onsubmit="saveAlert(); return false">
-    <div>
-     <div class="div1">
-       <div>
-       <h3>Cold4you Gewerbekälte GmbH</h3>
-       <p style="font-size: large">Wiener Strasse 25, 2100 Korneuburg</p>
-       <p style="font-size: large">Tel: 02262 / 235 25 </p>
-       <p style="font-size: large">Email: office@cold4you.at </p>
-       <p style="font-size: large">www.cold4you.at </p>
-       </div>
-       <div>
-       <h1>Dichtungsaufnahme</h1>
-       </div>
-       <div>
-        <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500em" height="200em"></a>
-       </div>
-    </div>
-      </div> 
-      <div class="flexContainer"> 
-        <div class="address">
-        <table class="table">
-          <tr class="addressBox">
-            <th class="addressBox">Auftraggeber:</th>
-            <th><input  type="text" id="kunde" value="" onchange="myFunction()" size="40" name="" required /></th>
-            </tr>
-          <tr class="addressBox">
-            <th class="text_area">Standort:</th>
-            <th>
-              <textarea class="tableBg2" id="standort" name="address" cols="41" rows="5" value="" required></textarea></th>
-          </tr>
-          <tr class="addressBox">
-            <th class="addressBox">Auftragsnummer:</th>
-            <th><input type="text" id="anlage" value="" size="40" onchange="myFunction()" required/></th>
-          </tr>
-          <tr class="addressBox">
-            <th class="addressBox">Techniker:</th>
-            <th><input type="text" id="techniker" size="40"></th>
-          </tr>
-
-          <tr class="addressBox">
-          <th class="addressBox">Datum:</th>
-          <th><input type="date" id="dateCurrent" value=""
-            /></th>
-        </tr>
-        </table>
+    <div class="container my-4">
+      <form class="form" id="form" onsubmit="saveAlert(); return false">
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <p style="font-size: 0.85rem">Cold4you Gewerbekälte GmbH</p>
+            <p style="font-size: 0.85rem">Wiener Strasse 25, 2100 Korneuburg</p>
+            <p style="font-size: 0.85rem">Tel: 02262 / 235 25</p>
+            <p style="font-size: 0.85rem">Email: office@cold4you.at</p>
+            <p style="font-size: 0.85rem">www.cold4you.at</p>
+          </div>
+          <div class="col-12 col-md-6 text-md-end">
+            <h1>Dichtungsaufnahme</h1>
+            <a href="../index.html">
+              <img
+                src="cold_logo.jpg"
+                alt="image"
+                class="img-fluid"
+                style="max-width: 200px; height: auto"
+              />
+            </a>
+          </div>
         </div>
-  </div> 
-<div>
-  <h1>Dichtung: </h1>
-
-<div class="flexInner"  id="unit">
-<div class="divSize">
-<div>
-  <label>Standort</label>
-  <input type="text" placeholder="z.B. Küche, Bar" size="24" id="anlagestandort"/>
-</div>
-<br>
-  <div>
-      <label>Anlagenbeschreibung</label>
-      <input type="text" placeholder="z.B. Kühlpult 4 Lade" />
-  </div>
-<br>
-<div>
-  <label>Profile Nr.</label>
-  <input type="text"  size="15" maxlength="37"/>
-  <label>Menge</label>
-  <input type="text" size="3" maxlength="37"/>
-</div>
-  <br>
-
-  <div id="abmessung0">
-  <div class="abmessungenStyle">
-  <label>Abmessungen </label>
-  <label >Höhe</label>
-  <input type="number" class="shortInput" step="0.100" />
-  <label>cm</label>
-  <label>Breite</label>
-  <input type="number" class="shortInput" step="0.100"/>
-  <label >cm</label>
-  </div>
-  </div>
-  
-  <p><a href="https://www.dsu-nl.com/de-DE" target="_blank" class="dichtungLink">Nicht gefunden? klick hier</a>
-  <button type="button" class="neueAbmessungButton" id="0" onclick="addNeueAbmessungen(event)">Neue Abmessungen für gleiche Profil</button>
-  </p>
-  <button type="button" class="neueAnlage" id="neueAnlage" onclick="addNeueAnlage()">Neue Anlage</button>   
-</div>
-
-</div>
-</div> 
-      <div class="flexContainer">
-      <div class="div3">
-        <label>Unterschrift:</label>
-    
-      <div class="flex-row">
-        <div class="wrapper">
-          <canvas id="signature-pad" width="800" height="300" class="zoom"></canvas>
+        <div class="addressContainer row mb-3">
+          <div class="col-12 addressContainer">
+            <table class="table">
+              <tr>
+                <th>Auftraggeber:</th>
+                <td>
+                  <input
+                    type="text"
+                    id="kunde"
+                    class="form-control"
+                    value=""
+                    onchange="myFunction()"
+                    name=""
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Standort:</th>
+                <td>
+                  <textarea
+                    class="form-control"
+                    id="standort"
+                    name="address"
+                    rows="3"
+                    required
+                  ></textarea>
+                </td>
+              </tr>
+              <tr>
+                <th>Auftragsnummer:</th>
+                <td>
+                  <input
+                    type="text"
+                    id="anlage"
+                    class="form-control"
+                    value=""
+                    onchange="myFunction()"
+                    required
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th>Techniker:</th>
+                <td><input type="text" id="techniker" class="form-control" /></td>
+              </tr>
+              <tr>
+                <th>Datum:</th>
+                <td><input type="date" id="dateCurrent" class="form-control" value="" /></td>
+              </tr>
+            </table>
+          </div>
         </div>
-        <div >
-          <button class="seeThrough" type="button" id="clear"><span>Löschen </span></button>
-          <button type="submit" class="seeThrough"  id="print" >Speichern PDF</button>
-       
+        <div class="row mb-3">
+          <div class="col-12">
+            <h1>Dichtung:</h1>
+            <div id="unit">
+              <div class="mb-3 p-3 border rounded anlageContainer">
+                <div class="mb-2">
+                  <label for="anlagestandort" class="form-label">Standort</label>
+                  <input
+                    type="text"
+                    placeholder="z.B. Küche, Bar"
+                    class="form-control"
+                    id="anlagestandort"
+                  />
+                </div>
+                <div class="mb-2">
+                  <label class="form-label">Anlagenbeschreibung</label>
+                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" />
+                </div>
+                <div class="abmessungBackground">
+                <div class="mb-2 row">
+                  <div class="col-6">
+                    <label class="form-label">Profile Nr.</label>
+                    <input type="text" class="form-control" maxlength="37" />
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Menge</label>
+                    <input type="text" class="form-control" maxlength="37" />
+                  </div>
+                </div>
+                <div  class="mb-2">
+                  <div>
+                    <label class="form-label">Abmessungen</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="form-label">Höhe (cm)</label>
+                        <input type="number" class="form-control" step="0.100" />
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Breite (cm)</label>
+                        <input type="number" class="form-control" step="0.100" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div id="abmessung0">
+
+                </div>
+                
+                <div class="mb-2">
+                  <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link"
+                    >Nicht gefunden? klick hier</a
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-secondary ms-2"
+                    id="0"
+                    onclick="addNeueAbmessungen(event)"
+                  >
+                    Neue Abmessungen für gleiche Profil
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="neueAnlage"
+                  onclick="addNeueAnlage()"
+                >
+                  Neue Anlage
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-      </div>
-      </div>
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="p-3 border rounded addressContainer">
+              <label class="form-label">Unterschrift:</label>
+              <div class="row">
+                <div class="col-12 col-md-8">
+                  <canvas id="signature-pad" width="800" height="300" class="img-fluid"></canvas>
+                </div>
+                <div
+                  class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
+                >
+                  <button class="btn btn-outline-danger mb-2" type="button" id="clear">
+                    <span>Löschen</span>
+                  </button>
+                  <button type="submit" class="btn btn-success" id="print">Speichern PDF</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </form>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js"
+      integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../../form-logic.js"></script>
+    <script src="../../indexDB.js"></script>
+    <script>
+      let abmessungCounter = 0;
+      let dichtungCounter = 1;
+      const neueAbmessungInput = `
+      <div class="abmessungBackground">
+      <div class="mb-2 row">
+                  <div class="col-6">
+                    <label class="form-label">Profile Nr.</label>
+                    <input type="text" class="form-control" maxlength="37" />
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Menge</label>
+                    <input type="text" class="form-control" maxlength="37" />
+                  </div>
+                </div>
+     <div>
+      <label class="form-label">Abmessungen</label>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Höhe (cm)</label>
+              <input type="number" class="form-control" step="0.100" />
+                </div>
+                  <div class="col-6">
+                    <label class="form-label">Breite (cm)</label>
+                      <input type="number" class="form-control" step="0.100"/>
+                      </div>
+                    </div>
+                  </div> 
+                  </div>
+      
+        `;
 
-    
+      function addNeueAnlage() {
+        abmessungCounter++;
+        const neueAnlageWrapper = document.createElement("div");
+        neueAnlageWrapper.innerHTML = `
+      
+              <div class="mb-3 p-3 border rounded anlageContainer">
+                <div class="mb-2">
+                  <label for="anlagestandort" class="form-label">Standort</label>
+                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort"/>
+                </div>
+                <div class="mb-2">
+                  <label class="form-label">Anlagenbeschreibung</label>
+                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control"/>
+                </div>
+                <div class="abmessungBackground">
+                <div class="mb-2 row" >
+                  <div class="col-6">
+                    <label class="form-label">Profile Nr.</label>
+                    <input type="text" class="form-control" maxlength="37"/>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label">Menge</label>
+                    <input type="text" class="form-control" maxlength="37"/>
+                  </div>
+                </div>
+                <div class="mb-2">
+                  <div>
+                    <label class="form-label">Abmessungen</label>
+                    <div class="row">
+                      <div class="col-6">
+                        <label class="form-label">Höhe (cm)</label>
+                        <input type="number" class="form-control" step="0.100" />
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label">Breite (cm)</label>
+                        <input type="number" class="form-control" step="0.100"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 </div>
+                <div id="abmessung${abmessungCounter}">
+                </div>
+                <div class="mb-2">
+                  <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link">Nicht gefunden? klick hier</a>
+                  <button type="button" class="btn btn-secondary ms-2" id="${abmessungCounter}" onclick="addNeueAbmessungen(event)">Neue Abmessungen für gleiche Profil</button>
+                </div>
+                <button type="button" class="btn btn-primary" id="neueAnlage" onclick="addNeueAnlage()">Neue Anlage</button>
+              </div>
+            </div>
+      `;
+        document.getElementById("unit").appendChild(neueAnlageWrapper);
+      }
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/signature_pad/1.3.5/signature_pad.min.js" integrity="sha512-kw/nRM/BMR2XGArXnOoxKOO5VBHLdITAW00aG8qK4zBzcLVZ4nzg7/oYCaoiwc8U9zrnsO9UHqpyljJ8+iqYiQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../form-logic.js"></script>
-<script src="../indexDB.js"></script>
-<script>
-let abmessungCounter = 0; 
-let dichtungCounter = 1;
-const neueAbmessungInput = `
-<label>Abmessungen </label>
-  <label >Höhe</label>
-  <input type="number" class="shortInput" step="0.100" />
-  <label>cm</label>
-  <label>Breite</label>
-  <input type="number" class="shortInput" step="0.100"/>
-  <label >cm</label>
-  ` 
+      function addNeueAbmessungen(event) {
+        let abmessungId = event.target.id;
+        const wrapper = document.createElement("div");
+        wrapper.classList.add("abmessungenStyle");
+        wrapper.innerHTML = neueAbmessungInput;
 
-function addNeueAnlage() {
-  abmessungCounter ++;
-  const neueAnlageWrapper = document.createElement("div");
-  neueAnlageWrapper.innerHTML =  `
-<div class="divSize">
-  <div>
-  <label>Standort</label>
-  <input type="text" placeholder="z.B. Küche, Bar"  size="24"/>
-  </div>
-<br>
-<div>
-      <label>Anlagenbeschreibung</label>
-      <input type="text" placeholder="z.B. Kühlpult 4 Lade" />
-</div>
-<br>
-<div>
-  <label>Profile Nr.</label>
-  <input type="text"  size="15" maxlength="37"/>
-  <label>Menge</label>
-  <input type="text"  size="3" maxlength="37"/>
-  </div>
-  <br>
+        document.getElementById(`abmessung${abmessungId}`).appendChild(wrapper);
+      }
 
-  <div id="abmessung${abmessungCounter}">
-  <div class="abmessungenStyle">
-  <label>Abmessungen </label>
-  <label >Höhe</label>
-  <input type="number" class="shortInput" step="0.100" />
-  <label>cm</label>
-  <label>Breite</label>
-  <input type="number" class="shortInput" step="0.100"/>
-  <label >cm</label>
-  </div>
-  </div>
-  
-  <p><a href="https://www.dsu-nl.com/de-DE" target="_blank" class="dichtungLink">Nicht gefunden? klick hier</a>
-  <button type="button" class="neueAbmessungButton" id="${abmessungCounter}" onclick="addNeueAbmessungen(event)">Neue Abmessungen für gleiche Profil</button>
-  </p>
-  <button type="button" class="neueAnlage" id="neueAnlage" onclick="addNeueAnlage()" >Neue Anlage</button>   
-</div>
-`;
-  document.getElementById("unit").appendChild(neueAnlageWrapper);
+      function myFunction() {
+        var title = document.getElementById("anlage").value;
+        var standort = document.getElementById("standort").value.split("\n")[0];
+        var datum = document.getElementById("dateCurrent").value;
+        var kunde = document.getElementById("kunde").value;
+        document.getElementById("title_change").innerHTML =
+          "Dichtung_" + "_" + kunde + "_" + standort + "_" + title + "_" + datum;
+      }
 
-}
-
-
-function addNeueAbmessungen(event) {
-  let abmessungId = event.target.id;
-  const wrapper = document.createElement("div");
-  wrapper.classList.add("abmessungenStyle");
-  wrapper.innerHTML = neueAbmessungInput;
-  
-  document.getElementById(`abmessung${abmessungId}`).appendChild(wrapper);
-}
-
-
-
-function myFunction() {
-var title = document.getElementById("anlage").value;
-var standort = document.getElementById("standort").value.split("\n")[0];
-var datum = document.getElementById("dateCurrent").value;
-var kunde = document.getElementById("kunde").value;
-  document.getElementById("title_change").innerHTML = "Dichtung_" + "_" + kunde + "_" + standort + "_" + title + "_" + datum;
-}
-
-var opt = {
-  margin:       1.1,
-  filename:     "Dichtung",
-  image:        { type: 'jpeg', quality: 1 },
-  html2canvas:  { scale: 0.7, dpi: 600, },
-  jsPDF:        { unit: 'in', format: 'a1', orientation: 'portrait' },
-  
-};
-  </script>
+      var opt = {
+        margin: 1.1,
+        filename: "Dichtung",
+        image: { type: "jpeg", quality: 1 },
+        html2canvas: { scale: 0.7, dpi: 600 },
+        jsPDF: { unit: "in", format: "a1", orientation: "portrait" },
+      };
+    </script>
   </body>
 </html>
