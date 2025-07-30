@@ -10,11 +10,5 @@
 
 .anlageContainer { 
     background-color: rgb(217, 219, 238);
-}
-
-.abmessungBackground{
-    background-color: rgb(198, 200, 216);
-    padding: 1rem !important;
-    border: solid, white 1px;
-    margin-top: .7rem;
+    margin: 1rem !important;
 }
