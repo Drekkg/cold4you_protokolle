@@ -1,11 +1,15 @@
 .addressContainer {
     background-color: rgb(244, 245, 255);
 }
-
+.table th {
+    
+    font-size: .9rem;
+  
+}
 .table th,
 .table td {
     background-color: rgb(244, 245, 255) !important;
-    padding: 1rem !important;
+    padding: .6rem !important;
 }
 
 .anlageContainer { 
