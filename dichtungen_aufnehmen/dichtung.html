@@ -100,7 +100,9 @@
           <div class="col-12">
             <h1>Dichtung:</h1>
             <div id="unit">
+              
               <div class="mb-3 p-3 border rounded anlageContainer">
+                <h3>Dichtung - 1</h3>
                 <div class="mb-2">
                   <label for="anlagestandort" class="form-label">Standort</label>
                   <input
@@ -203,6 +205,7 @@
     <script>
       let abmessungCounter = 0;
       let dichtungCounter = 1;
+      dichtungNummerCounter = 1;
       const neueAbmessungInput = `
       <div class="abmessungBackground">
       <div class="mb-2 row">
@@ -233,11 +236,13 @@
         `;
 
       function addNeueAnlage() {
-        abmessungCounter++;
+        abmessungCounter ++;
+        dichtungNummerCounter ++;
         const neueAnlageWrapper = document.createElement("div");
         neueAnlageWrapper.innerHTML = `
       
               <div class="mb-3 p-3 border rounded anlageContainer">
+                 <h3>Dichtung - ${dichtungNummerCounter}</h3>
                 <div class="mb-2">
                   <label for="anlagestandort" class="form-label">Standort</label>
                   <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort"/>
