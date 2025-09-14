@@ -1,27 +1,25 @@
 // Open (or create) the database
-const request = indexedDB.open("Cold4YouDB", 1);
+const request = indexedDB.open("Cold4YouDBDichtung", 1);
 
 request.onupgradeneeded = function (event) {
   const db = event.target.result;
 
   // Create an object store for the form data
-  const objectStore = db.createObjectStore("formData", { keyPath: "id", autoIncrement: true });
+  const objectStore = db.createObjectStore("dichtungData", { keyPath: "id", autoIncrement: true });
 
   // Define what data items the object store will contain
   objectStore.createIndex("kunde", "kunde", { unique: false });
   objectStore.createIndex("standort", "standort", { unique: false });
+  objectStore.createIndex("auftragsNummer", "auftragsNummer", { unique: false });
   objectStore.createIndex("aufstellung", "aufstellung", { unique: false });
   objectStore.createIndex("anlage", "anlage", { unique: false });
-  objectStore.createIndex("type", "type", { unique: false });
-  objectStore.createIndex("kaeltemittel", "kaeltemittel", { unique: false });
   objectStore.createIndex("techniker", "techniker", { unique: false });
   objectStore.createIndex("currentDate", "currentDate", { unique: false });
-  objectStore.createIndex("maengel1", "maengel1", { unique: false });
-  objectStore.createIndex("maengel2", "maengel2", { unique: false });
-  objectStore.createIndex("maengel3", "maengel3", { unique: false });
-  objectStore.createIndex("maengel4", "maengel4", { unique: false });
-  objectStore.createIndex("maengel5", "maengel5", { unique: false });
-  objectStore.createIndex("maengel6", "maengel6", { unique: false });
+  objectStore.createIndex("dichtungNummer", "dichtungNummer", { unique: false });
+  objectStore.createIndex("profileNr", "profileNr", { unique: false });
+  objectStore.createIndex("menge", "menge", { unique: false });
+  objectStore.createIndex("hoehe", "hoeh", { unique: false });
+  objectStore.createIndex("breite", "breite", { unique: false });
 };
 
 request.onerror = (event) => {
@@ -29,8 +27,8 @@ request.onerror = (event) => {
 };
 request.onsuccess = (event) => {
   db = event.target.result;
-  const transaction = db.transaction(["formData"], "readwrite");
-  const objectStore = transaction.objectStore("formData");
+  const transaction = db.transaction(["dichtungData"], "readwrite");
+  const objectStore = transaction.objectStore("dichtungData");
 };
 
 // Function to save form data to IndexedDB
@@ -39,17 +37,15 @@ function saveFormData() {
   const standortValue = document.getElementById("standort").value;
   const aufstellungValue = document.getElementById("aufstellung").value;
   const anlageValue = document.getElementById("anlage").value;
-  const typeValue = document.getElementById("type").value;
+  const auftragsnummer = document.getElementById("auftragsnummer").value;
   const technikerValue = document.getElementById("techniker").value;
-  const kaeltemittelValue = document.getElementById("kaeltemittel").value;
   const date1Value = document.getElementById("dateCurrent").value;
   const maengelValue1 = document.getElementById("maengel1").value;
   const maengelValue2 = document.getElementById("maengel2").value;
   const maengelValue3 = document.getElementById("maengel3").value;
   const maengelValue4 = document.getElementById("maengel4").value;
   const maengelValue5 = document.getElementById("maengel5").value;
-  // const maengelValue6 = document.getElementById("maengel6").value;
-  const maengelValue6 = {red: "ww"};
+  const maengelValue6 = document.getElementById("maengel6").value;
 
   const transaction = db.transaction(["formData"], "readwrite");
   const objectStore = transaction.objectStore("formData");

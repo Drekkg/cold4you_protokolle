@@ -77,7 +77,7 @@
                 <td>
                   <input
                     type="text"
-                    id="anlage"
+                    id="Auftragsnummer"
                     class="form-control"
                     value=""
                     onchange="myFunction()"
@@ -98,11 +98,9 @@
         </div>
         <div class="row mb-3">
           <div class="col-12">
-          
             <div id="unit">
-              
               <div class="mb-3 p-3 border rounded anlageContainer">
-                <h3>Dichtung - 1</h3>
+                <h3 id="dichtung1">Anlage - 1</h3>
                 <div class="mb-2">
                   <label for="anlagestandort" class="form-label">Standort</label>
                   <input
@@ -117,36 +115,34 @@
                   <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" />
                 </div>
                 <div class="abmessungBackground">
-                <div class="mb-2 row">
-                  <div class="col-6">
-                    <label class="form-label">Profile Nr.</label>
-                    <input type="text" class="form-control" maxlength="37" />
+                  <div class="mb-2 row">
+                    <div class="col-6">
+                      <label class="form-label">Profile Nr.</label>
+                      <input type="text" class="form-control" maxlength="37" />
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label">Menge</label>
+                      <input type="text" class="form-control" maxlength="37" />
+                    </div>
                   </div>
-                  <div class="col-6">
-                    <label class="form-label">Menge</label>
-                    <input type="text" class="form-control" maxlength="37" />
-                  </div>
-                </div>
-                <div  class="mb-2">
-                  <div>
-                    <label class="form-label">Abmessungen</label>
-                    <div class="row">
-                      <div class="col-6">
-                        <label class="form-label">Höhe (cm)</label>
-                        <input type="number" class="form-control" step="0.100" />
-                      </div>
-                      <div class="col-6">
-                        <label class="form-label">Breite (cm)</label>
-                        <input type="number" class="form-control" step="0.100" />
+                  <div class="mb-2">
+                    <div>
+                      <label class="form-label">Abmessungen</label>
+                      <div class="row">
+                        <div class="col-6">
+                          <label class="form-label">Höhe (cm)</label>
+                          <input type="number" class="form-control" step="0.100" />
+                        </div>
+                        <div class="col-6">
+                          <label class="form-label">Breite (cm)</label>
+                          <input type="number" class="form-control" step="0.100" />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                </div>
-                <div id="abmessung0">
+                <div id="abmessung0"></div>
 
-                </div>
-                
                 <div class="mb-2">
                   <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link"
                     >Nicht gefunden? klick hier</a
@@ -201,11 +197,11 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="../form-logic.js"></script>
-    <script src="../indexDB.js"></script>
+    <script src="../indexDB_dichtung.js"></script>
     <script>
       let abmessungCounter = 0;
       let dichtungCounter = 1;
-      dichtungNummerCounter = 1;
+      let anlageNummerCounter = 1;
       const neueAbmessungInput = `
       <div class="abmessungBackground">
       <div class="mb-2 row">
@@ -236,13 +232,13 @@
         `;
 
       function addNeueAnlage() {
-        abmessungCounter ++;
-        dichtungNummerCounter ++;
+        abmessungCounter++;
+        anlageNummerCounter++;
         const neueAnlageWrapper = document.createElement("div");
         neueAnlageWrapper.innerHTML = `
       
               <div class="mb-3 p-3 border rounded anlageContainer">
-                 <h3>Dichtung - ${dichtungNummerCounter}</h3>
+                 <h3>Anlage - ${anlageNummerCounter}</h3>
                 <div class="mb-2">
                   <label for="anlagestandort" class="form-label">Standort</label>
                   <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort"/>
@@ -296,8 +292,8 @@
         const wrapper = document.createElement("div");
         wrapper.classList.add("abmessungenStyle");
         wrapper.innerHTML = neueAbmessungInput;
-
         document.getElementById(`abmessung${abmessungId}`).appendChild(wrapper);
+        localStorage.setItem(`dichtung${dichtungCounter}`, [45, 54]);
       }
 
       function myFunction() {
