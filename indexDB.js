@@ -82,6 +82,8 @@ function saveFormData() {
     console.log("Error saving form data to IndexedDB", event.target.errorCode);
   };
 
+
+  //Save form data to backend server
   const postData = async (data) => {
     const url = "https://www.deadcowboy.at/db.php";
 
