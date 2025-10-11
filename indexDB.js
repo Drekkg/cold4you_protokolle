@@ -48,8 +48,8 @@ function saveFormData() {
   const maengelValue3 = document.getElementById("maengel3").value;
   const maengelValue4 = document.getElementById("maengel4").value;
   const maengelValue5 = document.getElementById("maengel5").value;
-  // const maengelValue6 = document.getElementById("maengel6").value;
-  const maengelValue6 = {red: "ww"};
+  const maengelValue6 = document.getElementById("maengel6").value;
+  // const maengelValue6 = {red: "ww"};
 
   const transaction = db.transaction(["formData"], "readwrite");
   const objectStore = transaction.objectStore("formData");
