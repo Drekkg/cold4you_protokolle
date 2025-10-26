@@ -49,6 +49,7 @@ function saveFormData() {
   const maengelValue4 = document.getElementById("maengel4").value;
   const maengelValue5 = document.getElementById("maengel5").value;
   const maengelValue6 = document.getElementById("maengel6").value;
+  // const maengelValue6 = {red: "ww"};
 
   const transaction = db.transaction(["formData"], "readwrite");
   const objectStore = transaction.objectStore("formData");
@@ -81,6 +82,8 @@ function saveFormData() {
     console.log("Error saving form data to IndexedDB", event.target.errorCode);
   };
 
+
+  //Save form data to backend server
   const postData = async (data) => {
     const url = "https://www.deadcowboy.at/db.php";
 
