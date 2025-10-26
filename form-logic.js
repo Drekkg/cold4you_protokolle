@@ -40,7 +40,6 @@ document.getElementById("techniker").value = technikerValue_storage;
 // }
 
 function saveAlert() {
-  console.log("saveAlert");
 
   const kundeValue = kunde.value;
   const standortValue = standort.value;

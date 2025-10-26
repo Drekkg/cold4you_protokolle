@@ -76,8 +76,9 @@
                 <th>Auftragsnummer:</th>
                 <td>
                   <input
+                    value="12"
                     type="text"
-                    id="Auftragsnummer"
+                    id="auftragsnummer"
                     class="form-control"
                     value=""
                     onchange="myFunction()"
@@ -96,33 +97,42 @@
             </table>
           </div>
         </div>
+
         <div class="row mb-3">
           <div class="col-12">
             <div id="unit">
               <div class="mb-3 p-3 border rounded anlageContainer">
-                <h3 id="dichtung1">Anlage - 1</h3>
+                <h3 id="anlage0">Anlage - 1</h3>
                 <div class="mb-2">
-                  <label for="anlagestandort" class="form-label">Standort</label>
+                  <label for="anlagestandort0" class="form-label">Standort</label>
                   <input
+                    value="vampire"
+                    name="anlagestandort"
                     type="text"
                     placeholder="z.B. Küche, Bar"
                     class="form-control"
-                    id="anlagestandort"
+                    id="anlagestandort0"
                   />
                 </div>
                 <div class="mb-2">
                   <label class="form-label">Anlagenbeschreibung</label>
-                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" />
+                  <input
+                    id="anlagebeschreibung0"
+                    type="text"
+                    placeholder="z.B. Kühlpult 4 Lade"
+                    class="form-control"
+                  />
                 </div>
-                <div class="abmessungBackground">
+                <div class="abmessungBackground" id="abmessungNr0">
+                  Abmessung 1
                   <div class="mb-2 row">
                     <div class="col-6">
                       <label class="form-label">Profile Nr.</label>
-                      <input type="text" class="form-control" maxlength="37" />
+                      <input id="profileNr0" type="text" class="form-control" maxlength="37" />
                     </div>
                     <div class="col-6">
                       <label class="form-label">Menge</label>
-                      <input type="text" class="form-control" maxlength="37" />
+                      <input id="menge0" type="text" class="form-control" maxlength="37" />
                     </div>
                   </div>
                   <div class="mb-2">
@@ -131,11 +141,11 @@
                       <div class="row">
                         <div class="col-6">
                           <label class="form-label">Höhe (cm)</label>
-                          <input type="number" class="form-control" step="0.100" />
+                          <input id="hoehe0" type="number" class="form-control" step="0.100" />
                         </div>
                         <div class="col-6">
-                          <label class="form-label">Breite (cm)</label>
-                          <input type="number" class="form-control" step="0.100" />
+                          <label for="breite" class="form-label">Breite (cm)</label>
+                          <input id="breite0" type="number" class="form-control" step="0.100" />
                         </div>
                       </div>
                     </div>
@@ -149,7 +159,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary ms-2 abmessungButton"
-                    id="0"
+                    id="abmessungButton0"
                     onclick="addNeueAbmessungen(event)"
                   >
                     Zusätzliches Abmessungen
@@ -158,8 +168,8 @@
                 <button
                   type="button"
                   class="btn btn-primary"
-                  id="neueAnlage"
-                  onclick="addNeueAnlage()"
+                  id="neueAnlage0"
+                  onclick="addNeueAnlage(event)"
                 >
                   Neue Anlage
                 </button>
@@ -167,7 +177,8 @@
             </div>
           </div>
         </div>
-        <div class="row mb-3">
+
+        <div class="row mb-3 no-page-break">
           <div class="col-12">
             <div class="p-3 border rounded addressContainer">
               <label class="form-label">Unterschrift:</label>
@@ -198,63 +209,68 @@
     <script src="../form-logic.js"></script>
     <script src="../indexDB_dichtung.js"></script>
     <script>
+      let abmessungButton = 0;
+      let abmessungNrCounter = 1;
       let abmessungCounter = 0;
       let dichtungCounter = 1;
-      let anlageNummerCounter = 1;
-      const neueAbmessungInput = `
-      <div class="abmessungBackground">
-      <div class="mb-2 row">
-                  <div class="col-6">
-                    <label class="form-label">Profile Nr.</label>
-                    <input type="text" class="form-control" maxlength="37" />
-                  </div>
-                  <div class="col-6">
-                    <label class="form-label">Menge</label>
-                    <input type="text" class="form-control" maxlength="37" />
-                  </div>
-                </div>
-     <div>
-      <label class="form-label">Abmessungen</label>
-        <div class="row">
-          <div class="col-6">
-            <label class="form-label">Höhe (cm)</label>
-              <input type="number" class="form-control" step="0.100" />
-                </div>
-                  <div class="col-6">
-                    <label class="form-label">Breite (cm)</label>
-                      <input type="number" class="form-control" step="0.100"/>
-                      </div>
-                    </div>
-                  </div> 
-                  </div>
-      
-        `;
 
-      function addNeueAnlage() {
+      let hoeheCounter = 0;
+      let breiteCounter = 0;
+      let profileNrCounter = 0;
+      let mengeCounter = 0;
+      let standortCounter = 0;
+      let anlageCounter = 0;
+      let anlageObjectCounter = { anlage0: [0] };
+
+      let anlageNummerCounter = 0;
+
+      let anlageStandort = 0;
+      let anlageBeschreibung = 0;
+
+      //Function to add a neu unit/Anlage
+      function addNeueAnlage(event) {
+        saveFormData(); // calls the save form function to save entered data
+
+        anlageNummerCounter++; //advances the anlage int
+        const newKey = `anlage${anlageNummerCounter}`; // adds the int to the string
+        anlageObjectCounter = { ...anlageObjectCounter, [newKey]: [0] }; //create a new key/value pair
+
+        abmessungNrCounter = 1;
         abmessungCounter++;
-        anlageNummerCounter++;
+        anlageCounter++;
+        hoeheCounter = anlageNummerCounter * 10;
+        breiteCounter = anlageNummerCounter * 10;
+        profileNrCounter = anlageNummerCounter * 10;
+        mengeCounter = anlageNummerCounter * 10;
+        // anlageCounter ++;
+        // standortCounter ++;
+        anlageStandort = anlageNummerCounter;
+        anlageBeschreibung = anlageNummerCounter;
+
+        //the html to be injected for new Anlage
         const neueAnlageWrapper = document.createElement("div");
         neueAnlageWrapper.innerHTML = `
-      
-              <div class="mb-3 p-3 border rounded anlageContainer">
-                 <h3>Anlage - ${anlageNummerCounter}</h3>
+              <div class="mb-3 p-3 border rounded anlageContainer no-page-break">
+                 <h3 id="anlage${anlageNummerCounter}">Anlage - ${anlageNummerCounter + 1}</h3>
                 <div class="mb-2">
-                  <label for="anlagestandort" class="form-label">Standort</label>
-                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort"/>
+                  <label for="anlagestandort0" class="form-label">Standort</label>
+                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort${anlageStandort}"/>
                 </div>
                 <div class="mb-2">
                   <label class="form-label">Anlagenbeschreibung</label>
-                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control"/>
+                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" id="anlagebeschreibung${anlageBeschreibung}"/>
                 </div>
-                <div class="abmessungBackground">
+                <div class="abmessungBackground" id="abmessungNr${abmessungCounter}">Abmessung 1
                 <div class="mb-2 row" >
-                  <div class="col-6">
+                  <div class="col-6">           
                     <label class="form-label">Profile Nr.</label>
-                    <input type="text" class="form-control" maxlength="37"/>
+                    <input type="text" class="form-control" maxlength="37"
+                    id="profileNr${anlageNummerCounter}0"/>
                   </div>
                   <div class="col-6">
                     <label class="form-label">Menge</label>
-                    <input type="text" class="form-control" maxlength="37"/>
+                    <input type="text" class="form-control" maxlength="37"
+                    id="menge${anlageNummerCounter}0"/>
                   </div>
                 </div>
                 <div class="mb-2">
@@ -263,52 +279,145 @@
                     <div class="row">
                       <div class="col-6">
                         <label class="form-label">Höhe (cm)</label>
-                        <input type="number" class="form-control" step="0.100" />
+                        <input type="number" class="form-control" step="0.100" 
+                        id="hoehe${anlageNummerCounter}0"/>
                       </div>
                       <div class="col-6">
                         <label class="form-label">Breite (cm)</label>
-                        <input type="number" class="form-control" step="0.100"/>
+                        <input type="number" class="form-control" step="0.100"
+                        id="breite${anlageNummerCounter}0" />
                       </div>
                     </div>
                   </div>
                 </div>
                  </div>
-                <div id="abmessung${abmessungCounter}">
+                <div id="abmessung${anlageNummerCounter}">
                 </div>
                 <div class="mb-2">
                   <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link">Nicht gefunden? klick hier</a>
-                  <button type="button" class="btn btn-secondary ms-2 abmessungButton" id="${abmessungCounter}" onclick="addNeueAbmessungen(event)">Zusätzliches Abmessung</button>
+
+                  <button type="button" class="btn btn-secondary ms-2 abmessungButton" id="abmessungButton${anlageNummerCounter}" onclick="addNeueAbmessungen(event)">Zusätzliches Abmessung</button>
+
                 </div>
-                <button type="button" class="btn btn-primary" id="neueAnlage" onclick="addNeueAnlage()">Neue Anlage</button>
+                <button type="button" class="btn btn-primary" id="neueAnlage${anlageNummerCounter}" onclick="addNeueAnlage(event)">Neue Anlage</button>
               </div>
             </div>
       `;
         document.getElementById("unit").appendChild(neueAnlageWrapper);
+
+        // const anlagePostData = {};
+        // anlagePostData.kunde = document.getElementById("kunde").value;
+        // anlagePostData.date = document.getElementById("dateCurrent").value;
+        // anlagePostData.standort = document.getElementById(
+        //   `anlagestandort${anlageNummerCounter - 1}`
+        // ).value;
       }
 
       function addNeueAbmessungen(event) {
-        let abmessungId = event.target.id;
+        saveFormData();
+        // hoeheCounter ++;
+        // breiteCounter ++;
+        // mengeCounter ++;
+
+        //get Id of button
+        const abmessungIdString = event.target.id;
+        // remove string keep int
+        const abmessungId = abmessungIdString.replace("abmessungButton", "");
+
+        //add int to abmessung str to access object value
+        const anlageObject = `anlage${abmessungId}`;
+
+        abmessungNumber = anlageObjectCounter[anlageObject].length;
+        anlageObjectCounter[anlageObject].push(abmessungNumber);
+        abmessungCounter = abmessungNumber;
+        abmessungNrCounter = abmessungNumber + 1;
+
+        mengeCounter = abmessungId + abmessungNumber;
+        hoeheCounter = abmessungId + abmessungNumber;
+        breiteCounter = abmessungId + abmessungNumber;
+        profileNrCounter = abmessungId + abmessungNumber;
+
+        anlageStandort = abmessungId;
+        anlageBeschreibung = abmessungId;
+
+        console.log("abmessungId" + abmessungId + " " + abmessungNumber);
+
+        const neueAbmessungInput = `
+      <div class="abmessungBackground id="abmessung${abmessungCounter}">Abmessung ${
+          abmessungNumber + 1
+        }
+         <div class="mb-2 row">
+              <div class="col-6">
+                <label class="form-label">Profile Nr.</label>
+                <input type="text" class="form-control" maxlength="37" 
+              id="profileNr${abmessungId + abmessungNumber}"/>
+              </div>
+              <div class="col-6">
+                <label class="form-label">Menge</label>
+                <input type="text" class="form-control" maxlength="37" 
+                id="menge${abmessungId + abmessungNumber}"/>
+            </div>
+        </div>
+     <div>
+      <label class="form-label">Abmessungen</label>
+        <div class="row">
+          <div class="col-6">
+            <label class="form-label">Höhe (cm)</label>
+              <input type="number" class="form-control" step="0.100"
+              id="hoehe${abmessungId + abmessungNumber}" />
+                </div>
+                  <div class="col-6">
+                    <label class="form-label">Breite (cm)</label>
+                      <input type="number" class="form-control" step="0.100"
+                      id="breite${abmessungId + abmessungNumber}"/>
+                      </div>
+                    </div>
+                  </div> 
+                  </div> `;
+
         const wrapper = document.createElement("div");
         wrapper.classList.add("abmessungenStyle");
         wrapper.innerHTML = neueAbmessungInput;
         document.getElementById(`abmessung${abmessungId}`).appendChild(wrapper);
-        localStorage.setItem(`dichtung${dichtungCounter}`, [45, 54]);
       }
 
       function myFunction() {
-        var title = document.getElementById("anlage").value;
-        var standort = document.getElementById("standort").value.split("\n")[0];
-        var datum = document.getElementById("dateCurrent").value;
-        var kunde = document.getElementById("kunde").value;
+        let title = document.getElementById("auftragsnummer").value;
+        let standort = document.getElementById("standort").value.split("\n")[0];
+        let datum = document.getElementById("dateCurrent").value;
+        let kunde = document.getElementById("kunde").value;
         document.getElementById("title_change").innerHTML =
           "Dichtung_" + "_" + kunde + "_" + standort + "_" + title + "_" + datum;
       }
-      var opt = {
-        margin: 1.1,
+      let opt = {
+        margin: 1,
         filename: "Dichtung",
         image: { type: "jpeg", quality: 1 },
         html2canvas: { scale: 0.7, dpi: 600 },
         jsPDF: { unit: "in", format: "a1", orientation: "portrait" },
+      };
+
+      const postData = async (data) => {
+        const url = "https://www.deadcowboy.at/db.php";
+
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`HTTP error status: ${response.status}, Response: ${errorText}`);
+          }
+          const result = await response.json();
+          console.log("success:", result);
+        } catch (error) {
+          console.error("Error", error);
+        }
       };
     </script>
   </body>

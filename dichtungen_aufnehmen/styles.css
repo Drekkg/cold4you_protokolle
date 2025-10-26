@@ -1,3 +1,8 @@
+.no-page-break {
+    page-break-inside: avoid;
+    
+}
+
 .addressContainer {
     background-color: rgb(244, 245, 255);
     margin: 2rem 0 !important;
