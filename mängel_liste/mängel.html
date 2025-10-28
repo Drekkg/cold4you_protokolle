@@ -89,9 +89,9 @@
       </form>
       <!-- Add a container to display the data -->
 
-<div id="data-container">
+<div>
   <table id="data-table" class="table">
-    <thead>
+    <thead class="stickyHeader">
       <tr>
         <th>Kunde</th>
         <th>Standort</th>
@@ -245,16 +245,21 @@ const fetchData = async () => {
 const tableBody = document.getElementById("data-table").querySelector("tbody");
 tableBody.innerHTML = ""; 
 
+
+
+
  // Function to render data into the table
  function renderTable(data) {
    const archButton = document.getElementById("arch");
    archButton.style.backgroundColor = "rgb(186, 186, 193)";
     tableBody.innerHTML = ""; // Clear existing rows
-   
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
       archButton.style.backgroundColor = "rgb(221, 221, 226)";
+
       const row = document.createElement("tr");
+      
+
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
         <td>${item.standort || ""}</td>
@@ -315,7 +320,6 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-   
           }
   }}
   );

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title id="title_change">Cold4You</title>
-    <link rel="icon" type="image/x-icon" href="/favicon/favicon.png" >
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
       crossorigin="anonymous"
-    >
-    <link rel="stylesheet" type="text/css" href="styles.css" >
+    />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"
       integrity="sha512-YcsIPGdhPK4P/uRW6/sruonlYj+Q7UHWeKfTAkBW+g83NKM+jMJFJ4iAPfSnVp7BKD4dKMHmVSvICUbE/V1sSw=="
@@ -39,7 +39,7 @@
                 alt="image"
                 class="img-fluid"
                 style="max-width: 200px; height: auto"
-              >
+              />
             </a>
           </div>
         </div>
@@ -55,7 +55,7 @@
                     class="form-control"
                     onchange="myFunction()"
                     required
-                  >
+                  />
                 </td>
               </tr>
               <tr>
@@ -79,17 +79,17 @@
                     id="auftragsnummer"
                     class="form-control"
                     onchange="myFunction()"
-                    required  
-                  >
+                    required
+                  />
                 </td>
               </tr>
               <tr>
                 <th>Techniker:</th>
-                <td><input type="text" id="techniker" class="form-control" ></td>
+                <td><input type="text" id="techniker" class="form-control" /></td>
               </tr>
               <tr>
                 <th>Datum:</th>
-                <td><input type="date" id="dateCurrent" class="form-control" value="" ></td>
+                <td><input type="date" id="dateCurrent" class="form-control" value="" /></td>
               </tr>
             </table>
           </div>
@@ -107,7 +107,7 @@
                     placeholder="z.B. Küche, Bar"
                     class="form-control"
                     id="anlagestandort0"
-                  >
+                  />
                 </div>
                 <div class="mb-2">
                   <label for="anlagebeschreibung0" class="form-label">Anlagenbeschreibung</label>
@@ -116,18 +116,18 @@
                     type="text"
                     placeholder="z.B. Kühlpult 4 Lade"
                     class="form-control"
-                  >
+                  />
                 </div>
                 <div class="abmessungBackground" id="abmessungNr0">
                   Abmessung 1
                   <div class="mb-2 row">
                     <div class="col-6">
                       <label for="profileNr0" class="form-label">Profile Nr.</label>
-                      <input id="profileNr0" type="text" class="form-control" maxlength="37" >
+                      <input id="profileNr0" type="text" class="form-control" maxlength="37" />
                     </div>
                     <div class="col-6">
                       <label for="menge0" class="form-label">Menge</label>
-                      <input id="menge0" type="text" class="form-control" maxlength="37" >
+                      <input id="menge0" type="text" class="form-control" maxlength="37" />
                     </div>
                   </div>
                   <div class="mb-2">
@@ -136,11 +136,11 @@
                       <div class="row">
                         <div class="col-6">
                           <label for="hoehe0" class="form-label">Höhe (cm)</label>
-                          <input id="hoehe0" type="number" class="form-control" step="0.100" >
+                          <input id="hoehe0" type="number" class="form-control" step="0.100" />
                         </div>
                         <div class="col-6">
                           <label for="breite0" class="form-label">Breite (cm)</label>
-                          <input id="breite0" type="number" class="form-control" step="0.100" >
+                          <input id="breite0" type="number" class="form-control" step="0.100" />
                         </div>
                       </div>
                     </div>
@@ -160,12 +160,7 @@
                     Zusätzliches Abmessungen
                   </button>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="neueAnlage0"
-                  onclick="addNeueAnlage(event)"
-                >
+                <button type="button" class="btn btn-primary neueAnlageButton" id="neueAnlage0">
                   Neue Anlage
                 </button>
               </div>
@@ -203,6 +198,11 @@
     <script src="../form-logic.js"></script>
     <script src="../indexDB_dichtung.js"></script>
     <script>
+      document.getElementById("neueAnlage0").addEventListener("click", function () {
+        addNeueAnlage();
+        this.setAttribute("disabled", "true");
+        this.classList.add("disabled");
+      });
       let abmessungButton = 0;
       let abmessungNrCounter = 1;
       let abmessungCounter = 0;
@@ -248,7 +248,7 @@
                  <h3 id="anlage${anlageNummerCounter}">Anlage - ${anlageNummerCounter + 1}</h3>
                 <div class="mb-2">
                   <label for="anlagestandort${anlageStandort}" class="form-label">Standort</label>
-                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort${anlageStandort}">
+                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort${anlageStandort}" required> 
                 </div>
                 <div class="mb-2">
                   <label for="anlagebeschreibung${anlageBeschreibung}" class="form-label">Anlagenbeschreibung</label>
@@ -291,13 +291,23 @@
                   <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link">Nicht gefunden? klick hier</a>
 
                   <button type="button" class="btn btn-secondary ms-2 abmessungButton" id="abmessungButton${anlageNummerCounter}" onclick="addNeueAbmessungen(event)">Zusätzliches Abmessung</button>
-
                 </div>
-                <button type="button" class="btn btn-primary" id="neueAnlage${anlageNummerCounter}" onclick="addNeueAnlage(event)">Neue Anlage</button>
+                <button type="button" class="btn btn-primary" id="neueAnlage${anlageNummerCounter}">Neue Anlage</button>
               </div>
             </div>
       `;
         document.getElementById("unit").appendChild(neueAnlageWrapper);
+        // document.getElementById(`neueAnlage${anlageNummerCounter}`).addEventListener("click", addNeueAnlage);
+        document
+          .getElementById(`neueAnlage${anlageNummerCounter}`)
+          .addEventListener("click", function () {
+            addNeueAnlage();
+            this.setAttribute("disabled", "true");
+            this.classList.add("disabled");
+          });
+        document
+          .getElementById(`neueAnlage${anlageNummerCounter - 1}`)
+          .removeEventListener("click", addNeueAnlage);
 
         // const anlagePostData = {};
         // anlagePostData.kunde = document.getElementById("kunde").value;
@@ -334,15 +344,15 @@
         anlageStandort = abmessungId;
         anlageBeschreibung = abmessungId;
 
-        console.log("abmessungId" + abmessungId + " " + abmessungNumber);
-
         const neueAbmessungInput = `
       <div class="abmessungBackground id="abmessung${abmessungCounter}">Abmessung ${
           abmessungNumber + 1
         }
          <div class="mb-2 row">
               <div class="col-6">
-                <label for="profileNr${abmessungId + abmessungNumber}" class="form-label">Profile Nr.</label>
+                <label for="profileNr${
+                  abmessungId + abmessungNumber
+                }" class="form-label">Profile Nr.</label>
                 <input type="text" class="form-control" maxlength="37" 
               id="profileNr${abmessungId + abmessungNumber}">
               </div>
@@ -361,7 +371,9 @@
               id="hoehe${abmessungId + abmessungNumber}" >
                 </div>
                   <div class="col-6">
-                    <label for="breite${abmessungId + abmessungNumber}" class="form-label">Breite (cm)</label>
+                    <label for="breite${
+                      abmessungId + abmessungNumber
+                    }" class="form-label">Breite (cm)</label>
                       <input type="number" class="form-control" step="0.100"
                       id="breite${abmessungId + abmessungNumber}">
                       </div>
