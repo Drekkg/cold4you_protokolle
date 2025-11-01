@@ -38,17 +38,17 @@ td {
 
 }
 
-.stickyHeader {
+.stickyContainer{
   position: sticky;
-  z-index: 1000;
+  z-index: 100;
   top: 0;
 }
-
-.sticky {
- margin-bottom: 20rem;
-
-
+.stickyHeader {
+  position: sticky;
+ 
+  top: 7rem;
 }
+
 
 .table td {
 
@@ -100,7 +100,8 @@ tr:nth-child(even) {
   width: 80%;
 }
 .flexContainer {
-  
+  border: 1px solid black;
+  position:relative;
   border-radius: 3em;
   margin-left: 6em;
   margin-bottom: 3em;
@@ -110,6 +111,7 @@ tr:nth-child(even) {
   background-color: rgb(244, 245, 255);
   width: 110rem;
   flex-direction: column;
+  z-index: 1001;
 }
 .flexContainer2 {
   border-radius: 3em;
@@ -167,10 +169,10 @@ tr:nth-child(even) {
 }
 .div4 {
   border-radius: 3em;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bolder;
   padding-bottom: 1em;
-  padding-top: 2em;
+  padding-top: 1em;
   margin-bottom: 0em;
   margin-top: 0em;
   margin-left: 4em;
@@ -450,6 +452,7 @@ button#clear span {
 }
 #form {
   display: none;
+  
 }
 .arch-td {
   background-color: rgb(247, 247, 145);
