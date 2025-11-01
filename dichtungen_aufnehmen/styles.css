@@ -30,6 +30,7 @@
 }
 .disabled {
     background-color: rgb(114, 124, 133) !important;
+    visibility: hidden;
 }
 .abmessungButton {
     margin-top: .6rem;

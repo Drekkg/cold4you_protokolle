@@ -44,6 +44,11 @@ td {
   top: 0;
 }
 
+.sticky {
+ margin-bottom: 20rem;
+
+
+}
 
 .table td {
 
@@ -324,6 +329,7 @@ font-size: 1.5em;
 }
 
 .button-container {
+
   border-top: 2px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
