@@ -34,7 +34,19 @@ td {
   border: 1px solid #080808;
   border-collapse: collapse;
   width: 99%;
+  
 
+}
+
+.stickyContainer{
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+.stickyHeader {
+  position: sticky;
+ 
+  top: 7rem;
 }
 
 
@@ -88,7 +100,8 @@ tr:nth-child(even) {
   width: 80%;
 }
 .flexContainer {
-  
+  border: 1px solid black;
+  position:relative;
   border-radius: 3em;
   margin-left: 6em;
   margin-bottom: 3em;
@@ -97,7 +110,8 @@ tr:nth-child(even) {
   display: flex;
   background-color: rgb(244, 245, 255);
   width: 110rem;
-  flex-direction: column;
+  flex-direction: row;
+  z-index: 1001;
 }
 .flexContainer2 {
   border-radius: 3em;
@@ -155,16 +169,19 @@ tr:nth-child(even) {
 }
 .div4 {
   border-radius: 3em;
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bolder;
   padding-bottom: 1em;
-  padding-top: 2em;
+  padding-top: 1em;
   margin-bottom: 0em;
   margin-top: 0em;
   margin-left: 4em;
 }
 .div4 > label {
-  margin-left: 1em;
+  padding-top: 1em;
+}
+.div4 > input {
+  margin: 0 0 1em 0;
 }
 
 #km {
@@ -317,6 +334,7 @@ font-size: 1.5em;
 }
 
 .button-container {
+
   border-top: 2px solid black;
   border-left: 1px solid black;
   border-right: 1px solid black;
@@ -367,21 +385,20 @@ font-size: 1.5em;
 
 button#print {
   border-radius: 2em;
-  padding: 1em;
-  height: 80%;
-  margin-left: 25em;
+  height: 10%;
+  margin: 2em;
   background: rgb(12, 240, 77);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
+  font-size: .9em;
   font-weight: 600;
   cursor: pointer;
 }
 
 button#close {
   border-radius: 2em;
-  padding: 1em;
-  height: 80%;
-  margin-left: 25em;
+  height: 10%;
+  margin: 2em;
   background: rgb(255, 196, 0);
   border: 1px solid transparent;
   color: rgb(26, 8, 8);
@@ -437,6 +454,7 @@ button#clear span {
 }
 #form {
   display: none;
+  
 }
 .arch-td {
   background-color: rgb(247, 247, 145);

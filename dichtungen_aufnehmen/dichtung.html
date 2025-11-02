@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title id="title_change"></title>
+    <title id="title_change">Cold4You</title>
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
@@ -53,9 +53,7 @@
                     type="text"
                     id="kunde"
                     class="form-control"
-                    value=""
                     onchange="myFunction()"
-                    name=""
                     required
                   />
                 </td>
@@ -68,6 +66,7 @@
                     id="standort"
                     name="address"
                     rows="3"
+                    autocomplete="off"
                     required
                   ></textarea>
                 </td>
@@ -79,7 +78,6 @@
                     type="text"
                     id="auftragsnummer"
                     class="form-control"
-                    value=""
                     onchange="myFunction()"
                     required
                   />
@@ -96,7 +94,6 @@
             </table>
           </div>
         </div>
-
         <div class="row mb-3">
           <div class="col-12">
             <div id="unit">
@@ -113,7 +110,7 @@
                   />
                 </div>
                 <div class="mb-2">
-                  <label class="form-label">Anlagenbeschreibung</label>
+                  <label for="anlagebeschreibung0" class="form-label">Anlagenbeschreibung</label>
                   <input
                     id="anlagebeschreibung0"
                     type="text"
@@ -125,24 +122,24 @@
                   Abmessung 1
                   <div class="mb-2 row">
                     <div class="col-6">
-                      <label class="form-label">Profile Nr.</label>
+                      <label for="profileNr0" class="form-label">Profile Nr.</label>
                       <input id="profileNr0" type="text" class="form-control" maxlength="37" />
                     </div>
                     <div class="col-6">
-                      <label class="form-label">Menge</label>
+                      <label for="menge0" class="form-label">Menge</label>
                       <input id="menge0" type="text" class="form-control" maxlength="37" />
                     </div>
                   </div>
                   <div class="mb-2">
                     <div>
-                      <label class="form-label">Abmessungen</label>
+                      <p class="form-label">Abmessungen</p>
                       <div class="row">
                         <div class="col-6">
-                          <label class="form-label">Höhe (cm)</label>
+                          <label for="hoehe0" class="form-label">Höhe (cm)</label>
                           <input id="hoehe0" type="number" class="form-control" step="0.100" />
                         </div>
                         <div class="col-6">
-                          <label for="breite" class="form-label">Breite (cm)</label>
+                          <label for="breite0" class="form-label">Breite (cm)</label>
                           <input id="breite0" type="number" class="form-control" step="0.100" />
                         </div>
                       </div>
@@ -163,23 +160,17 @@
                     Zusätzliches Abmessungen
                   </button>
                 </div>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="neueAnlage0"
-                  onclick="addNeueAnlage(event)"
-                >
+                <button type="button" class="btn btn-primary neueAnlageButton" id="neueAnlage0">
                   Neue Anlage
                 </button>
               </div>
             </div>
           </div>
         </div>
-
         <div class="row mb-3 no-page-break">
           <div class="col-12">
             <div class="p-3 border rounded addressContainer">
-              <label class="form-label">Unterschrift:</label>
+              <p class="form-label">Unterschrift:</p>
               <div class="row">
                 <div class="col-12 col-md-8">
                   <canvas id="signature-pad" width="800" height="300" class="img-fluid"></canvas>
@@ -207,6 +198,11 @@
     <script src="../form-logic.js"></script>
     <script src="../indexDB_dichtung.js"></script>
     <script>
+      document.getElementById("neueAnlage0").addEventListener("click", function () {
+        addNeueAnlage();
+        this.setAttribute("disabled", "true");
+        this.classList.add("disabled");
+      });
       let abmessungButton = 0;
       let abmessungNrCounter = 1;
       let abmessungCounter = 0;
@@ -251,39 +247,39 @@
               <div class="mb-3 p-3 border rounded anlageContainer no-page-break">
                  <h3 id="anlage${anlageNummerCounter}">Anlage - ${anlageNummerCounter + 1}</h3>
                 <div class="mb-2">
-                  <label for="anlagestandort0" class="form-label">Standort</label>
-                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort${anlageStandort}"/>
+                  <label for="anlagestandort${anlageStandort}" class="form-label">Standort</label>
+                  <input type="text" placeholder="z.B. Küche, Bar" class="form-control" id="anlagestandort${anlageStandort}" required> 
                 </div>
                 <div class="mb-2">
-                  <label class="form-label">Anlagenbeschreibung</label>
-                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" id="anlagebeschreibung${anlageBeschreibung}"/>
+                  <label for="anlagebeschreibung${anlageBeschreibung}" class="form-label">Anlagenbeschreibung</label>
+                  <input type="text" placeholder="z.B. Kühlpult 4 Lade" class="form-control" id="anlagebeschreibung${anlageBeschreibung}">
                 </div>
                 <div class="abmessungBackground" id="abmessungNr${abmessungCounter}">Abmessung 1
                 <div class="mb-2 row" >
                   <div class="col-6">           
-                    <label class="form-label">Profile Nr.</label>
+                    <label for="profileNr${anlageNummerCounter}0" class="form-label">Profile Nr.</label>
                     <input type="text" class="form-control" maxlength="37"
-                    id="profileNr${anlageNummerCounter}0"/>
+                    id="profileNr${anlageNummerCounter}0">
                   </div>
                   <div class="col-6">
-                    <label class="form-label">Menge</label>
+                    <label for="menge${anlageNummerCounter}0" class="form-label">Menge</label>
                     <input type="text" class="form-control" maxlength="37"
-                    id="menge${anlageNummerCounter}0"/>
+                    id="menge${anlageNummerCounter}0">
                   </div>
                 </div>
                 <div class="mb-2">
                   <div>
-                    <label class="form-label">Abmessungen</label>
+                    <p class="form-label">Abmessungen</p>
                     <div class="row">
                       <div class="col-6">
-                        <label class="form-label">Höhe (cm)</label>
+                        <label for="hoehe${anlageNummerCounter}0" class="form-label">Höhe (cm)</label>
                         <input type="number" class="form-control" step="0.100" 
-                        id="hoehe${anlageNummerCounter}0"/>
+                        id="hoehe${anlageNummerCounter}0">
                       </div>
                       <div class="col-6">
-                        <label class="form-label">Breite (cm)</label>
+                        <label for="breite${anlageNummerCounter}0" class="form-label">Breite (cm)</label>
                         <input type="number" class="form-control" step="0.100"
-                        id="breite${anlageNummerCounter}0" />
+                        id="breite${anlageNummerCounter}0">
                       </div>
                     </div>
                   </div>
@@ -295,13 +291,23 @@
                   <a href="https://www.dsu-nl.com/de-DE" target="_blank" class="btn btn-link">Nicht gefunden? klick hier</a>
 
                   <button type="button" class="btn btn-secondary ms-2 abmessungButton" id="abmessungButton${anlageNummerCounter}" onclick="addNeueAbmessungen(event)">Zusätzliches Abmessung</button>
-
                 </div>
-                <button type="button" class="btn btn-primary" id="neueAnlage${anlageNummerCounter}" onclick="addNeueAnlage(event)">Neue Anlage</button>
+                <button type="button" class="btn btn-primary" id="neueAnlage${anlageNummerCounter}">Neue Anlage</button>
               </div>
             </div>
       `;
         document.getElementById("unit").appendChild(neueAnlageWrapper);
+        // document.getElementById(`neueAnlage${anlageNummerCounter}`).addEventListener("click", addNeueAnlage);
+        document
+          .getElementById(`neueAnlage${anlageNummerCounter}`)
+          .addEventListener("click", function () {
+            addNeueAnlage();
+            this.setAttribute("disabled", "true");
+            this.classList.add("disabled");
+          });
+        document
+          .getElementById(`neueAnlage${anlageNummerCounter - 1}`)
+          .removeEventListener("click", addNeueAnlage);
 
         // const anlagePostData = {};
         // anlagePostData.kunde = document.getElementById("kunde").value;
@@ -338,36 +344,38 @@
         anlageStandort = abmessungId;
         anlageBeschreibung = abmessungId;
 
-        console.log("abmessungId" + abmessungId + " " + abmessungNumber);
-
         const neueAbmessungInput = `
       <div class="abmessungBackground id="abmessung${abmessungCounter}">Abmessung ${
           abmessungNumber + 1
         }
          <div class="mb-2 row">
               <div class="col-6">
-                <label class="form-label">Profile Nr.</label>
+                <label for="profileNr${
+                  abmessungId + abmessungNumber
+                }" class="form-label">Profile Nr.</label>
                 <input type="text" class="form-control" maxlength="37" 
-              id="profileNr${abmessungId + abmessungNumber}"/>
+              id="profileNr${abmessungId + abmessungNumber}">
               </div>
               <div class="col-6">
-                <label class="form-label">Menge</label>
+                <label for="menge${abmessungId + abmessungNumber}" class="form-label">Menge</label>
                 <input type="text" class="form-control" maxlength="37" 
-                id="menge${abmessungId + abmessungNumber}"/>
+                id="menge${abmessungId + abmessungNumber}">
             </div>
         </div>
      <div>
-      <label class="form-label">Abmessungen</label>
+      <p class="form-label">Abmessungen</p>
         <div class="row">
           <div class="col-6">
-            <label class="form-label">Höhe (cm)</label>
+            <label for="hoehe${abmessungId + abmessungNumber}" class="form-label">Höhe (cm)</label>
               <input type="number" class="form-control" step="0.100"
-              id="hoehe${abmessungId + abmessungNumber}" />
+              id="hoehe${abmessungId + abmessungNumber}" >
                 </div>
                   <div class="col-6">
-                    <label class="form-label">Breite (cm)</label>
+                    <label for="breite${
+                      abmessungId + abmessungNumber
+                    }" class="form-label">Breite (cm)</label>
                       <input type="number" class="form-control" step="0.100"
-                      id="breite${abmessungId + abmessungNumber}"/>
+                      id="breite${abmessungId + abmessungNumber}">
                       </div>
                     </div>
                   </div> 

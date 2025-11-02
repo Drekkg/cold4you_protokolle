@@ -2,8 +2,8 @@
 <html>
   <head>
   <meta charset="UTF-8">
-  <meta  name="viewport" content="width=device-width", initial-scale="1" >
-  <title id="title_change"></title>
+  <meta  name="viewport" content="width=device-width, initial-scale=1">
+  <title id="title_change">C4Y</title>
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.png">
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -25,9 +25,10 @@
         <h1>Mängel Liste</h1>
       </div>
       <div>
-        <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500rem" height="200rem"></a>
+        <a href="../index.html"><img src="cold_logo.jpg" alt="image" width="500em" height="200em"></a>
       </div>
     </div> 
+    <header class="stickyContainer">
     <div class="button-container">
       <button type="button" class="seeThrough"  id="open" >Mängel Eingeben</button>
       <button type="button" class="pdf-speichern"  id="savePdf" >PDF Speichern</button>
@@ -36,7 +37,7 @@
     </div>
     <form class="form" id="form">
       <div class="flexContainer">      
-        <div>
+
             <div class="div4">
               <label>Kunde:</label>
               <input type="text" id="kunde" size="25" required />
@@ -47,7 +48,8 @@
                 <label>Aufstellungsort:</label>
                 <input type="text" id="aufstellung" size="25"  />
 
-                  </div> 
+              </div> 
+
                   <div class="div4">
                     <label>Anlage:</label>
                     <input type="text" id="anlage" size="25"  />
@@ -70,28 +72,20 @@
                     <input type="text" name="maengel6"  id="maengel6" size="65" value="" maxlength="149"/><br>
                     </div>
             
-      </div>
+      
       <div class="div4">
-           <label class="addressBox">Datum:</label>
+           <label>Datum:</label>
            <input type="date" id="dateCurrent" value="" required>
-          </div>
-          
-        <div class="div4">
           <label>Techniker:</label>
           <input type="text" id="techniker" size="20" required >
           <button type="submit" class="seeThrough"  id="print" >Speichern</button>
           <button type="button" class="seeThrough"  id="close" >Schliessen</button>
-          </div>
-       
         </div>
-      </div>
-      </div>
       </form>
+      </header>
       <!-- Add a container to display the data -->
-
-<div id="data-container">
   <table id="data-table" class="table">
-    <thead>
+    <thead class="stickyHeader">
       <tr>
         <th>Kunde</th>
         <th>Standort</th>
@@ -103,16 +97,20 @@
         <th>Datum</th>
         <th colspan="6">Mängel</th>
       </tr>
+
     </thead>
+ 
     <tbody>
       <!-- Data rows will be dynamically added here -->
     </tbody>
   </table>
-</div>
+
 
     </body>
     <script src="../indexDB-maengel.js"></script>
 <script>
+
+
   //Initialise the date variable to hold the current date 
   // Get value from local storage to autofill important inputs of form
   
@@ -245,16 +243,21 @@ const fetchData = async () => {
 const tableBody = document.getElementById("data-table").querySelector("tbody");
 tableBody.innerHTML = ""; 
 
+
+
+
  // Function to render data into the table
  function renderTable(data) {
    const archButton = document.getElementById("arch");
    archButton.style.backgroundColor = "rgb(186, 186, 193)";
     tableBody.innerHTML = ""; // Clear existing rows
-   
     data.forEach((item) => {
       if(!archivedFlag && item.archived != "1") {
       archButton.style.backgroundColor = "rgb(221, 221, 226)";
+
       const row = document.createElement("tr");
+      
+
       row.innerHTML = `
         <td>${item.kunde || ""}</td>
         <td>${item.standort || ""}</td>
@@ -315,7 +318,6 @@ tableBody.innerHTML = "";
        </td>`;
 
       tableBody.appendChild(row);
-   
           }
   }}
   );
